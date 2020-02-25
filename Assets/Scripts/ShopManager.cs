@@ -18,6 +18,11 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopItems[i].GetChild(0).GetComponent<Text>().text = Inventory.Items[i].Name;
+            if (Inventory.Items[i].Bought)
+            {
+                shopItems[i].GetComponent<Image>().raycastTarget = false;
+                shopItems[i].GetComponent<Image>().color = NonSelectedColor;
+            }
         }
 
         UpdateUI(Inventory.SelectedItemIndex);
@@ -40,7 +45,8 @@ public class ShopManager : MonoBehaviour
     {
         CoinsTxt.text = "Coins: " + Inventory.Coins.ToString();
 
-        shopItems[index].GetComponent<Image>().color = NonSelectedColor;
+        shopItems[prevSelectedIntex].GetComponent<Image>().color = NonSelectedColor;
+        shopItems[prevSelectedIntex].GetComponent<Image>().raycastTarget = false;
         shopItems[Inventory.SelectedItemIndex].GetComponent<Image>().color = SelectedColor;
 
         prevSelectedIntex = Inventory.SelectedItemIndex;
