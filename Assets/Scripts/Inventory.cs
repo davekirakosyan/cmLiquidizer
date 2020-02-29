@@ -30,10 +30,11 @@ public class Inventory : MonoBehaviour
     {
         Instance = this;
 
-        //if (!PlayerPrefs.HasKey("Items")) {
+        if (!PlayerPrefs.HasKey("Items"))
+        {
             PlayerPrefs.SetString("Items", "{\"Items\":[{\"name\":\"22dd4ba56c29eaa871e2533dabbd57bec1ccc05372694ca8\",\"bought\":\"22dd4ba56c29eaa8952945b465dbbeb5\",\"selected\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"price\":\"22dd4ba56c29eaa8d6178b5743fb96f3\"},{\"name\":\"22dd4ba56c29eaa84ba4f2bba938b313e11346ca624de8a4\",\"bought\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"selected\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"price\":\"22dd4ba56c29eaa805d3523dd8d2a989\"},{\"name\":\"22dd4ba56c29eaa83773ecf707ab61587317cf29eff62d20\",\"bought\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"selected\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"price\":\"22dd4ba56c29eaa800fc87faa9e734a9\"}]}");
             PlayerPrefs.SetInt("Coins",1000);    
-       // }
+        }
 
         Coins = PlayerPrefs.GetInt("Coins");
         itemsData = JSONObject.Parse(PlayerPrefs.GetString("Items"));
