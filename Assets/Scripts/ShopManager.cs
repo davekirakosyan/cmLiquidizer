@@ -48,7 +48,7 @@ public class ShopManager : MonoBehaviour
 
     private void UpdateUI(int index)
     {
-        CoinsTxt.text = "Coins: " + Inventory.Coins.ToString();
+        CoinsTxt.text = "Coins: " + bf.Decrypt_CBC(Inventory.Coins);
 
         shopItems[prevSelectedIntex].GetComponent<Image>().color = NonSelectedColor;
         shopItems[prevSelectedIntex].GetComponent<Image>().raycastTarget = false;

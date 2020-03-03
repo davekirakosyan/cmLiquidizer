@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     }
 
     public static List<ShopItem> Items;
-    public static int Coins { get; private set; }
+    public static string Coins { get; private set; }
     
     private void Awake()
     {
@@ -34,11 +34,11 @@ public class Inventory : MonoBehaviour
         if (!PlayerPrefs.HasKey("Items"))
         {
             PlayerPrefs.SetString("Items", "{\"Items\":[{\"name\":\"0e7a66abd5daa98536ff177e27eedb5b\",\"bought\":\"0e7a66abd5daa985f47a5b16e3a8ddbe\",\"selected\":\"0e7a66abd5daa985f47a5b16e3a8ddbe\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa9857d3e2b1e96033c4a\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa98567391b0b57e5575d\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa9857a7b16d6cd7ae61f\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa9858702f017dbcf56d6\"},{\"name\":\"0e7a66abd5daa985a98333f7f8c47ad3\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985433f717a73d0141e\"},{\"name\":\"0e7a66abd5daa985ade7e05c8e5baac1\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa98545b825fb94731cb2\"}]}");
-            PlayerPrefs.SetInt("Coins",1000);    
+            PlayerPrefs.SetString("Coins",bf.Encrypt_CBC("300"));    
         }
 
         //initialize data
-        Coins = PlayerPrefs.GetInt("Coins");
+        Coins = PlayerPrefs.GetString("Coins");
         itemsData = JSONObject.Parse(PlayerPrefs.GetString("Items"));
         Items = new List<ShopItem>();
 
@@ -87,11 +87,11 @@ public class Inventory : MonoBehaviour
     //coin subtraction after buyinng item
     private bool SubtractCoins(int value)
     {
-        if (Coins - value < 0)
+        if (int.Parse(bf.Decrypt_CBC(Coins)) - value < 0)
             return false;
 
-        Coins -= value;
-        PlayerPrefs.SetInt("Coins", Coins);
+        Coins = bf.Encrypt_CBC((int.Parse(bf.Decrypt_CBC(Coins))-value).ToString());
+        PlayerPrefs.SetString("Coins", Coins);
         return true;
     }
 
