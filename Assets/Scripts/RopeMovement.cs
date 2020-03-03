@@ -4,68 +4,27 @@ using UnityEngine;
 
 public class RopeMovement : MonoBehaviour
 {
-    public Vector3[] movementPoints=new Vector3[4];
-    private float startTime;
-    private float[] journeyLength = new float[4];
-    public float speed = 0.5F;
-    public int state = 0;
+    public Transform pathPoints;
+    public GameObject elixirPrefab;
 
-    // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.time;
-        transform.position= movementPoints[0];
-        journeyLength[0] = Vector3.Distance(movementPoints[0], movementPoints[1]);
-        journeyLength[1] = Vector3.Distance(movementPoints[1], movementPoints[2]);
-        journeyLength[2] = Vector3.Distance(movementPoints[2], movementPoints[3]);
-        journeyLength[3] = Vector3.Distance(movementPoints[3], movementPoints[0]);
-    }
+        int n = pathPoints.childCount;
+        if (n != 0)
+        {
+            Vector3[] movementCoordinates = new Vector3[n];
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (state == 0)
-        {
-            float distCovered = (Time.time - startTime) * speed;
-            float fractionOfJourney = distCovered / journeyLength[0];
-            transform.position = Vector3.Lerp(movementPoints[0], movementPoints[1], fractionOfJourney);
-            if (transform.position == movementPoints[1])
+            for (int i=0; i<n; i++)
             {
-                startTime = Time.time;
-                state++;
+                movementCoordinates[i] = pathPoints.GetChild(i).position;
             }
-        } else if (state == 1)
-        {
-            float distCovered = (Time.time - startTime) * speed;
-            float fractionOfJourney = distCovered / journeyLength[1];
-            transform.position = Vector3.Lerp(movementPoints[1], movementPoints[2], fractionOfJourney);
-            if (transform.position == movementPoints[2])
-            {
-                startTime = Time.time;
-                state++;
-            }
+        
+            GameObject elixir1 = Instantiate(elixirPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            elixir1.transform.localScale = new Vector3(0.07f, 0.15f, 0.07f);
+            elixir1.GetComponent<Elixir>().movementCoordinates = movementCoordinates;
+            elixir1.GetComponent<Elixir>().speed = 2;
+            elixir1.GetComponent<Elixir>().lastPos = 0;
         }
-        else if (state == 2)
-        {
-            float distCovered = (Time.time - startTime) * speed;
-            float fractionOfJourney = distCovered / journeyLength[2];
-            transform.position = Vector3.Lerp(movementPoints[2], movementPoints[3], fractionOfJourney);
-            if (transform.position == movementPoints[3])
-            {
-                startTime = Time.time;
-                state++;
-            }
-        }
-        else if (state == 3)
-        {
-            float distCovered = (Time.time - startTime) * speed;
-            float fractionOfJourney = distCovered / journeyLength[3];
-            transform.position = Vector3.Lerp(movementPoints[3], movementPoints[0], fractionOfJourney);
-            if (transform.position == movementPoints[0])
-            {
-                startTime = Time.time;
-                state=0;
-            }
-        }
+
     }
 }
