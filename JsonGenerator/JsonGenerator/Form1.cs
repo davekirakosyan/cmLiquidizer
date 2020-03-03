@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using BlowFishCS;
 
 namespace JsonGenerator
 {
     public partial class Form1 : Form
     {
+        BlowFish bf = new BlowFish("04B915BA43FEB5B6");
         const string quote = "\"";
         public Form1()
         {
@@ -36,13 +38,13 @@ namespace JsonGenerator
                 {
                     jsonFile += "{";
                     jsonFile += @"\" + quote + @"name\" + quote + ":";
-                    jsonFile += @"\" + quote + names[i] + @"\" + quote + ",";
+                    jsonFile += @"\" + quote + bf.Encrypt_CBC(names[i]) + @"\" + quote + ",";
                     jsonFile += @"\" + quote + @"bought\" + quote + ":";
-                    jsonFile += bought[i]+ ",";
+                    jsonFile += @"\" + quote + bf.Encrypt_CBC(bought[i])+ @"\" + quote + ",";
                     jsonFile += @"\" + quote + @"selected\" + quote + ":";
-                    jsonFile +=  selected[i] + ",";
+                    jsonFile += @"\" + quote + bf.Encrypt_CBC(selected[i]) + @"\" + quote + ",";
                     jsonFile += @"\" + quote + @"price\" + quote + ":";
-                    jsonFile += price[i];
+                    jsonFile += @"\" + quote + bf.Encrypt_CBC(price[i]) + @"\" + quote;
                     jsonFile += "}";
                     if (i < names.Length - 1)
                     {
