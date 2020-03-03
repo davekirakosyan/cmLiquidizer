@@ -13,11 +13,11 @@ public class Inventory : MonoBehaviour
     public static int SelectedItemIndex { get; private set; }
 
     public class ShopItem {
-        public bool Bought, Selected;
-        public int Price;
+        public string Bought, Selected;
+        public string Price;
         public string Name;
 
-        public ShopItem(bool bought, bool selected, int price, string name)
+        public ShopItem(string bought, string selected, string price, string name)
         {
             Bought = bought; Selected = selected; Price = price;Name = name.Replace("/n","");
         }
@@ -30,37 +30,42 @@ public class Inventory : MonoBehaviour
     {
         Instance = this;
 
+        //Load prefabs (if needed) from json file
         if (!PlayerPrefs.HasKey("Items"))
         {
-            PlayerPrefs.SetString("Items", "{\"Items\":[{\"name\":\"22dd4ba56c29eaa871e2533dabbd57bec1ccc05372694ca8\",\"bought\":\"22dd4ba56c29eaa8952945b465dbbeb5\",\"selected\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"price\":\"22dd4ba56c29eaa8d6178b5743fb96f3\"},{\"name\":\"22dd4ba56c29eaa84ba4f2bba938b313e11346ca624de8a4\",\"bought\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"selected\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"price\":\"22dd4ba56c29eaa805d3523dd8d2a989\"},{\"name\":\"22dd4ba56c29eaa83773ecf707ab61587317cf29eff62d20\",\"bought\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"selected\":\"22dd4ba56c29eaa80d26f3c47703c712\",\"price\":\"22dd4ba56c29eaa800fc87faa9e734a9\"}]}");
+            PlayerPrefs.SetString("Items", "{\"Items\":[{\"name\":\"0e7a66abd5daa98536ff177e27eedb5b\",\"bought\":\"0e7a66abd5daa985f47a5b16e3a8ddbe\",\"selected\":\"0e7a66abd5daa985f47a5b16e3a8ddbe\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa9857d3e2b1e96033c4a\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa98567391b0b57e5575d\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa9857a7b16d6cd7ae61f\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa9858702f017dbcf56d6\"},{\"name\":\"0e7a66abd5daa985a98333f7f8c47ad3\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985433f717a73d0141e\"},{\"name\":\"0e7a66abd5daa985ade7e05c8e5baac1\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa98545b825fb94731cb2\"}]}");
             PlayerPrefs.SetInt("Coins",1000);    
         }
 
+        //initialize data
         Coins = PlayerPrefs.GetInt("Coins");
         itemsData = JSONObject.Parse(PlayerPrefs.GetString("Items"));
         Items = new List<ShopItem>();
 
         for (int i = 0; i < itemsData.GetArray("Items").Length; i++) {
-            Items.Add(new ShopItem(bool.Parse(bf.Decrypt_CBC(itemsData.GetArray("Items")[i].Obj.GetString("bought"))),
-                                   bool.Parse(bf.Decrypt_CBC(itemsData.GetArray("Items")[i].Obj.GetString("selected"))),
-                                   int.Parse(bf.Decrypt_CBC(itemsData.GetArray("Items")[i].Obj.GetString("price"))),
-                                   bf.Decrypt_CBC(itemsData.GetArray("Items")[i].Obj.GetString("name"))));
-            if (Items[i].Selected)
+            Items.Add(new ShopItem(itemsData.GetArray("Items")[i].Obj.GetString("bought"),
+                                   itemsData.GetArray("Items")[i].Obj.GetString("selected"),
+                                   itemsData.GetArray("Items")[i].Obj.GetString("price"),
+                                   itemsData.GetArray("Items")[i].Obj.GetString("name")));
+            if (bool.Parse(bf.Decrypt_CBC(Items[i].Selected)))
+            {
                 SelectedItemIndex = i;
+            }
         }
     }
 
+    //selecting items from shop
     public void SelectItem(int index) {
         for (int i=0;i< Items.Count; i++)
         {
-            if (Items[i].Selected)
+            if (bool.Parse(bf.Decrypt_CBC(Items[i].Selected)))
             {
-                Items[i].Selected = false;
-                itemsData.GetArray("Items")[i].Obj.GetValue("selected").Boolean = false;
+                Items[i].Selected = bf.Encrypt_CBC("false");
+                itemsData.GetArray("Items")[i].Obj.GetValue("selected").Str = bf.Encrypt_CBC("false");
             }
         }
-        Items[index].Selected = true;
-        itemsData.GetArray("Items")[index].Obj.GetValue("selected").Boolean = true;
+        Items[index].Selected = bf.Encrypt_CBC("true");
+        itemsData.GetArray("Items")[index].Obj.GetValue("selected").Str = bf.Encrypt_CBC("true");
 
         SelectedItemIndex = index;
 
@@ -68,16 +73,18 @@ public class Inventory : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    //buying items from shop
     public void BuyItem(int index)
     {
-        if (SubtractCoins(Items[index].Price))
+        if (SubtractCoins(int.Parse(bf.Decrypt_CBC(Items[index].Price))))
         {
-            Items[index].Bought = true;
-            itemsData.GetArray("Items")[index].Obj.GetValue("bought").Boolean = true;
+            Items[index].Bought = bf.Encrypt_CBC("true");
+            itemsData.GetArray("Items")[index].Obj.GetValue("bought").Str = bf.Encrypt_CBC("true");
             SelectItem(index);
         }
     }
 
+    //coin subtraction after buyinng item
     private bool SubtractCoins(int value)
     {
         if (Coins - value < 0)
