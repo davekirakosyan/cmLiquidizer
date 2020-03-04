@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RopeMovement : MonoBehaviour
+public class ElixirController : MonoBehaviour
 {
     public Transform pathPoints;
     public GameObject elixirPrefab;
