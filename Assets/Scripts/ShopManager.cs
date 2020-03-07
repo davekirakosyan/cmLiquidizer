@@ -8,6 +8,9 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField]
     private Transform[] shopItems;
+    [SerializeField]
+    private Sprite[] elixires;
+
     BlowFish bf = new BlowFish("04B915BA43FEB5B6");
 
     public Text CoinsTxt;
@@ -20,7 +23,8 @@ public class ShopManager : MonoBehaviour
         //initialize shop ui
         for (int i = 0; i < shopItems.Length; i++)
         {
-            shopItems[i].GetChild(0).GetComponent<Text>().text = bf.Decrypt_CBC(Inventory.Items[i].Name);
+            shopItems[i].GetChild(0).GetComponent<Text>().text = bf.Decrypt_CBC(Inventory.Items[i].Price);
+            shopItems[i].GetChild(1).GetComponent<Image>().sprite = elixires[i];
             if (bool.Parse(bf.Decrypt_CBC(Inventory.Items[i].Bought)))
             {
                 shopItems[i].GetComponent<Image>().raycastTarget = false;
@@ -52,6 +56,7 @@ public class ShopManager : MonoBehaviour
 
         shopItems[prevSelectedIntex].GetComponent<Image>().color = NonSelectedColor;
         shopItems[prevSelectedIntex].GetComponent<Image>().raycastTarget = false;
+        shopItems[prevSelectedIntex].GetComponent<Button>().enabled = false;
         shopItems[Inventory.SelectedItemIndex].GetComponent<Image>().color = SelectedColor;
 
         prevSelectedIntex = Inventory.SelectedItemIndex;
