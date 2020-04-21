@@ -22,7 +22,6 @@ public class Elixir : MonoBehaviour
         nextPos = lastPos + 1;
 
         //elixir setup
-        transform.GetChild(0).gameObject.SetActive(false);
         transform.position = movementCoordinates[lastPos];
 
         // calculate lengths between consecutive points
@@ -50,7 +49,6 @@ public class Elixir : MonoBehaviour
         transform.position = Vector3.Lerp(movementCoordinates[lastPos], movementCoordinates[nextPos], fractionOfJourney);
         if (transform.position == movementCoordinates[nextPos])
         {
-            transform.GetChild(0).gameObject.SetActive(true);
             startTime = Time.time;
             lastPos++; nextPos++;
         }

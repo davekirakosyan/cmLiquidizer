@@ -20,7 +20,6 @@ public class ElixirController : MonoBehaviour
             }
         
             GameObject elixir1 = Instantiate(elixirPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            elixir1.transform.localScale = new Vector3(0.07f, 0.15f, 0.07f);
             elixir1.GetComponent<Elixir>().movementCoordinates = movementCoordinates;
             elixir1.GetComponent<Elixir>().speed = 2;
             elixir1.GetComponent<Elixir>().lastPos = 0;
