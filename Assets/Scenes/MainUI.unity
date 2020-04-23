@@ -1550,6 +1550,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464795428}
   m_CullTransparentMesh: 0
+--- !u!114 &487808347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1096801282999764184, guid: 7cec99f57802e7e44b3f547535289470,
+    type: 3}
+  m_PrefabInstance: {fileID: 1764692932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &488066400
 GameObject:
   m_ObjectHideFlags: 0
@@ -4716,6 +4728,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6851527812423169415, guid: 4b3b02102d7476c4192ede5644ba2f21,
         type: 3}
+    - target: {fileID: 1015420021546906975, guid: 7cec99f57802e7e44b3f547535289470,
+        type: 3}
+      propertyPath: pathCreator
+      value: 
+      objectReference: {fileID: 487808347}
     - target: {fileID: 1369099239435785767, guid: 7cec99f57802e7e44b3f547535289470,
         type: 3}
       propertyPath: m_TagString
@@ -4745,6 +4762,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: tube
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389306122893990083, guid: 7cec99f57802e7e44b3f547535289470,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.013316549
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389306122893990083, guid: 7cec99f57802e7e44b3f547535289470,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06738362
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389306122893990083, guid: 7cec99f57802e7e44b3f547535289470,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.39700085
       objectReference: {fileID: 0}
     - target: {fileID: 5400622144656557050, guid: 7cec99f57802e7e44b3f547535289470,
         type: 3}
@@ -4815,26 +4847,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 6927074538232704488, guid: 7cec99f57802e7e44b3f547535289470,
         type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 7882592980364952931, guid: 7cec99f57802e7e44b3f547535289470,
         type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 8492638552812905729, guid: 7cec99f57802e7e44b3f547535289470,
         type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 8942062762950050677, guid: 7cec99f57802e7e44b3f547535289470,
         type: 3}
       propertyPath: m_TagString

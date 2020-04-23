@@ -1,25 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PathCreation;
 
 public class ElixirController : MonoBehaviour
 {
-    public Transform pathPoints;
     public GameObject elixirPrefab;
-    Vector3[] movementCoordinates;
+    public PathCreator pathCreator;
 
     void Start()
     {
-        // construct movement coordinates
-        int n = pathPoints.childCount;
-        if (n != 0)
-        {
-            movementCoordinates = new Vector3[n];
-            for (int i=0; i<n; i++)
-            {
-                movementCoordinates[i] = pathPoints.GetChild(i).position;
-            }
-        }
+        
     }
 
     void Update()
@@ -34,13 +25,11 @@ public class ElixirController : MonoBehaviour
             {
                 if (hit.collider.CompareTag("tube"))
                 {
-                    print("kakashkaa");
                     GameObject elixir = Instantiate(elixirPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                    elixir.GetComponent<Elixir>().movementCoordinates = movementCoordinates;
-                    elixir.GetComponent<Elixir>().speed = 4;
-                    elixir.GetComponent<Elixir>().lastPos = 0;
+                    elixir.transform.position = hit.point;
+                    elixir.GetComponent<Elixir>().speed = 2;
+                    elixir.GetComponent<Elixir>().pathCreator = pathCreator;
                 }
-                //Debug.DrawLine(ray.origin, hit.point, Color.red);
             }
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5503663494868239391}
   - component: {fileID: 281314412392290737}
   m_Layer: 0
-  m_Name: elixirTest
+  m_Name: ElixirFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4767,6 +4767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeeffd0f8e8dac45b091bacdf45ecf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathCreator: {fileID: 0}
+  endOfPathInstruction: 0
   movementCoordinates: []
   startTime: 0
   speed: 0
