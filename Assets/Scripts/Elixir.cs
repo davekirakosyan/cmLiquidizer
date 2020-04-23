@@ -9,6 +9,7 @@ public class Elixir : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction; 
     float distanceTravelled;
     public float speed;
+    public Color color = Color.red;
 
     void Start()
     {
@@ -16,6 +17,8 @@ public class Elixir : MonoBehaviour
         transform.position = pathCreator.path.GetClosestPointOnPath(transform.position);
         transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+
+        GetComponent<ParticleSystem>().startColor = color;
     }
 
     void Update()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public class ElixirController : MonoBehaviour
+public class PathController : MonoBehaviour
 {
     public GameObject elixirPrefab;
     public PathCreator pathCreator;
@@ -25,10 +25,12 @@ public class ElixirController : MonoBehaviour
             {
                 if (hit.collider.CompareTag("tube"))
                 {
+                    // if clicked on tubes create an elixir at that hit point and initialize its main components
                     GameObject elixir = Instantiate(elixirPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                     elixir.transform.position = hit.point;
                     elixir.GetComponent<Elixir>().speed = 2;
                     elixir.GetComponent<Elixir>().pathCreator = pathCreator;
+                    elixir.GetComponent<Elixir>().color = new Color(Random.value, Random.value, Random.value);
                 }
             }
         }
