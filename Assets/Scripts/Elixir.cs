@@ -10,6 +10,10 @@ public class Elixir : MonoBehaviour
     float distanceTravelled;
     public float speed;
     public Color color = Color.red;
+    public int uniqueNumber;
+
+    public ParticleSystem part;
+    public List<ParticleCollisionEvent> collisionEvents;
 
     void Start()
     {
@@ -18,7 +22,9 @@ public class Elixir : MonoBehaviour
         transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
 
-        GetComponent<ParticleSystem>().startColor = color;
+        part = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
+        part.startColor = color;
     }
 
     void Update()
@@ -30,5 +36,12 @@ public class Elixir : MonoBehaviour
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
         }
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        // prevent self collision using unique id
+        if (uniqueNumber != other.GetComponentInParent<Elixir>().uniqueNumber)
+            print(other.name);
     }
 }
