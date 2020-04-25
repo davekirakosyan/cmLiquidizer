@@ -28,7 +28,7 @@ public class PathController : MonoBehaviour
                 if (hit.transform.gameObject.layer == 8) // layer 8 is Path
                 {
                     // if clicked on tubes create an elixir at that hit point and initialize its main components
-                    GameObject elixir = Instantiate(elixirPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    GameObject elixir = Instantiate(elixirPrefab);
                     elixir.transform.position = hit.point;
                     elixir.GetComponent<Elixir>().speed = 2;
                     elixir.GetComponent<Elixir>().pathCreator = pathCreator;
