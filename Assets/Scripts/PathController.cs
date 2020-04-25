@@ -18,7 +18,7 @@ public class PathController : MonoBehaviour
     void Update()
     {
         // detect the click on the tubes to pour elixir
-        if (Input.GetMouseButtonDown(0))
+        if (Clicked())
         {
             // cast a ray and check if it hits any of tube coliders
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -39,6 +39,23 @@ public class PathController : MonoBehaviour
                     nextUniqueNumber++;
                 }
             }
+        }
+    }
+
+    /// returns if screen has been clicked or touched
+    private bool Clicked ()
+    {
+        if (Input.touchSupported)   // check if the device supports touch 
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                return true;
+            else return false;
+        }
+        else                        // EDITOR
+        {
+            if (Input.GetMouseButtonDown(0))
+                return true;
+            else return false;
         }
     }
 }
