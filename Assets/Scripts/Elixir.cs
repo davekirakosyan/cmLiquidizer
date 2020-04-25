@@ -1,58 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PathCreation;
 
 public class Elixir : MonoBehaviour
 {
-
-    public Vector3[] movementCoordinates;
-    private float[] journeyLength;
-    public float startTime;
+    public PathCreator pathCreator;
+    public EndOfPathInstruction endOfPathInstruction; 
+    float distanceTravelled;
     public float speed;
-    public int lastPos;
-    private int nextPos;
-    private int pathSize;
+    public Color color = Color.red;
+    public int uniqueNumber;
+
+    public ParticleSystem part;
+    public List<ParticleCollisionEvent> collisionEvents;
 
     void Start()
     {
-        // first initializations
-        startTime = Time.time;
-        pathSize = movementCoordinates.Length;
-        journeyLength = new float[pathSize];
-        nextPos = lastPos + 1;
+        // move elixir to the nearest point on path and calculate the distance from the startpoint of the path
+        transform.position = pathCreator.path.GetClosestPointOnPath(transform.position);
+        transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+        distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
 
-        //elixir setup
-        transform.GetChild(0).gameObject.SetActive(false);
-        transform.position = movementCoordinates[lastPos];
-
-        // calculate lengths between consecutive points
-        for (int i = 0; i < pathSize; i++)
-        {
-            if (lastPos >= movementCoordinates.Length)
-                lastPos = 0;
-            if (nextPos >= movementCoordinates.Length)
-                nextPos = 0;
-            journeyLength[lastPos] = Vector3.Distance(movementCoordinates[lastPos], movementCoordinates[nextPos]);
-            lastPos++;
-            nextPos++;
-        }
+        part = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
+        part.startColor = color;
     }
 
     void Update()
     {
-        // elixir lerp movement from lastPos to nextBoz
-        if (lastPos >= movementCoordinates.Length)
-            lastPos = 0;
-        if (nextPos >= movementCoordinates.Length)
-            nextPos = 0;
-        float distCovered = (Time.time - startTime) * speed;
-        float fractionOfJourney = distCovered / journeyLength[lastPos];
-        transform.position = Vector3.Lerp(movementCoordinates[lastPos], movementCoordinates[nextPos], fractionOfJourney);
-        if (transform.position == movementCoordinates[nextPos])
+        // follow the path
+        if (pathCreator != null)
         {
-            transform.GetChild(0).gameObject.SetActive(true);
-            startTime = Time.time;
-            lastPos++; nextPos++;
+            distanceTravelled += speed * Time.deltaTime;
+            transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
         }
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        // prevent self collision using unique id
+        if (uniqueNumber != other.GetComponentInParent<Elixir>().uniqueNumber)
+            print(other.name);
     }
 }
