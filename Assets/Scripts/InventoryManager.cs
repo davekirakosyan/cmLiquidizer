@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     public Texture green;
     public Texture blue;
     public Texture purple;
-    public enum ElixirColors { Red, Orange, Yellow, Green, Blue, Purple };
+    public enum ElixirColor { Red, Orange, Yellow, Green, Blue, Purple };
 
     public GameObject inventoryItemPrefab;
     public Transform inventoryContent;
@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         // This is temporary, should be called during level construction
-        FillInventory(new ElixirColors[] { ElixirColors.Yellow, ElixirColors.Red, ElixirColors.Green });
+        FillInventory(new ElixirColor[] { ElixirColor.Yellow, ElixirColor.Red, ElixirColor.Green, ElixirColor.Purple });
     }
 
     void Update()
@@ -28,47 +28,41 @@ public class InventoryManager : MonoBehaviour
     }
 
     // given a list of elixir colors, fills up the inventory
-    void FillInventory (ElixirColors[] inputColorNamesList)
+    void FillInventory (ElixirColor[] inputColorNamesList)
     {
         // keep the position of the first item
-        Vector2 nextPos = new Vector2(0, 0);
-        if (inputColorNamesList.Length <= 3)
-        {
-            nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -100);
-        }
-
+        Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -100);
+        
         // go through all the color names and create corresponding color items in the inventory
         for (int i = 0; i < inputColorNamesList.Length; i++)
         {
             GameObject newInventoryItem = Instantiate(inventoryItemPrefab);
             newInventoryItem.GetComponent<InventoryItem>().colorName = inputColorNamesList[i];
             newInventoryItem.transform.SetParent(inventoryContent);
-            if (inputColorNamesList.Length <= 3)
-            {
-                newInventoryItem.transform.localPosition = nextPos;
-                newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
-                nextPos.y -= 120;   // decrease y for the next item
-            }
+            newInventoryItem.transform.localPosition = nextPos;
+            newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
+            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem.GetComponent<InventoryItem>().colorName));
+            nextPos.y -= 120;   // decrease y for the next item
         }
     }
-
+    
     // return texture given the color
-    Texture getTextureByColorName (ElixirColors color)
+    public Texture getTextureByColorName (ElixirColor color)
     {
         switch (color)
         {
-            case ElixirColors.Red:
+            case ElixirColor.Red:
                 return red;
-            case ElixirColors.Orange:
+            case ElixirColor.Orange:
                 return orange;
-            case ElixirColors.Yellow:
+            case ElixirColor.Yellow:
                 return yellow;
-            case ElixirColors.Green:
+            case ElixirColor.Green:
                 return green;
-            case ElixirColors.Blue:
+            case ElixirColor.Blue:
                 return blue;
-            case ElixirColors.Purple:
+            case ElixirColor.Purple:
                 return purple;
             default:
                 return red;

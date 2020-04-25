@@ -4,14 +4,5 @@ using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
 {
-    public InventoryManager.ElixirColors colorName;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public InventoryManager.ElixirColor colorName;
 }

@@ -4,24 +4,11 @@ using UnityEngine;
 
 public class BasicLogic : MonoBehaviour
 {
+    // global variable of the selected elixir color 
+    public static InventoryManager.ElixirColor selectedColor;
 
-    void OnCollisionEnter(Collision collision)
+    public static void SelectElixir(InventoryManager.ElixirColor color)
     {
-        if (collision.collider.name.Contains("White"))
-        {
-           // Debug.Log(collision.collider.name);
-            Time.timeScale = 0;
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        selectedColor = color;
     }
 }

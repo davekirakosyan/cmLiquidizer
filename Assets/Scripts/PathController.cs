@@ -7,13 +7,7 @@ public class PathController : MonoBehaviour
 {
     public GameObject elixirPrefab;
     public PathCreator pathCreator;
-    public Color[] colors;
     int nextUniqueNumber = 0;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -32,8 +26,7 @@ public class PathController : MonoBehaviour
                     elixir.transform.position = hit.point;
                     elixir.GetComponent<Elixir>().speed = 2;
                     elixir.GetComponent<Elixir>().pathCreator = pathCreator;
-                    if (colors.Length != 0)
-                        elixir.GetComponent<Elixir>().color = colors[Random.Range(0, colors.Length)];
+                    elixir.GetComponent<Elixir>().colorName = BasicLogic.selectedColor;
                     // adding a unique number to each elixir for easy tracking and self collision issues
                     elixir.GetComponent<Elixir>().uniqueNumber = nextUniqueNumber;
                     nextUniqueNumber++;

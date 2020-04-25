@@ -9,7 +9,8 @@ public class Elixir : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction; 
     float distanceTravelled;
     public float speed;
-    public Color color = Color.red;
+    public InventoryManager.ElixirColor colorName = InventoryManager.ElixirColor.Red;
+    Color color = Color.red;
     public int uniqueNumber;
 
     public ParticleSystem part;
@@ -24,6 +25,7 @@ public class Elixir : MonoBehaviour
 
         part = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
+        color = SelectColorByName(colorName);
         part.startColor = color;
     }
 
@@ -43,5 +45,26 @@ public class Elixir : MonoBehaviour
         // prevent self collision using unique id
         if (uniqueNumber != other.GetComponentInParent<Elixir>().uniqueNumber)
             print(other.name);
+    }
+
+    Color SelectColorByName (InventoryManager.ElixirColor name)
+    {
+        switch (name)
+        {
+            case InventoryManager.ElixirColor.Red:
+                return Color.red;
+            case InventoryManager.ElixirColor.Orange:
+                return new Color(255, 155, 0);
+            case InventoryManager.ElixirColor.Yellow:
+                return Color.yellow;
+            case InventoryManager.ElixirColor.Green:
+                return Color.green;
+            case InventoryManager.ElixirColor.Blue:
+                return Color.blue;
+            case InventoryManager.ElixirColor.Purple:
+                return Color.magenta;
+            default:
+                return Color.red;
+        }
     }
 }
