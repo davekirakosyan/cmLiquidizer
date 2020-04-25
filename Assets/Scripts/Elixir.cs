@@ -54,7 +54,7 @@ public class Elixir : MonoBehaviour
             case InventoryManager.ElixirColor.Red:
                 return Color.red;
             case InventoryManager.ElixirColor.Orange:
-                return new Color(255, 155, 0);
+                return new Color(1, 0.5f, 0);
             case InventoryManager.ElixirColor.Yellow:
                 return Color.yellow;
             case InventoryManager.ElixirColor.Green:
@@ -62,7 +62,7 @@ public class Elixir : MonoBehaviour
             case InventoryManager.ElixirColor.Blue:
                 return Color.blue;
             case InventoryManager.ElixirColor.Purple:
-                return Color.magenta;
+                return new Color(0.7f, 0, 1);
             default:
                 return Color.red;
         }

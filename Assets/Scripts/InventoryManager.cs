@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         // This is temporary, should be called during level construction
-        FillInventory(new ElixirColor[] { ElixirColor.Yellow, ElixirColor.Red, ElixirColor.Green, ElixirColor.Purple });
+        FillInventory(new ElixirColor[] { ElixirColor.Red, ElixirColor.Orange, ElixirColor.Yellow, ElixirColor.Green, ElixirColor.Blue, ElixirColor.Purple});
     }
 
     void Update()
@@ -30,9 +30,13 @@ public class InventoryManager : MonoBehaviour
     // given a list of elixir colors, fills up the inventory
     void FillInventory (ElixirColor[] inputColorNamesList)
     {
+        // adjust content size and the position of title "INVENTORY"
+        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Length * 120);
+        inventoryContent.GetChild(0).transform.localPosition = new Vector3(GetComponent<RectTransform>().rect.width / 2, inventoryContent.GetChild(0).GetComponent<RectTransform>().rect.height / -2, 0);
+
         // keep the position of the first item
         Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -100);
-        
+
         // go through all the color names and create corresponding color items in the inventory
         for (int i = 0; i < inputColorNamesList.Length; i++)
         {
