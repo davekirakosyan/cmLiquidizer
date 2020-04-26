@@ -13,7 +13,7 @@ public class PathController : MonoBehaviour
     void Update()
     {
         // detect the click on the tubes to pour elixir
-        if (Clicked())
+        if (Clicked() && BasicLogic.gameOn)
         {
             // cast a ray and check if it hits any of tube coliders
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
