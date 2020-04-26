@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
         inventoryContent.GetChild(0).transform.localPosition = new Vector3(GetComponent<RectTransform>().rect.width / 2, inventoryContent.GetChild(0).GetComponent<RectTransform>().rect.height / -2, 0);
 
         // keep the position of the first item
-        Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -60);
+        Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -70);
 
         // go through all the color names and create corresponding color items in the inventory
         for (int i = 0; i < inputColorNamesList.Length; i++)
