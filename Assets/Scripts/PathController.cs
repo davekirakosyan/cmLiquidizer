@@ -8,6 +8,7 @@ public class PathController : MonoBehaviour
     public GameObject elixirPrefab;
     public PathCreator pathCreator;
     int nextUniqueNumber = 0;
+    public GameObject gameOverMsg;
 
     void Update()
     {

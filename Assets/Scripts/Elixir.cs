@@ -13,6 +13,7 @@ public class Elixir : MonoBehaviour
     public InventoryManager.ElixirColor colorName = InventoryManager.ElixirColor.Red;
     Color color;
     public int uniqueNumber;
+    bool canMix;
 
     public ParticleSystem part;
     public List<ParticleCollisionEvent> collisionEvents;
@@ -47,12 +48,19 @@ public class Elixir : MonoBehaviour
         // prevent self collision using unique id
         if (uniqueNumber != other.GetComponentInParent<Elixir>().uniqueNumber)
         {
-            // create elixir on the position of collision
             InventoryManager.ElixirColor newColor = MixElixirs(other.transform.parent.GetComponent<Elixir>().colorName, colorName);
-            pathController.CreateElixir(other.transform.position, speed, newColor);
-            // destroy the existing ones
+            if (canMix)
+            {
+                // create elixir on the position of collision
+                pathController.CreateElixir(other.transform.position, speed, newColor);
+            }
+            else
+            {
+                pathController.gameOverMsg.SetActive(true);
+            }
+            // destroy the existing elixirs
             pathController.DestroyElixir(this.gameObject);
-            pathController.DestroyElixir(other.transform.parent.gameObject); 
+            pathController.DestroyElixir(other.transform.parent.gameObject);
         }
     }
 
@@ -60,6 +68,7 @@ public class Elixir : MonoBehaviour
     InventoryManager.ElixirColor MixElixirs (InventoryManager.ElixirColor color1, InventoryManager.ElixirColor color2)
     {
         InventoryManager.ElixirColor mix;
+        canMix = true;
 
         if (color1.Equals(InventoryManager.ElixirColor.Red) && color2.Equals(InventoryManager.ElixirColor.Yellow) ||
             color2.Equals(InventoryManager.ElixirColor.Red) && color1.Equals(InventoryManager.ElixirColor.Yellow) )
@@ -79,6 +88,7 @@ public class Elixir : MonoBehaviour
         else
         {
             mix = InventoryManager.ElixirColor.Red;
+            canMix = false;
         }
 
         return mix;
