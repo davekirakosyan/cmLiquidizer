@@ -5,13 +5,15 @@ using PathCreation;
 
 public class Elixir : MonoBehaviour
 {
+    public PathController pathController;
     public PathCreator pathCreator;
     public EndOfPathInstruction endOfPathInstruction; 
     float distanceTravelled;
     public float speed;
     public InventoryManager.ElixirColor colorName = InventoryManager.ElixirColor.Red;
-    Color color = Color.red;
+    Color color;
     public int uniqueNumber;
+    bool canMix;
 
     public ParticleSystem part;
     public List<ParticleCollisionEvent> collisionEvents;
@@ -40,13 +42,60 @@ public class Elixir : MonoBehaviour
         }
     }
 
+    // collision logic
     void OnParticleCollision(GameObject other)
     {
         // prevent self collision using unique id
         if (uniqueNumber != other.GetComponentInParent<Elixir>().uniqueNumber)
-            print(other.name);
+        {
+            InventoryManager.ElixirColor newColor = MixElixirs(other.transform.parent.GetComponent<Elixir>().colorName, colorName);
+            if (canMix)
+            {
+                // create elixir on the position of collision
+                pathController.CreateElixir(other.transform.position, speed, newColor);
+            }
+            else
+            {
+                pathController.gameOverMsg.SetActive(true);
+                BasicLogic.gameOn = false;
+            }
+            // destroy the existing elixirs
+            pathController.DestroyElixir(this.gameObject);
+            pathController.DestroyElixir(other.transform.parent.gameObject);
+        }
     }
 
+    // color mixing logic
+    InventoryManager.ElixirColor MixElixirs (InventoryManager.ElixirColor color1, InventoryManager.ElixirColor color2)
+    {
+        InventoryManager.ElixirColor mix;
+        canMix = true;
+
+        if (color1.Equals(InventoryManager.ElixirColor.Red) && color2.Equals(InventoryManager.ElixirColor.Yellow) ||
+            color2.Equals(InventoryManager.ElixirColor.Red) && color1.Equals(InventoryManager.ElixirColor.Yellow) )
+        {
+            mix = InventoryManager.ElixirColor.Orange;
+        }
+        else if (color1.Equals(InventoryManager.ElixirColor.Red) && color2.Equals(InventoryManager.ElixirColor.Blue) ||
+                 color2.Equals(InventoryManager.ElixirColor.Red) && color1.Equals(InventoryManager.ElixirColor.Blue))
+        {
+            mix = InventoryManager.ElixirColor.Purple;
+        }
+        else if (color1.Equals(InventoryManager.ElixirColor.Yellow) && color2.Equals(InventoryManager.ElixirColor.Blue) ||
+                 color2.Equals(InventoryManager.ElixirColor.Yellow) && color1.Equals(InventoryManager.ElixirColor.Blue))
+        {
+            mix = InventoryManager.ElixirColor.Green;
+        }
+        else
+        {
+            mix = InventoryManager.ElixirColor.Red;
+            canMix = false;
+        }
+
+        return mix;
+    }
+
+    // color mixing logic
     Color SelectColorByName (InventoryManager.ElixirColor name)
     {
         switch (name)
