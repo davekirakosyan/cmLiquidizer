@@ -6,9 +6,24 @@ public class BasicLogic : MonoBehaviour
 {
     // global variable of the selected elixir color 
     public static InventoryManager.ElixirColor selectedColor;
-    public static bool gameOn = true;
+    public static bool gameOn = false;
+    public static int level = 1;
     public PathController pathController;
     public GameObject gameOverMsg;
+
+    public GameObject[] PATHS;
+
+    private void Awake()
+    {
+        if (PATHS.Length != 0 && level <= PATHS.Length)  // check if there is at least one level, and the current level has a path
+        {
+            // instantiate the level path
+            GameObject newPath = Instantiate(PATHS[level-1], pathController.gameObject.transform);
+            GameObject curve = newPath.transform.GetChild(0).gameObject;
+            pathController.pathCreator = curve.GetComponent<PathCreation.PathCreator>();
+            gameOn = true;
+        }
+    }
 
     public static void SelectElixir(InventoryManager.ElixirColor color)
     {
