@@ -19,20 +19,16 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         // This is temporary, should be called during level construction
-        FillInventory(new ElixirColor[] { ElixirColor.Red, ElixirColor.Orange, ElixirColor.Yellow, ElixirColor.Green, ElixirColor.Blue, ElixirColor.Purple});
-    }
-
-    void Update()
-    {
-        
+        //FillInventory(new ElixirColor[] { ElixirColor.Red, ElixirColor.Orange, ElixirColor.Yellow, ElixirColor.Green, ElixirColor.Blue, ElixirColor.Purple});
     }
 
     // given a list of elixir colors, fills up the inventory
-    void FillInventory (ElixirColor[] inputColorNamesList)
+    public void FillInventory (ElixirColor[] inputColorNamesList)
     {
-        // adjust content size and the position of title "INVENTORY"
+        // first get rid of the old elixirs from the inventory (if there is any)
+        removeInventoryItems();
+        // adjust content size
         inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Length * 120);
-        inventoryContent.GetChild(0).transform.localPosition = new Vector3(GetComponent<RectTransform>().rect.width / 2, inventoryContent.GetChild(0).GetComponent<RectTransform>().rect.height / -2, 0);
 
         // keep the position of the first item
         Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -70);
@@ -48,6 +44,18 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
             newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem.GetComponent<InventoryItem>().colorName));
             nextPos.y -= 120;   // decrease y for the next item
+        }
+    }
+
+    // removes the exicting inventory items
+    public void removeInventoryItems()
+    {
+        if (inventoryContent.childCount != 0)
+        {
+            for (int i = 0; i < inventoryContent.childCount; i++)
+            {
+                Destroy(inventoryContent.GetChild(i).gameObject);
+            }
         }
     }
     

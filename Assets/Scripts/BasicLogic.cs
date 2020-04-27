@@ -5,19 +5,25 @@ using UnityEngine.UI;
 
 public class BasicLogic : MonoBehaviour
 {
-    // global variable of the selected elixir color 
+    // global variables
     public static InventoryManager.ElixirColor selectedColor;
     public static bool gameOn = false;
+    public static int world = 0;
     public static int level = 0;
+
+    public InventoryManager inventoryManager;
     public PathController pathController;
+
     public GameObject gameOverMsg;
     public Dropdown levelDropdown;
 
     public GameObject[] PATHS;
+    public InventoryManager.ElixirColor[] currentInput;
+    public InventoryManager.ElixirColor[] currentOutput;
 
     private void Awake()
     {
-        CreateLevel();
+        CreateWorld();
     }
 
     public static void SelectElixir(InventoryManager.ElixirColor color)
@@ -37,28 +43,35 @@ public class BasicLogic : MonoBehaviour
         gameOverMsg.SetActive(false);
     }
 
-    public void CreateLevel()
+    public void CreateWorld()
     {
-        if (PATHS.Length != 0 && level < PATHS.Length && level >= 0)  // check if there is at least one level, and the current level has a path
+        if (PATHS.Length != 0 && world < PATHS.Length && world >= 0)  // check if there is at least one world path, and the current world has a path
         {
-            // instantiate the level path
-            GameObject newPath = Instantiate(PATHS[level], pathController.gameObject.transform);
-            GameObject curve = newPath.transform.GetChild(0).gameObject;
-            pathController.pathCreator = curve.GetComponent<PathCreation.PathCreator>();
+            // instantiate the world path
+            GameObject newPath = Instantiate(PATHS[world], pathController.gameObject.transform);
+            pathController.pathCreator = newPath.GetComponent<Path>().pathCreator;
+
+            Assignment lvl = newPath.GetComponent<Path>().levels[level].GetComponent<Assignment>();
+
+            currentInput = lvl.inputColors;
+            currentOutput = lvl.outputColors;
+
+           inventoryManager.FillInventory(currentInput);
+
             gameOn = true;
         }
     }
 
-    public void ChangeLevel ()
+    public void ChangeWorld ()
     {
         // if there is any existing path remove it
         if (pathController.gameObject.transform.childCount != 0)
         {
             Destroy(pathController.gameObject.transform.GetChild(0).gameObject);
         }
-        // change into a new level from the dropdown list
-        level = levelDropdown.value;
+        // change into a new world from the dropdown list
+        world = levelDropdown.value;
         ResetGame();
-        CreateLevel();
+        CreateWorld();
     }
 }
