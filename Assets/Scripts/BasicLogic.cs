@@ -7,7 +7,7 @@ public class BasicLogic : MonoBehaviour
     // global variable of the selected elixir color 
     public static InventoryManager.ElixirColor selectedColor;
     public static bool gameOn = false;
-    public static int level = 1;
+    public static int level = 2;
     public PathController pathController;
     public GameObject gameOverMsg;
 
@@ -15,7 +15,7 @@ public class BasicLogic : MonoBehaviour
 
     private void Awake()
     {
-        if (PATHS.Length != 0 && level <= PATHS.Length)  // check if there is at least one level, and the current level has a path
+        if (PATHS.Length != 0 && level <= PATHS.Length && level > 0)  // check if there is at least one level, and the current level has a path
         {
             // instantiate the level path
             GameObject newPath = Instantiate(PATHS[level-1], pathController.gameObject.transform);

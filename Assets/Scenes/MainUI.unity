@@ -2831,9 +2831,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathController: {fileID: 1015420021939945176}
   gameOverMsg: {fileID: 2006860960}
-  curve: {fileID: 0}
   PATHS:
   - {fileID: 9165353073776263151, guid: 6fe8028c3d795cf4496089178218ecf5, type: 3}
+  - {fileID: 9165353073776263151, guid: 63c202db51ac1cc4b8791eca076635d1, type: 3}
 --- !u!1 &989113008
 GameObject:
   m_ObjectHideFlags: 0
