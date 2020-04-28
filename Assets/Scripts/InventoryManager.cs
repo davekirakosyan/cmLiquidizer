@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,6 +51,13 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem));
             nextPos.y -= 120;   // decrease y for the next item
         }
+    }
+
+    public bool IsInvenotoryEmpty()
+    {
+        if (inventoryContent.childCount == 0)
+            return true;
+        return false;
     }
 
     // removes the exicting inventory items
