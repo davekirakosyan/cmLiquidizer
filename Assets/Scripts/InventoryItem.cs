@@ -16,7 +16,7 @@ public class InventoryItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         parent = transform.parent;
         itemSize = transform.localScale;
 
-        BasicLogic.SelectElixir(this.gameObject);
+        GameManager.SelectElixir(this.gameObject);
     }
 
     public void OnDrag(PointerEventData eventData)

@@ -57,7 +57,7 @@ public class Elixir : MonoBehaviour
             else
             {
                 pathController.gameOverMsg.SetActive(true);
-                BasicLogic.gameOn = false;
+                GameManager.gameOn = false;
             }
             // destroy the existing elixirs
             pathController.DestroyElixir(this.gameObject);

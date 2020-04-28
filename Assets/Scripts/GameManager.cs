@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BasicLogic : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     // global variables
     public static InventoryManager.ElixirColor selectedColor;
@@ -40,12 +40,13 @@ public class BasicLogic : MonoBehaviour
 
     public void ResetGame()
     {
-        // remove all the existing ellixirs
-        GameObject[] allElixirs = GameObject.FindGameObjectsWithTag("elixir");
-        for (int i = 0; i < allElixirs.Length; i++)
+        // delete all the existing elixirs on the path
+        foreach (GameObject elixir in pathController.usedElixirs)
         {
-            pathController.DestroyElixir(allElixirs[i]);
+            pathController.DestroyElixir(elixir);
         }
+        pathController.usedElixirs.Clear();
+       
         inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
         gameOverMsg.SetActive(false);

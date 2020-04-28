@@ -48,7 +48,7 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.transform.localPosition = nextPos;
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
-            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem));
+            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => GameManager.SelectElixir(newInventoryItem));
             nextPos.y -= 120;   // decrease y for the next item
         }
     }
@@ -113,7 +113,7 @@ public class InventoryManager : MonoBehaviour
     // delete the used elixir from inventory and fill its gap
     public void RemoveUsedItemFromInventory()
     {
-        Destroy(BasicLogic.selectedElixir);
+        Destroy(GameManager.selectedElixir);
         StartCoroutine( RearrangeInventoryContent());
     }
 }
