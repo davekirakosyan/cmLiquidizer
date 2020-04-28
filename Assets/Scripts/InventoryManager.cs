@@ -16,6 +16,10 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
     public Transform inventoryContent;
 
+    public GameObject usedElixir;
+
+    Vector2 firstItemPosition = new Vector2(0, -70);
+
     void Start()
     {
         // This is temporary, should be called during level construction
@@ -31,7 +35,8 @@ public class InventoryManager : MonoBehaviour
         inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Length * 120);
 
         // keep the position of the first item
-        Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -70);
+        Vector2 nextPos = firstItemPosition;
+        nextPos.x = GetComponent<RectTransform>().rect.width/2;
 
         // go through all the color names and create corresponding color items in the inventory
         for (int i = 0; i < inputColorNamesList.Length; i++)
@@ -42,7 +47,7 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.transform.localPosition = nextPos;
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
-            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem.GetComponent<InventoryItem>().colorName));
+            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem));
             nextPos.y -= 120;   // decrease y for the next item
         }
     }
@@ -79,5 +84,27 @@ public class InventoryManager : MonoBehaviour
             default:
                 return red;
         }
+    }
+
+    void RearrangeInventoryContent ()
+    {
+
+        // keep the position of the first item
+        Vector2 nextPos = firstItemPosition;
+        nextPos.x = GetComponent<RectTransform>().rect.width / 2;
+
+        // go through all the items and fix position
+        for (int i = 0; i < inventoryContent.childCount; i++)
+        {
+            inventoryContent.GetChild(i).transform.localPosition = nextPos;
+            nextPos.y -= 120;   // decrease y for the next item
+        }
+    }
+
+    // delete the used elixir from inventory and fill its gap
+    public void RemoveUsedItemFromInventory()
+    {
+        Destroy(BasicLogic.selectedElixir);
+        RearrangeInventoryContent();
     }
 }

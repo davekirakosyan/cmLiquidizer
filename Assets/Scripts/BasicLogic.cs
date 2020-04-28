@@ -8,6 +8,7 @@ public class BasicLogic : MonoBehaviour
 {
     // global variables
     public static InventoryManager.ElixirColor selectedColor;
+    public static GameObject selectedElixir;
     public static bool gameOn = false;
     public static int world = 0;
     public static int level = 0;
@@ -31,9 +32,10 @@ public class BasicLogic : MonoBehaviour
         CreateWorld();
     }
 
-    public static void SelectElixir(InventoryManager.ElixirColor color)
+    public static void SelectElixir(GameObject elixir)
     {
-        selectedColor = color;
+        selectedColor = elixir.GetComponent<InventoryItem>().colorName;
+        selectedElixir = elixir;
     }
 
     public void ResetGame()
@@ -44,6 +46,7 @@ public class BasicLogic : MonoBehaviour
         {
             pathController.DestroyElixir(allElixirs[i]);
         }
+        inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
         gameOverMsg.SetActive(false);
     }

@@ -10,6 +10,7 @@ public class PathController : MonoBehaviour
     public PathCreator pathCreator;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
+    public InventoryManager inventoryManager;
 
     void Update()
     {
@@ -47,6 +48,7 @@ public class PathController : MonoBehaviour
         // adding a unique number to each elixir for easy tracking and self collision issues
         elixir.GetComponent<Elixir>().uniqueNumber = nextUniqueNumber;
         nextUniqueNumber++;
+        inventoryManager.RemoveUsedItemFromInventory();
     }
 
     public void DestroyElixir(GameObject elixir)
