@@ -12,7 +12,7 @@ public class PathController : MonoBehaviour
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
     public InventoryManager inventoryManager;
-    public List<GameObject> usedElixirs = new List<GameObject>();
+    public List<GameObject> liveElixirs = new List<GameObject>();
 
     void Update()
     {
@@ -51,7 +51,7 @@ public class PathController : MonoBehaviour
         elixir.GetComponent<Elixir>().uniqueNumber = nextUniqueNumber;
         nextUniqueNumber++;
 
-        usedElixirs.Add(elixir);
+        liveElixirs.Add(elixir);
         inventoryManager.RemoveUsedItemFromInventory();
         StartCoroutine(CheckReseults());
     }
@@ -93,8 +93,23 @@ public class PathController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         if (inventoryManager.IsInvenotoryEmpty())
         {
+            List<InventoryManager.ElixirColor> usedColors = new List<InventoryManager.ElixirColor>();
+            foreach (GameObject elixir in liveElixirs)
+            {
+                usedColors.Add(elixir.GetComponent<Elixir>().colorName);
+            }
+
+            bool isRequirementDone = true;
             // check if the output is right
-            
+            foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
+            {
+                print(color);
+                if (!usedColors.Contains(color))
+                {
+                    isRequirementDone = false;
+                }
+            }
+            print(isRequirementDone); 
         }
     }
 }

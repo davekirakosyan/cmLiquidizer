@@ -29,6 +29,9 @@ public class Elixir : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
         color = SelectColorByName(colorName);
         part.startColor = color;
+
+        //float t = pathCreator.path.length / speed;
+        //print(t);
     }
 
     void Update()
@@ -59,6 +62,8 @@ public class Elixir : MonoBehaviour
                 pathController.gameOverMsg.SetActive(true);
                 GameManager.gameOn = false;
             }
+            pathController.liveElixirs.Remove(this.gameObject);
+            pathController.liveElixirs.Remove(other.transform.parent.gameObject);
             // destroy the existing elixirs
             pathController.DestroyElixir(this.gameObject);
             pathController.DestroyElixir(other.transform.parent.gameObject);

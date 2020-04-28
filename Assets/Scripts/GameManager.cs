@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         // delete all the existing elixirs on the path
-        foreach (GameObject elixir in pathController.usedElixirs)
+        foreach (GameObject elixir in pathController.liveElixirs)
         {
             pathController.DestroyElixir(elixir);
         }
-        pathController.usedElixirs.Clear();
+        pathController.liveElixirs.Clear();
        
         inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
