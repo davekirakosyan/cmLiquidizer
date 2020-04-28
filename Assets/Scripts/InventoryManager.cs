@@ -94,12 +94,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    void RearrangeInventoryContent ()
+    IEnumerator RearrangeInventoryContent ()
     {
 
         // keep the position of the first item
         Vector2 nextPos = firstItemPosition;
         nextPos.x = GetComponent<RectTransform>().rect.width / 2;
+        yield return new WaitForEndOfFrame();
 
         // go through all the items and fix position
         for (int i = 0; i < inventoryContent.childCount; i++)
@@ -113,6 +114,6 @@ public class InventoryManager : MonoBehaviour
     public void RemoveUsedItemFromInventory()
     {
         Destroy(BasicLogic.selectedElixir);
-        RearrangeInventoryContent();
+        StartCoroutine( RearrangeInventoryContent());
     }
 }

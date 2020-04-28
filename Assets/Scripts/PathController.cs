@@ -49,6 +49,14 @@ public class PathController : MonoBehaviour
         elixir.GetComponent<Elixir>().uniqueNumber = nextUniqueNumber;
         nextUniqueNumber++;
         inventoryManager.RemoveUsedItemFromInventory();
+        StartCoroutine(CheckReseults());
+    }
+
+    IEnumerator CheckReseults ()
+    {
+        print(inventoryManager.IsInvenotoryEmpty());
+        yield return new WaitForEndOfFrame();
+        print(inventoryManager.IsInvenotoryEmpty());
     }
 
     public void DestroyElixir(GameObject elixir)
