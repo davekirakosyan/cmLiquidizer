@@ -115,11 +115,11 @@ public class PathController : MonoBehaviour
             
             if (isRequirementDone)
             {
-                print("WIN");
+                gameManager.winningMsg.SetActive(true);
             }
             else
             {
-                print("LOSE");
+                gameManager.gameOverMsg.SetActive(true);
             }
         }
     }

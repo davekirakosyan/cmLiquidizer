@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public PathController pathController;
 
     public GameObject gameOverMsg;
+    public GameObject winningMsg;
     public Dropdown worldDropdown;
     public Dropdown levelDropdown;
     public Text outputText;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
         gameOverMsg.SetActive(false);
+        winningMsg.SetActive(false);
     }
 
     public void CreateWorld()
