@@ -43,7 +43,6 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
             newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem.GetComponent<InventoryItem>().colorName));
-            newInventoryItem.AddComponent(System.Type.GetType("ItemDragHandler" + ",Assembly-CSharp"));
             nextPos.y -= 120;   // decrease y for the next item
         }
     }
