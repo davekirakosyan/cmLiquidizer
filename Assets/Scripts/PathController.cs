@@ -54,9 +54,7 @@ public class PathController : MonoBehaviour
 
     IEnumerator CheckReseults ()
     {
-        print(inventoryManager.IsInvenotoryEmpty());
         yield return new WaitForEndOfFrame();
-        print(inventoryManager.IsInvenotoryEmpty());
     }
 
     public void DestroyElixir(GameObject elixir)
