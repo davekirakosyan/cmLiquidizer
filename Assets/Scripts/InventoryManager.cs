@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,10 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
     public Transform inventoryContent;
 
+    public GameObject usedElixir;
+
+    Vector2 firstItemPosition = new Vector2(0, -70);
+
     void Start()
     {
         // This is temporary, should be called during level construction
@@ -23,28 +28,36 @@ public class InventoryManager : MonoBehaviour
     }
 
     // given a list of elixir colors, fills up the inventory
-    public void FillInventory (ElixirColor[] inputColorNamesList)
+    public void FillInventory (List<ElixirColor> inputColorNamesList)
     {
         // first get rid of the old elixirs from the inventory (if there is any)
         removeInventoryItems();
         // adjust content size
-        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Length * 120);
+        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Count * 120);
 
         // keep the position of the first item
-        Vector2 nextPos = new Vector2(GetComponent<RectTransform>().rect.width/2, -70);
+        Vector2 nextPos = firstItemPosition;
+        nextPos.x = GetComponent<RectTransform>().rect.width/2;
 
         // go through all the color names and create corresponding color items in the inventory
-        for (int i = 0; i < inputColorNamesList.Length; i++)
+        foreach (ElixirColor elixirColor in inputColorNamesList)
         {
             GameObject newInventoryItem = Instantiate(inventoryItemPrefab);
-            newInventoryItem.GetComponent<InventoryItem>().colorName = inputColorNamesList[i];
+            newInventoryItem.GetComponent<InventoryItem>().colorName = elixirColor;
             newInventoryItem.transform.SetParent(inventoryContent);
             newInventoryItem.transform.localPosition = nextPos;
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
-            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => BasicLogic.SelectElixir(newInventoryItem.GetComponent<InventoryItem>().colorName));
+            newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(elixirColor);
+            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => GameManager.SelectElixir(newInventoryItem));
             nextPos.y -= 120;   // decrease y for the next item
         }
+    }
+
+    public bool IsInvenotoryEmpty()
+    {
+        if (inventoryContent.childCount == 0)
+            return true;
+        return false;
     }
 
     // removes the exicting inventory items
@@ -79,5 +92,28 @@ public class InventoryManager : MonoBehaviour
             default:
                 return red;
         }
+    }
+
+    IEnumerator RearrangeInventoryContent ()
+    {
+
+        // keep the position of the first item
+        Vector2 nextPos = firstItemPosition;
+        nextPos.x = GetComponent<RectTransform>().rect.width / 2;
+        yield return new WaitForEndOfFrame();
+
+        // go through all the items and fix position
+        for (int i = 0; i < inventoryContent.childCount; i++)
+        {
+            inventoryContent.GetChild(i).transform.localPosition = nextPos;
+            nextPos.y -= 120;   // decrease y for the next item
+        }
+    }
+
+    // delete the used elixir from inventory and fill its gap
+    public void RemoveUsedItemFromInventory()
+    {
+        Destroy(GameManager.selectedElixir);
+        StartCoroutine( RearrangeInventoryContent());
     }
 }

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BasicLogic : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     // global variables
     public static InventoryManager.ElixirColor selectedColor;
+    public static GameObject selectedElixir;
     public static bool gameOn = false;
     public static int world = 0;
     public static int level = 0;
@@ -16,6 +17,7 @@ public class BasicLogic : MonoBehaviour
     public PathController pathController;
 
     public GameObject gameOverMsg;
+    public GameObject winningMsg;
     public Dropdown worldDropdown;
     public Dropdown levelDropdown;
     public Text outputText;
@@ -23,29 +25,35 @@ public class BasicLogic : MonoBehaviour
 
     public GameObject[] PATHS;
     public GameObject currentPath;
-    public InventoryManager.ElixirColor[] currentInput;
-    public InventoryManager.ElixirColor[] currentOutput;
+
+    public List<InventoryManager.ElixirColor> currentInput;
+    public List<InventoryManager.ElixirColor> currentOutput;
 
     private void Awake()
     {
         CreateWorld();
     }
 
-    public static void SelectElixir(InventoryManager.ElixirColor color)
+    public static void SelectElixir(GameObject elixir)
     {
-        selectedColor = color;
+        selectedColor = elixir.GetComponent<InventoryItem>().colorName;
+        selectedElixir = elixir;
     }
 
     public void ResetGame()
     {
-        // remove all the existing ellixirs
-        GameObject[] allElixirs = GameObject.FindGameObjectsWithTag("elixir");
-        for (int i = 0; i < allElixirs.Length; i++)
+        // delete all the existing elixirs on the path
+        foreach (GameObject elixir in pathController.liveElixirs)
         {
-            pathController.DestroyElixir(allElixirs[i]);
+            pathController.DestroyElixir(elixir);
         }
+        pathController.liveElixirs.Clear();
+        pathController.liveElixirColors.Clear();
+       
+        inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
         gameOverMsg.SetActive(false);
+        winningMsg.SetActive(false);
     }
 
     public void CreateWorld()
@@ -77,9 +85,9 @@ public class BasicLogic : MonoBehaviour
 
             // display output by text (temporary solution)
             outputText.GetComponent<Text>().text = "";
-            for (int i = 0; i < currentOutput.Length; i++)
+            foreach (InventoryManager.ElixirColor elixir in currentOutput)
             {
-                outputText.GetComponent<Text>().text += currentOutput[i] + " ";
+                outputText.GetComponent<Text>().text += elixir + " ";
             }
             UpdateLevelText();
         }

@@ -5,16 +5,22 @@ using PathCreation;
 
 public class PathController : MonoBehaviour
 {
+    public GameManager gameManager;
     public GameObject elixirPrefab;
     public static bool dragged = false;
     public PathCreator pathCreator;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
+    public InventoryManager inventoryManager;
+    public List<GameObject> liveElixirs = new List<GameObject>();
+    public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
+    float speed = 2;
+    bool checkCountdownInProgress = false;
 
     void Update()
     {
         // detect the click on the tubes to pour elixir
-        if (Clicked() && BasicLogic.gameOn)
+        if (Clicked() && GameManager.gameOn)
         {
             PourElixir();
             dragged = false;
@@ -31,7 +37,11 @@ public class PathController : MonoBehaviour
             if (hit.transform.gameObject.layer == 8) // layer 8 is Path
             {
                 // if clicked on tubes create an elixir at that hit point and initialize its main components
-                CreateElixir(hit.point, 2, BasicLogic.selectedColor);
+                CreateElixir(hit.point, speed, GameManager.selectedColor);
+            }
+            if (!checkCountdownInProgress)
+            {
+                StartCoroutine(CheckReseults());
             }
         }
     }
@@ -47,7 +57,12 @@ public class PathController : MonoBehaviour
         // adding a unique number to each elixir for easy tracking and self collision issues
         elixir.GetComponent<Elixir>().uniqueNumber = nextUniqueNumber;
         nextUniqueNumber++;
+
+        liveElixirs.Add(elixir);
+        liveElixirColors.Add(colorName);
+        inventoryManager.RemoveUsedItemFromInventory();
     }
+
 
     public void DestroyElixir(GameObject elixir)
     {
@@ -77,6 +92,36 @@ public class PathController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)||dragged)
                 return true;
             else return false;
+        }
+    }
+
+    IEnumerator CheckReseults()
+    {
+        checkCountdownInProgress = true;
+        yield return new WaitForSeconds(pathCreator.path.length / speed);
+        checkCountdownInProgress = false;
+
+        if (inventoryManager.IsInvenotoryEmpty())
+        {
+            // check if the output is right
+            bool isRequirementDone = true;
+            foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
+            {
+                if (!liveElixirColors.Contains(color))
+                {
+                    isRequirementDone = false;
+                }
+            }
+            
+            if (isRequirementDone)
+            {
+                gameManager.winningMsg.SetActive(true);
+            }
+            else
+            {
+                gameManager.gameOverMsg.SetActive(true);
+            }
+            GameManager.gameOn = false;
         }
     }
 }

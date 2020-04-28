@@ -29,6 +29,7 @@ public class Elixir : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
         color = SelectColorByName(colorName);
         part.startColor = color;
+
     }
 
     void Update()
@@ -57,8 +58,15 @@ public class Elixir : MonoBehaviour
             else
             {
                 pathController.gameOverMsg.SetActive(true);
-                BasicLogic.gameOn = false;
+                GameManager.gameOn = false;
             }
+
+            // add the elixir to the lists
+            pathController.liveElixirs.Remove(this.gameObject);
+            pathController.liveElixirs.Remove(other.transform.parent.gameObject);
+            pathController.liveElixirColors.Remove(this.colorName);
+            pathController.liveElixirColors.Remove(other.transform.parent.GetComponent<Elixir>().colorName);
+
             // destroy the existing elixirs
             pathController.DestroyElixir(this.gameObject);
             pathController.DestroyElixir(other.transform.parent.gameObject);
