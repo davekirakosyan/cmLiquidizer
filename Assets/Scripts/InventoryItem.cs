@@ -29,6 +29,6 @@ public class InventoryItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         transform.SetParent(parent);
         transform.localPosition = itemPosition;
         transform.localScale = itemSize;
-        PathController.draged = true;
+        PathController.dragged = true;
     }
 }

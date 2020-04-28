@@ -6,7 +6,7 @@ using PathCreation;
 public class PathController : MonoBehaviour
 {
     public GameObject elixirPrefab;
-    public static bool draged=false;
+    public static bool dragged = false;
     public PathCreator pathCreator;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
@@ -17,7 +17,7 @@ public class PathController : MonoBehaviour
         if (Clicked() && BasicLogic.gameOn)
         {
             PourElixir();
-            draged = false;
+            dragged = false;
         }
     }
 
@@ -68,13 +68,13 @@ public class PathController : MonoBehaviour
     {
         if (Input.touchSupported)   // check if the device supports touch 
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Ended|| draged)
+            if (Input.GetTouch(0).phase == TouchPhase.Ended|| dragged)
                 return true;
             else return false;
         }
         else                        // EDITOR
         {
-            if (Input.GetMouseButtonDown(0)||draged)
+            if (Input.GetMouseButtonDown(0)||dragged)
                 return true;
             else return false;
         }
