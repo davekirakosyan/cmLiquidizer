@@ -5,6 +5,7 @@ using PathCreation;
 
 public class PathController : MonoBehaviour
 {
+    public GameManager gameManager;
     public GameObject elixirPrefab;
     public static bool dragged = false;
     public PathCreator pathCreator;
@@ -93,7 +94,7 @@ public class PathController : MonoBehaviour
         if (inventoryManager.IsInvenotoryEmpty())
         {
             // check if the output is right
-
+            
         }
     }
 }

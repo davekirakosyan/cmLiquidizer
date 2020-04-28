@@ -24,8 +24,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] PATHS;
     public GameObject currentPath;
-    public InventoryManager.ElixirColor[] currentInput;
-    public InventoryManager.ElixirColor[] currentOutput;
+
+    public List<InventoryManager.ElixirColor> currentInput;
+    public List<InventoryManager.ElixirColor> currentOutput;
 
     private void Awake()
     {
@@ -81,9 +82,9 @@ public class GameManager : MonoBehaviour
 
             // display output by text (temporary solution)
             outputText.GetComponent<Text>().text = "";
-            for (int i = 0; i < currentOutput.Length; i++)
+            foreach (InventoryManager.ElixirColor elixir in currentOutput)
             {
-                outputText.GetComponent<Text>().text += currentOutput[i] + " ";
+                outputText.GetComponent<Text>().text += elixir + " ";
             }
             UpdateLevelText();
         }

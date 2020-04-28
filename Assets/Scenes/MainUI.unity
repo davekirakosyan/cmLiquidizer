@@ -3857,7 +3857,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 972302377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f648248c02c3cd14a8c2196f598257c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 41167b85f8da92948a0697aca983db6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 2026960538}
@@ -7728,6 +7728,7 @@ MonoBehaviour:
   inventoryItemPrefab: {fileID: 8922424161783731015, guid: fd5b2ae3eb005104db260d10f11b511b,
     type: 3}
   inventoryContent: {fileID: 339202660}
+  usedElixir: {fileID: 0}
 --- !u!1 &2036623806
 GameObject:
   m_ObjectHideFlags: 0
@@ -8272,10 +8273,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee25e6ca56eee2429c5c9a14b08268a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 972302381}
   elixirPrefab: {fileID: 6851527812423169415, guid: 4b3b02102d7476c4192ede5644ba2f21,
     type: 3}
   pathCreator: {fileID: 0}
   gameOverMsg: {fileID: 2006860960}
+  inventoryManager: {fileID: 2026960538}
+  usedElixirs: []
 --- !u!1001 &1097043922732863995
 PrefabInstance:
   m_ObjectHideFlags: 0

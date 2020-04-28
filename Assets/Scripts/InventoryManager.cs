@@ -28,26 +28,26 @@ public class InventoryManager : MonoBehaviour
     }
 
     // given a list of elixir colors, fills up the inventory
-    public void FillInventory (ElixirColor[] inputColorNamesList)
+    public void FillInventory (List<ElixirColor> inputColorNamesList)
     {
         // first get rid of the old elixirs from the inventory (if there is any)
         removeInventoryItems();
         // adjust content size
-        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Length * 120);
+        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Count * 120);
 
         // keep the position of the first item
         Vector2 nextPos = firstItemPosition;
         nextPos.x = GetComponent<RectTransform>().rect.width/2;
 
         // go through all the color names and create corresponding color items in the inventory
-        for (int i = 0; i < inputColorNamesList.Length; i++)
+        foreach (ElixirColor elixirColor in inputColorNamesList)
         {
             GameObject newInventoryItem = Instantiate(inventoryItemPrefab);
-            newInventoryItem.GetComponent<InventoryItem>().colorName = inputColorNamesList[i];
+            newInventoryItem.GetComponent<InventoryItem>().colorName = elixirColor;
             newInventoryItem.transform.SetParent(inventoryContent);
             newInventoryItem.transform.localPosition = nextPos;
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(inputColorNamesList[i]);
+            newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(elixirColor);
             newInventoryItem.GetComponent<Button>().onClick.AddListener(() => GameManager.SelectElixir(newInventoryItem));
             nextPos.y -= 120;   // decrease y for the next item
         }
