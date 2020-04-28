@@ -6,6 +6,7 @@ using PathCreation;
 public class PathController : MonoBehaviour
 {
     public GameObject elixirPrefab;
+    public static bool dragged = false;
     public PathCreator pathCreator;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
@@ -15,16 +16,22 @@ public class PathController : MonoBehaviour
         // detect the click on the tubes to pour elixir
         if (Clicked() && BasicLogic.gameOn)
         {
-            // cast a ray and check if it hits any of tube coliders
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, 200))
+            PourElixir();
+            dragged = false;
+        }
+    }
+
+    public void PourElixir()
+    {
+        // cast a ray and check if it hits any of tube coliders
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, 200))
+        {
+            if (hit.transform.gameObject.layer == 8) // layer 8 is Path
             {
-                if (hit.transform.gameObject.layer == 8) // layer 8 is Path
-                {
-                    // if clicked on tubes create an elixir at that hit point and initialize its main components
-                    CreateElixir(hit.point, 2, BasicLogic.selectedColor);
-                }
+                // if clicked on tubes create an elixir at that hit point and initialize its main components
+                CreateElixir(hit.point, 2, BasicLogic.selectedColor);
             }
         }
     }
@@ -61,13 +68,13 @@ public class PathController : MonoBehaviour
     {
         if (Input.touchSupported)   // check if the device supports touch 
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            if (Input.GetTouch(0).phase == TouchPhase.Ended|| dragged)
                 return true;
             else return false;
         }
         else                        // EDITOR
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)||dragged)
                 return true;
             else return false;
         }
