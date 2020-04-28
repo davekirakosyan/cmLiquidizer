@@ -13,6 +13,9 @@ public class PathController : MonoBehaviour
     public GameObject gameOverMsg;
     public InventoryManager inventoryManager;
     public List<GameObject> liveElixirs = new List<GameObject>();
+    public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
+    float speed = 2;
+    bool checkCountdownInProgress = false;
 
     void Update()
     {
@@ -34,7 +37,11 @@ public class PathController : MonoBehaviour
             if (hit.transform.gameObject.layer == 8) // layer 8 is Path
             {
                 // if clicked on tubes create an elixir at that hit point and initialize its main components
-                CreateElixir(hit.point, 2, GameManager.selectedColor);
+                CreateElixir(hit.point, speed, GameManager.selectedColor);
+            }
+            if (!checkCountdownInProgress)
+            {
+                StartCoroutine(CheckReseults());
             }
         }
     }
@@ -52,8 +59,8 @@ public class PathController : MonoBehaviour
         nextUniqueNumber++;
 
         liveElixirs.Add(elixir);
+        liveElixirColors.Add(colorName);
         inventoryManager.RemoveUsedItemFromInventory();
-        StartCoroutine(CheckReseults());
     }
 
 
@@ -90,26 +97,30 @@ public class PathController : MonoBehaviour
 
     IEnumerator CheckReseults()
     {
-        yield return new WaitForEndOfFrame();
+        checkCountdownInProgress = true;
+        yield return new WaitForSeconds(pathCreator.path.length / speed);
+        checkCountdownInProgress = false;
+
         if (inventoryManager.IsInvenotoryEmpty())
         {
-            List<InventoryManager.ElixirColor> usedColors = new List<InventoryManager.ElixirColor>();
-            foreach (GameObject elixir in liveElixirs)
-            {
-                usedColors.Add(elixir.GetComponent<Elixir>().colorName);
-            }
-
-            bool isRequirementDone = true;
             // check if the output is right
+            bool isRequirementDone = true;
             foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
             {
-                print(color);
-                if (!usedColors.Contains(color))
+                if (!liveElixirColors.Contains(color))
                 {
                     isRequirementDone = false;
                 }
             }
-            print(isRequirementDone); 
+            
+            if (isRequirementDone)
+            {
+                print("WIN");
+            }
+            else
+            {
+                print("LOSE");
+            }
         }
     }
 }

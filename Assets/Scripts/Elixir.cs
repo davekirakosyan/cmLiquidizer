@@ -30,8 +30,6 @@ public class Elixir : MonoBehaviour
         color = SelectColorByName(colorName);
         part.startColor = color;
 
-        //float t = pathCreator.path.length / speed;
-        //print(t);
     }
 
     void Update()
@@ -62,8 +60,13 @@ public class Elixir : MonoBehaviour
                 pathController.gameOverMsg.SetActive(true);
                 GameManager.gameOn = false;
             }
+
+            // add the elixir to the lists
             pathController.liveElixirs.Remove(this.gameObject);
             pathController.liveElixirs.Remove(other.transform.parent.gameObject);
+            pathController.liveElixirColors.Remove(this.colorName);
+            pathController.liveElixirColors.Remove(other.transform.parent.GetComponent<Elixir>().colorName);
+
             // destroy the existing elixirs
             pathController.DestroyElixir(this.gameObject);
             pathController.DestroyElixir(other.transform.parent.gameObject);

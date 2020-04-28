@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
             pathController.DestroyElixir(elixir);
         }
         pathController.liveElixirs.Clear();
+        pathController.liveElixirColors.Clear();
        
         inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;

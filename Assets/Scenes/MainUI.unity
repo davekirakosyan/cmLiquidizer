@@ -8279,7 +8279,8 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   gameOverMsg: {fileID: 2006860960}
   inventoryManager: {fileID: 2026960538}
-  usedElixirs: []
+  liveElixirs: []
+  liveElixirColors: 
 --- !u!1001 &1097043922732863995
 PrefabInstance:
   m_ObjectHideFlags: 0
