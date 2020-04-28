@@ -121,6 +121,7 @@ public class PathController : MonoBehaviour
             {
                 gameManager.gameOverMsg.SetActive(true);
             }
+            GameManager.gameOn = false;
         }
     }
 }
