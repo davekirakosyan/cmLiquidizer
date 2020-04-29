@@ -1614,7 +1614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000020980835}
+  m_AnchoredPosition: {x: 0, y: -0.000032613054}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &363553581 stripped
@@ -3936,7 +3936,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 2026960538}
-  pathController: {fileID: 0}
+  pathController: {fileID: 1015420021939945176}
+  content: {fileID: 339202659}
   gameOverMsg: {fileID: 2006860960}
   winningMsg: {fileID: 648994674}
   worldDropdown: {fileID: 799824897}
