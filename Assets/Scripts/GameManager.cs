@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
     public Text outputText;
     public Text worldLevelText;
 
-    public GameObject[] PATHS;
     public GameObject currentPath;
+    public GameObject[] PATHS;
 
     public List<InventoryManager.ElixirColor> currentInput;
     public List<InventoryManager.ElixirColor> currentOutput;
@@ -83,9 +83,15 @@ public class GameManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        if (level >= currentPath.GetComponent<Path>().levels.Length)
+        {
+            level = currentPath.GetComponent<Path>().levels.Length - 1;
+            levelDropdown.value = level;
+            print("էտ լեվլը չկա");
+        }
+
         // load the current level with its recuirements
-        if (currentPath.GetComponent<Path>().levels.Length != 0 && 
-            level < currentPath.GetComponent<Path>().levels.Length && level >= 0)   // check if the path has levels and the selected level is in the range
+        if (currentPath.GetComponent<Path>().levels.Length != 0 && level >= 0)   // check if the path has levels and the selected level is in the range
         {
             Assignment lvl = currentPath.GetComponent<Path>().levels[level].GetComponent<Assignment>();
             currentInput = lvl.inputColors;
@@ -111,6 +117,7 @@ public class GameManager : MonoBehaviour
         }
         // change into a new world from the dropdown list
         world = worldDropdown.value;
+        level = levelDropdown.value;
         ResetGame();
         CreateWorld();
     }
