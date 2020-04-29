@@ -15,9 +15,7 @@ public class GameManager : MonoBehaviour
 
     public InventoryManager inventoryManager;
     public PathController pathController;
-
-    public GameObject content;
-    public static GameObject staticContent;
+ 
 
     public GameObject gameOverMsg;
     public GameObject winningMsg;
@@ -35,20 +33,17 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         CreateWorld();
-        staticContent = content;
     }
 
     public static void SelectElixir(GameObject elixir)
     {
+        if (selectedElixir != null)
+        {
+            selectedElixir.GetComponent<Image>().color= new Color(1, 1, 1, 1);
+        }
         selectedColor = elixir.GetComponent<InventoryItem>().colorName;
         selectedElixir = elixir;
-        for (int childIndex = 0; childIndex < staticContent.transform.childCount; childIndex++)
-        {
-            if (staticContent.transform.GetChild(childIndex).gameObject == selectedElixir)
-                staticContent.transform.GetChild(childIndex).GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
-            else
-                staticContent.transform.GetChild(childIndex).GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        }
+        selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
     }
 
     public void ResetGame()
