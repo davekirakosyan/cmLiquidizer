@@ -37,12 +37,15 @@ public class GameManager : MonoBehaviour
 
     public static void SelectElixir(GameObject elixir)
     {
+
         if (selectedElixir != null)
         {
+            //unhighlight previous selected item
             selectedElixir.GetComponent<Image>().color= new Color(1, 1, 1, 1);
         }
         selectedColor = elixir.GetComponent<InventoryItem>().colorName;
         selectedElixir = elixir;
+        //highlight selected item in inventory
         selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
     }
 
