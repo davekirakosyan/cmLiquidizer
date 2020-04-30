@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
     public static bool gameOn = false;
-    public int world = 0;
-    public int level = 0;
+    public int world;
+    public int level;
 
     public InventoryManager inventoryManager;
     public PathController pathController;
@@ -33,7 +33,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        world = PlayerPrefs.GetInt("World");
+        level = PlayerPrefs.GetInt("Level");
         CreateWorld();
+    }
+
+    private void Start()
+    {
+        
     }
 
     public static void SelectElixir(GameObject elixir)
@@ -85,6 +92,8 @@ public class GameManager : MonoBehaviour
             ResetGame();
             CreateWorld();
         }
+        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("World", world);
     }
 
     public void CreateWorld()
@@ -138,15 +147,15 @@ public class GameManager : MonoBehaviour
             Destroy(pathController.gameObject.transform.GetChild(0).gameObject);
         }
         // change into a new world from the dropdown list
-        world = worldDropdown.value;
-        level = levelDropdown.value;
+        world = PlayerPrefs.GetInt("World");
+        level = PlayerPrefs.GetInt("Level");
         ResetGame();
         CreateWorld();
     }
 
     public void ChangeLevel ()
     {
-        level = levelDropdown.value;
+        level = PlayerPrefs.GetInt("Level");
         ResetGame();
         CreateLevel();
     }
