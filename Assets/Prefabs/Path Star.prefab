@@ -82,6 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elixirLength: 0.8
+  elixirSpeed: 2
   inputColors: 00000000040000000200000004000000
   outputColors: 0500000003000000
 --- !u!65 &8473244647741021880

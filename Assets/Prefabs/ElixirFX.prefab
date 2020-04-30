@@ -209,8 +209,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.5
+      minMaxState: 0
+      scalar: 1
       minScalar: 0.7
       maxCurve:
         serializedVersion: 2
@@ -4865,6 +4865,7 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
   speed: 0
+  length: 0
   colorName: 0
   uniqueNumber: 0
   part: {fileID: 0}
