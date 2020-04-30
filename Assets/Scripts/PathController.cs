@@ -114,10 +114,11 @@ public class PathController : MonoBehaviour
                 }
             }
             
-            if (isRequirementDone && gameManager.world<2)
+            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
             {
                 gameManager.winningMsg.SetActive(true);
-            } else if (isRequirementDone && gameManager.world >= 2)
+            } 
+            else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
             {
                 gameManager.endGameMsg.SetActive(true);
             }
