@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public PathController pathController;
  
-
     public GameObject gameOverMsg;
     public GameObject winningMsg;
     public GameObject endGameMsg;
@@ -33,14 +32,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // load data
         world = PlayerPrefs.GetInt("World");
         level = PlayerPrefs.GetInt("Level");
         CreateWorld();
+        UpdateLevelDropdownMenuValues();
     }
 
-    private void Start()
+    // update level data in PlayerPrefs
+    void UpdateLevelData()
     {
-        
+        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("World", world);
     }
 
     public static void SelectElixir(GameObject elixir)
@@ -90,8 +93,8 @@ public class GameManager : MonoBehaviour
             UpdateLevelDropdownMenuValues();
             ChangeWorld();
         }
-        PlayerPrefs.SetInt("Level", level);
-        PlayerPrefs.SetInt("World", world);
+        UpdateLevelData();
+
     }
 
     public void CreateWorld()
@@ -116,7 +119,6 @@ public class GameManager : MonoBehaviour
         {
             level = currentPath.GetComponent<Path>().levels.Length - 1;
             UpdateLevelDropdownMenuValues();
-            print("էտ լեվլը չկա");
         }
 
         // load the current level with its recuirements
@@ -145,15 +147,18 @@ public class GameManager : MonoBehaviour
             Destroy(pathController.gameObject.transform.GetChild(0).gameObject);
         }
         // change into a new world from the dropdown list
-        world = PlayerPrefs.GetInt("World");
-        level = PlayerPrefs.GetInt("Level");
+        world = worldDropdown.value;
+        level = levelDropdown.value;
+
+        UpdateLevelData();
         ResetGame();
         CreateWorld();
     }
 
     public void ChangeLevel ()
     {
-        level = PlayerPrefs.GetInt("Level");
+        level = levelDropdown.value;
+        UpdateLevelData();
         ResetGame();
         CreateLevel();
     }
