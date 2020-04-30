@@ -34,7 +34,9 @@ public class Inventory : MonoBehaviour
         if (!PlayerPrefs.HasKey("Items"))
         {
             PlayerPrefs.SetString("Items", "{\"Items\":[{\"name\":\"0e7a66abd5daa98536ff177e27eedb5b\",\"bought\":\"0e7a66abd5daa985f47a5b16e3a8ddbe\",\"selected\":\"0e7a66abd5daa985f47a5b16e3a8ddbe\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa9857d3e2b1e96033c4a\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa98567391b0b57e5575d\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985636d838bdd125470\"},{\"name\":\"0e7a66abd5daa9857a7b16d6cd7ae61f\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa9858702f017dbcf56d6\"},{\"name\":\"0e7a66abd5daa985a98333f7f8c47ad3\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa985433f717a73d0141e\"},{\"name\":\"0e7a66abd5daa985ade7e05c8e5baac1\",\"bought\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"selected\":\"0e7a66abd5daa9850983cb872d5ede1d\",\"price\":\"0e7a66abd5daa98545b825fb94731cb2\"}]}");
-            PlayerPrefs.SetString("Coins",bf.Encrypt_CBC("300"));    
+            PlayerPrefs.SetString("Coins",bf.Encrypt_CBC("300"));
+            PlayerPrefs.SetInt("World", 0);
+            PlayerPrefs.SetInt("Level", 0);
         }
 
         //initialize data

@@ -10,13 +10,12 @@ public class GameManager : MonoBehaviour
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
     public static bool gameOn = false;
-    public int world = 0;
-    public int level = 0;
+    public int world;
+    public int level;
 
     public InventoryManager inventoryManager;
     public PathController pathController;
  
-
     public GameObject gameOverMsg;
     public GameObject winningMsg;
     public GameObject endGameMsg;
@@ -33,7 +32,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // load data
+        world = PlayerPrefs.GetInt("World");
+        level = PlayerPrefs.GetInt("Level");
         CreateWorld();
+        UpdateLevelDropdownMenuValues();
+    }
+
+    // update level data in PlayerPrefs
+    void UpdateLevelData()
+    {
+        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("World", world);
     }
 
     public static void SelectElixir(GameObject elixir)
@@ -83,6 +93,8 @@ public class GameManager : MonoBehaviour
             UpdateLevelDropdownMenuValues();
             ChangeWorld();
         }
+        UpdateLevelData();
+
     }
 
     public void CreateWorld()
@@ -107,7 +119,6 @@ public class GameManager : MonoBehaviour
         {
             level = currentPath.GetComponent<Path>().levels.Length - 1;
             UpdateLevelDropdownMenuValues();
-            print("էտ լեվլը չկա");
         }
 
         // load the current level with its recuirements
@@ -138,6 +149,8 @@ public class GameManager : MonoBehaviour
         // change into a new world from the dropdown list
         world = worldDropdown.value;
         level = levelDropdown.value;
+
+        UpdateLevelData();
         ResetGame();
         CreateWorld();
     }
@@ -145,6 +158,7 @@ public class GameManager : MonoBehaviour
     public void ChangeLevel ()
     {
         level = levelDropdown.value;
+        UpdateLevelData();
         ResetGame();
         CreateLevel();
     }
