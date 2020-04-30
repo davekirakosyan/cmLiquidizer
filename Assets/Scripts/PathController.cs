@@ -17,6 +17,7 @@ public class PathController : MonoBehaviour
     float speed = 2;
     bool checkCountdownInProgress = false;
 
+
     void Update()
     {
         // detect the click on the tubes to pour elixir
@@ -113,9 +114,12 @@ public class PathController : MonoBehaviour
                 }
             }
             
-            if (isRequirementDone)
+            if (isRequirementDone && gameManager.world<2)
             {
                 gameManager.winningMsg.SetActive(true);
+            } else if (isRequirementDone && gameManager.world >= 2)
+            {
+                gameManager.endGameMsg.SetActive(true);
             }
             else
             {
