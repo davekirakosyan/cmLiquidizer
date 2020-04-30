@@ -18,15 +18,15 @@ public class PathController : MonoBehaviour
 
     void Update()
     {
-        // detect the click on the tubes to pour elixir
-        if (Clicked() && GameManager.gameOn)
+        // detect the click
+        if (Clicked() && GameManager.gameOn && GameManager.selectedElixir != null)
         {
-            PourElixir();
+            PlayerClicked();
             dragged = false;
         }
     }
 
-    public void PourElixir()
+    public void PlayerClicked()
     {
         // cast a ray and check if it hits any of tube coliders
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
