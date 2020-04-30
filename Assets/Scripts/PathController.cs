@@ -14,21 +14,19 @@ public class PathController : MonoBehaviour
     public InventoryManager inventoryManager;
     public List<GameObject> liveElixirs = new List<GameObject>();
     public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
-    float speed = 2;
     bool checkCountdownInProgress = false;
-
 
     void Update()
     {
-        // detect the click on the tubes to pour elixir
-        if (Clicked() && GameManager.gameOn)
+        // detect the click
+        if (Clicked() && GameManager.gameOn && GameManager.selectedElixir != null)
         {
-            PourElixir();
+            PlayerClicked();
             dragged = false;
         }
     }
 
-    public void PourElixir()
+    public void PlayerClicked()
     {
         // cast a ray and check if it hits any of tube coliders
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -38,7 +36,7 @@ public class PathController : MonoBehaviour
             if (hit.transform.gameObject.layer == 8) // layer 8 is Path
             {
                 // if clicked on tubes create an elixir at that hit point and initialize its main components
-                CreateElixir(hit.point, speed, GameManager.selectedColor);
+                CreateElixir(hit.point, gameManager.currentLevel.elixirSpeed, gameManager.currentLevel.elixirLength, GameManager.selectedColor);
             }
             if (!checkCountdownInProgress)
             {
@@ -47,11 +45,12 @@ public class PathController : MonoBehaviour
         }
     }
 
-    public void CreateElixir (Vector3 position, float speed, InventoryManager.ElixirColor colorName)
+    public void CreateElixir (Vector3 position, float speed, float length, InventoryManager.ElixirColor colorName)
     {
         GameObject elixir = Instantiate(elixirPrefab);
         elixir.transform.position = position;
         elixir.GetComponent<Elixir>().speed = speed;
+        elixir.GetComponent<Elixir>().length = length;
         elixir.GetComponent<Elixir>().colorName = colorName;
         elixir.GetComponent<Elixir>().pathCreator = pathCreator;
         elixir.GetComponent<Elixir>().pathController = this;
@@ -99,7 +98,7 @@ public class PathController : MonoBehaviour
     IEnumerator CheckReseults()
     {
         checkCountdownInProgress = true;
-        yield return new WaitForSeconds(pathCreator.path.length / speed);
+        yield return new WaitForSeconds(pathCreator.path.length / gameManager.currentLevel.elixirSpeed);
         checkCountdownInProgress = false;
 
         if (inventoryManager.IsInvenotoryEmpty())

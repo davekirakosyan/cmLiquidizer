@@ -10,6 +10,7 @@ public class Elixir : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction; 
     float distanceTravelled;
     public float speed;
+    public float length;
     public InventoryManager.ElixirColor colorName = InventoryManager.ElixirColor.Red;
     Color color;
     public int uniqueNumber;
@@ -29,7 +30,7 @@ public class Elixir : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
         color = SelectColorByName(colorName);
         part.startColor = color;
-
+        part.startLifetime = length;
     }
 
     void Update()
@@ -53,7 +54,7 @@ public class Elixir : MonoBehaviour
             if (canMix)
             {
                 // create elixir on the position of collision
-                pathController.CreateElixir(other.transform.position, speed, newColor);
+                pathController.CreateElixir(other.transform.position, speed, length, newColor);
             }
             else
             {

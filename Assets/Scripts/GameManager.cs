@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject currentPath;
     public GameObject[] PATHS;
 
+    public Assignment currentLevel;
     public List<InventoryManager.ElixirColor> currentInput;
     public List<InventoryManager.ElixirColor> currentOutput;
 
@@ -124,9 +125,9 @@ public class GameManager : MonoBehaviour
         // load the current level with its recuirements
         if (currentPath.GetComponent<Path>().levels.Length != 0 && level >= 0)   // check if the path has levels and the selected level is in the range
         {
-            Assignment lvl = currentPath.GetComponent<Path>().levels[level].GetComponent<Assignment>();
-            currentInput = lvl.inputColors;
-            currentOutput = lvl.outputColors;
+            currentLevel = currentPath.GetComponent<Path>().levels[level].GetComponent<Assignment>();
+            currentInput = currentLevel.inputColors;
+            currentOutput = currentLevel.outputColors;
             inventoryManager.FillInventory(currentInput);
 
             // display output by text (temporary solution)

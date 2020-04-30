@@ -21,12 +21,6 @@ public class InventoryManager : MonoBehaviour
 
     Vector2 firstItemPosition = new Vector2(0, -70);
 
-    void Start()
-    {
-        // This is temporary, should be called during level construction
-        //FillInventory(new ElixirColor[] { ElixirColor.Red, ElixirColor.Orange, ElixirColor.Yellow, ElixirColor.Green, ElixirColor.Blue, ElixirColor.Purple});
-    }
-
     // given a list of elixir colors, fills up the inventory
     public void FillInventory (List<ElixirColor> inputColorNamesList)
     {
