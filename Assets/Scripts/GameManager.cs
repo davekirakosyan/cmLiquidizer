@@ -70,27 +70,25 @@ public class GameManager : MonoBehaviour
         inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
         gameOverMsg.SetActive(false);
-        //endGameMsg.SetActive(false);
+        endGameMsg.SetActive(false);
         winningMsg.SetActive(false);
     }
 
     public void NextLevel()
     {
+        // go to the next level (if it exists)
         level++;
         if (level < currentPath.GetComponent<Path>().levels.Length)
         {
-            ResetGame();
-            CreateLevel();
-        } else if (level>= currentPath.GetComponent<Path>().levels.Length && world<2)
+            UpdateLevelDropdownMenuValues();
+        }
+        else if (level >= currentPath.GetComponent<Path>().levels.Length && world < PATHS.Length)
         {
-            if (pathController.gameObject.transform.childCount != 0)
-            {
-                Destroy(pathController.gameObject.transform.GetChild(0).gameObject);
-            }
-            level = 0;
+            // if the current path has no more levels go to the level 0 of the next path
             world++;
-            ResetGame();
-            CreateWorld();
+            level = 0;
+            UpdateLevelDropdownMenuValues();
+            ChangeWorld();
         }
         PlayerPrefs.SetInt("Level", level);
         PlayerPrefs.SetInt("World", world);
@@ -117,7 +115,7 @@ public class GameManager : MonoBehaviour
         if (level >= currentPath.GetComponent<Path>().levels.Length)
         {
             level = currentPath.GetComponent<Path>().levels.Length - 1;
-            levelDropdown.value = level;
+            UpdateLevelDropdownMenuValues();
             print("էտ լեվլը չկա");
         }
 
@@ -160,8 +158,16 @@ public class GameManager : MonoBehaviour
         CreateLevel();
     }
 
+    // this is temporary
     void UpdateLevelText ()
     {
         worldLevelText.GetComponent<Text>().text = "World " + (world+1) + ", Level " + (level+1);
+    }
+
+    // this is temporary too
+    void UpdateLevelDropdownMenuValues ()
+    {
+        levelDropdown.value = level;
+        worldDropdown.value = world;
     }
 }
