@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
     public static bool gameOn = false;
-    public static int world = 0;
-    public static int level = 0;
+    public int world = 0;
+    public int level = 0;
 
     public InventoryManager inventoryManager;
     public PathController pathController;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverMsg;
     public GameObject winningMsg;
+    public GameObject endGameMsg;
     public Dropdown worldDropdown;
     public Dropdown levelDropdown;
     public Text outputText;
@@ -62,7 +63,28 @@ public class GameManager : MonoBehaviour
         inventoryManager.FillInventory(currentInput);   // refill inventory
         gameOn = true;
         gameOverMsg.SetActive(false);
+        //endGameMsg.SetActive(false);
         winningMsg.SetActive(false);
+    }
+
+    public void NextLevel()
+    {
+        level++;
+        if (level < currentPath.GetComponent<Path>().levels.Length)
+        {
+            ResetGame();
+            CreateLevel();
+        } else if (level>= currentPath.GetComponent<Path>().levels.Length && world<2)
+        {
+            if (pathController.gameObject.transform.childCount != 0)
+            {
+                Destroy(pathController.gameObject.transform.GetChild(0).gameObject);
+            }
+            level = 0;
+            world++;
+            ResetGame();
+            CreateWorld();
+        }
     }
 
     public void CreateWorld()
