@@ -402,7 +402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Star
-  pathCreator: {fileID: 8073123426488175759}
+  pathCreators:
+  - {fileID: 8073123426488175759}
   levels:
   - {fileID: 8830557801897598602}
 --- !u!1001 &384741407485264460

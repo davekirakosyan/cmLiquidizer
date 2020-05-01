@@ -3207,6 +3207,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: 3
       m_Image: {fileID: 0}
+    - m_Text: 4
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3822,8 +3824,10 @@ MonoBehaviour:
   currentPath: {fileID: 0}
   PATHS:
   - {fileID: 9165353073776263151, guid: 6fe8028c3d795cf4496089178218ecf5, type: 3}
+  - {fileID: 9165353073776263151, guid: e469c964aaa3d2a4783f571e59faf7b8, type: 3}
   - {fileID: 9165353073776263151, guid: 63c202db51ac1cc4b8791eca076635d1, type: 3}
   - {fileID: 9165353073776263151, guid: 7e7e4de6d3f5e0e4291b341db95c9951, type: 3}
+  currentLevel: {fileID: 0}
   currentInput: 
   currentOutput: 
 --- !u!1 &989113008
@@ -8206,7 +8210,7 @@ MonoBehaviour:
   gameManager: {fileID: 972302381}
   elixirPrefab: {fileID: 6851527812423169415, guid: 4b3b02102d7476c4192ede5644ba2f21,
     type: 3}
-  pathCreator: {fileID: 0}
+  pathCreators: []
   gameOverMsg: {fileID: 2006860960}
   inventoryManager: {fileID: 2026960538}
   liveElixirs: []

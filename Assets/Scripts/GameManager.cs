@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         {
             // instantiate the world path
             currentPath = Instantiate(PATHS[world], pathController.gameObject.transform);
-            pathController.pathCreator = currentPath.GetComponent<Path>().pathCreator;
+            pathController.pathCreators = currentPath.GetComponent<Path>().pathCreators;
 
             CreateLevel();
             UpdateLevelText();

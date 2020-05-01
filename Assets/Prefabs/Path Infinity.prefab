@@ -458,7 +458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Infinity
-  pathCreator: {fileID: 8073123426488175759}
+  pathCreators:
+  - {fileID: 8073123426488175759}
   levels:
   - {fileID: 6008227658331682346}
   - {fileID: 8462894580875807540}
