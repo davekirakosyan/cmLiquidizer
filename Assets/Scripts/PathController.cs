@@ -97,45 +97,49 @@ public class PathController : MonoBehaviour
 
     IEnumerator CheckReseults()
     {
-        // find the length of the longest path
-        float longestPathLength = 0;
-        for (int i = 0; i < pathCreators.Length; i++)
+        yield return new WaitForEndOfFrame();
+        if (inventoryManager.inventoryContent.childCount == 0)
         {
-            float pathLength = pathCreators[i].path.length;
-            if (pathLength > longestPathLength)
-                longestPathLength = pathLength;
-        }
-
-        // wait until elixirs make one whole cycle
-        checkCountdownInProgress = true;
-        yield return new WaitForSeconds(longestPathLength / gameManager.currentLevel.elixirSpeed);
-        checkCountdownInProgress = false;
-
-        if (inventoryManager.IsInvenotoryEmpty())
-        {
-            // check if the output is right
-            bool isRequirementDone = true;
-            foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
+            // find the length of the longest path
+            float longestPathLength = 0;
+            for (int i = 0; i < pathCreators.Length; i++)
             {
-                if (!liveElixirColors.Contains(color))
+                float pathLength = pathCreators[i].path.length;
+                if (pathLength > longestPathLength)
+                    longestPathLength = pathLength;
+            }
+
+            // wait until elixirs make one whole cycle
+            checkCountdownInProgress = true;
+            yield return new WaitForSeconds(longestPathLength / gameManager.currentLevel.elixirSpeed);
+            checkCountdownInProgress = false;
+
+            if (inventoryManager.IsInvenotoryEmpty())
+            {
+                // check if the output is right
+                bool isRequirementDone = true;
+                foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
                 {
-                    isRequirementDone = false;
+                    if (!liveElixirColors.Contains(color))
+                    {
+                        isRequirementDone = false;
+                    }
                 }
+
+                if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
+                {
+                    gameManager.winningMsg.SetActive(true);
+                }
+                else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
+                {
+                    gameManager.endGameMsg.SetActive(true);
+                }
+                else
+                {
+                    gameManager.gameOverMsg.SetActive(true);
+                }
+                GameManager.gameOn = false;
             }
-            
-            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-            {
-                gameManager.winningMsg.SetActive(true);
-            } 
-            else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
-            {
-                gameManager.endGameMsg.SetActive(true);
-            }
-            else
-            {
-                gameManager.gameOverMsg.SetActive(true);
-            }
-            GameManager.gameOn = false;
         }
     }
 }
