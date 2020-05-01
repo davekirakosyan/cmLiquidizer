@@ -5,6 +5,7 @@ using PathCreation;
 
 public class Elixir : MonoBehaviour
 {
+    public PathCreator[] paths;
     public PathController pathController;
     public PathCreator pathCreator;
     public EndOfPathInstruction endOfPathInstruction; 
@@ -21,6 +22,18 @@ public class Elixir : MonoBehaviour
 
     void Start()
     {
+        // find the nearest path
+        float minDistancesToThePath = float.MaxValue;
+        for (int i = 0; i < paths.Length; i++)
+        {
+            float nextDistance = Vector3.Distance(paths[i].path.GetClosestPointOnPath(transform.position), transform.position);
+            if (nextDistance < minDistancesToThePath)
+            {
+                minDistancesToThePath = nextDistance;
+                pathCreator = paths[i];
+            }
+        }
+
         // move elixir to the nearest point on path and calculate the distance from the startpoint of the path
         transform.position = pathCreator.path.GetClosestPointOnPath(transform.position);
         transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);

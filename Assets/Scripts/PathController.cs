@@ -8,7 +8,7 @@ public class PathController : MonoBehaviour
     public GameManager gameManager;
     public GameObject elixirPrefab;
     public static bool dragged = false;
-    public PathCreator pathCreator;
+    public PathCreator[] pathCreators;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
     public InventoryManager inventoryManager;
@@ -52,7 +52,7 @@ public class PathController : MonoBehaviour
         elixir.GetComponent<Elixir>().speed = speed;
         elixir.GetComponent<Elixir>().length = length;
         elixir.GetComponent<Elixir>().colorName = colorName;
-        elixir.GetComponent<Elixir>().pathCreator = pathCreator;
+        elixir.GetComponent<Elixir>().paths = pathCreators;
         elixir.GetComponent<Elixir>().pathController = this;
         // adding a unique number to each elixir for easy tracking and self collision issues
         elixir.GetComponent<Elixir>().uniqueNumber = nextUniqueNumber;
@@ -97,35 +97,49 @@ public class PathController : MonoBehaviour
 
     IEnumerator CheckReseults()
     {
-        checkCountdownInProgress = true;
-        yield return new WaitForSeconds(pathCreator.path.length / gameManager.currentLevel.elixirSpeed);
-        checkCountdownInProgress = false;
-
-        if (inventoryManager.IsInvenotoryEmpty())
+        yield return new WaitForEndOfFrame();
+        if (inventoryManager.inventoryContent.childCount == 0)
         {
-            // check if the output is right
-            bool isRequirementDone = true;
-            foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
+            // find the length of the longest path
+            float longestPathLength = 0;
+            for (int i = 0; i < pathCreators.Length; i++)
             {
-                if (!liveElixirColors.Contains(color))
+                float pathLength = pathCreators[i].path.length;
+                if (pathLength > longestPathLength)
+                    longestPathLength = pathLength;
+            }
+
+            // wait until elixirs make one whole cycle
+            checkCountdownInProgress = true;
+            yield return new WaitForSeconds(longestPathLength / gameManager.currentLevel.elixirSpeed);
+            checkCountdownInProgress = false;
+
+            if (inventoryManager.IsInvenotoryEmpty())
+            {
+                // check if the output is right
+                bool isRequirementDone = true;
+                foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
                 {
-                    isRequirementDone = false;
+                    if (!liveElixirColors.Contains(color))
+                    {
+                        isRequirementDone = false;
+                    }
                 }
+
+                if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
+                {
+                    gameManager.winningMsg.SetActive(true);
+                }
+                else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
+                {
+                    gameManager.endGameMsg.SetActive(true);
+                }
+                else
+                {
+                    gameManager.gameOverMsg.SetActive(true);
+                }
+                GameManager.gameOn = false;
             }
-            
-            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-            {
-                gameManager.winningMsg.SetActive(true);
-            } 
-            else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
-            {
-                gameManager.endGameMsg.SetActive(true);
-            }
-            else
-            {
-                gameManager.gameOverMsg.SetActive(true);
-            }
-            GameManager.gameOn = false;
         }
     }
 }
