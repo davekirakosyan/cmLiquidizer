@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             world++;
             level = 0;
             UpdateLevelDropdownMenuValues();
-            ChangeWorld();
+            //ChangeWorld();
         }
         UpdateLevelData();
 
