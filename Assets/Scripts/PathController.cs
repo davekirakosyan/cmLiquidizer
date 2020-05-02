@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using PathCreation;
 
 public class PathController : MonoBehaviour
@@ -15,6 +16,7 @@ public class PathController : MonoBehaviour
     public List<GameObject> liveElixirs = new List<GameObject>();
     public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
     bool checkCountdownInProgress = false;
+    public Text countdownText;
 
     void Update()
     {
@@ -111,8 +113,15 @@ public class PathController : MonoBehaviour
 
             // wait until elixirs make one whole cycle
             checkCountdownInProgress = true;
-            yield return new WaitForSeconds(longestPathLength / gameManager.currentLevel.elixirSpeed);
+            countdownText.gameObject.SetActive(true);
+            float waitTime = longestPathLength / gameManager.currentLevel.elixirSpeed;
+            for (int i = 0; i < waitTime; i++)
+            {
+                yield return new WaitForSeconds(1);
+                countdownText.text = (Mathf.Floor(waitTime-i)).ToString();
+            }
             checkCountdownInProgress = false;
+            countdownText.gameObject.SetActive(false);
 
             if (inventoryManager.IsInvenotoryEmpty())
             {
