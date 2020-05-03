@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using PathCreation;
 
 public class PathController : MonoBehaviour
@@ -14,7 +15,9 @@ public class PathController : MonoBehaviour
     public InventoryManager inventoryManager;
     public List<GameObject> liveElixirs = new List<GameObject>();
     public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
-    bool checkCountdownInProgress = false;
+    public bool checkCountdownInProgress = false;
+    public Text countdownText;
+    public Coroutine countDown;
 
     void Update()
     {
@@ -40,7 +43,7 @@ public class PathController : MonoBehaviour
             }
             if (!checkCountdownInProgress)
             {
-                StartCoroutine(CheckReseults());
+                countDown = StartCoroutine(CheckReseults());
             }
         }
     }
@@ -98,7 +101,7 @@ public class PathController : MonoBehaviour
     IEnumerator CheckReseults()
     {
         yield return new WaitForEndOfFrame();
-        if (inventoryManager.inventoryContent.childCount == 0)
+        if (inventoryManager.IsInvenotoryEmpty())
         {
             // find the length of the longest path
             float longestPathLength = 0;
@@ -111,35 +114,40 @@ public class PathController : MonoBehaviour
 
             // wait until elixirs make one whole cycle
             checkCountdownInProgress = true;
-            yield return new WaitForSeconds(longestPathLength / gameManager.currentLevel.elixirSpeed);
-            checkCountdownInProgress = false;
-
-            if (inventoryManager.IsInvenotoryEmpty())
+            countdownText.text = "";
+            countdownText.gameObject.SetActive(true);
+            float waitTime = longestPathLength / gameManager.currentLevel.elixirSpeed;
+            for (int i = 0; i < waitTime; i++)
             {
-                // check if the output is right
-                bool isRequirementDone = true;
-                foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
-                {
-                    if (!liveElixirColors.Contains(color))
-                    {
-                        isRequirementDone = false;
-                    }
-                }
-
-                if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-                {
-                    gameManager.winningMsg.SetActive(true);
-                }
-                else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
-                {
-                    gameManager.endGameMsg.SetActive(true);
-                }
-                else
-                {
-                    gameManager.gameOverMsg.SetActive(true);
-                }
-                GameManager.gameOn = false;
+                yield return new WaitForSeconds(1);
+                countdownText.text = (Mathf.Floor(waitTime-i)).ToString();
             }
+            checkCountdownInProgress = false;
+            countdownText.gameObject.SetActive(false);
+
+            // check if the output is right
+            bool isRequirementDone = true;
+            foreach (InventoryManager.ElixirColor color in gameManager.currentOutput)
+            {
+                if (!liveElixirColors.Contains(color))
+                {
+                    isRequirementDone = false;
+                }
+            }
+
+            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
+            {
+                gameManager.winningMsg.SetActive(true);
+            }
+            else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
+            {
+                gameManager.endGameMsg.SetActive(true);
+            }
+            else
+            {
+                gameManager.gameOverMsg.SetActive(true);
+            }
+            GameManager.gameOn = false;
         }
     }
 }

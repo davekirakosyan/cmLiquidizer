@@ -73,6 +73,14 @@ public class Elixir : MonoBehaviour
             {
                 pathController.gameOverMsg.SetActive(true);
                 GameManager.gameOn = false;
+
+                // stop the existing countdown
+                if (pathController.countDown != null)
+                {
+                    StopCoroutine(pathController.countDown);
+                    pathController.checkCountdownInProgress = false;
+                    pathController.countdownText.gameObject.SetActive(false);
+                }
             }
 
             // add the elixir to the lists

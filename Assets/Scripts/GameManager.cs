@@ -72,10 +72,21 @@ public class GameManager : MonoBehaviour
         pathController.liveElixirColors.Clear();
        
         inventoryManager.FillInventory(currentInput);   // refill inventory
+
         gameOn = true;
+
+        // hide popups
         gameOverMsg.SetActive(false);
         endGameMsg.SetActive(false);
         winningMsg.SetActive(false);
+
+        // stop the existing countdown
+        if (pathController.countDown != null)
+        {
+            StopCoroutine(pathController.countDown);
+            pathController.checkCountdownInProgress = false;
+            pathController.countdownText.gameObject.SetActive(false);
+        }
     }
 
     public void NextLevel()
