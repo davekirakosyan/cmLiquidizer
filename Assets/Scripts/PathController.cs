@@ -100,11 +100,9 @@ public class PathController : MonoBehaviour
 
     IEnumerator CheckReseults()
     {
-        print("Check");
         yield return new WaitForEndOfFrame();
         if (inventoryManager.IsInvenotoryEmpty())
         {
-            print("empty");
             // find the length of the longest path
             float longestPathLength = 0;
             for (int i = 0; i < pathCreators.Length; i++)
