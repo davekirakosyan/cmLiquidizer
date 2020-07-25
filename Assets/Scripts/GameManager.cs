@@ -15,12 +15,12 @@ public class GameManager : MonoBehaviour
 
     public InventoryManager inventoryManager;
     public PathController pathController;
+    public CardSelection cardSelection;
  
     public GameObject gameOverMsg;
     public GameObject winningMsg;
     public GameObject endGameMsg;
     public Dropdown worldDropdown;
-    public Dropdown levelDropdown;
     public Text outputText;
     public Text worldLevelText;
 
@@ -105,14 +105,16 @@ public class GameManager : MonoBehaviour
             UpdateLevelDropdownMenuValues();
             //ChangeWorld();
         }
+        // User Specific data
         UpdateLevelData();
 
+        // Show level selection Cards
+        cardSelection.CardGeneration();
     }
 
     public void CreateWorld()
     {
-        if (PATHS.Length != 0 
-            && world < PATHS.Length && world >= 0)  // check if there is at least one world path, and the current world has a path
+        if (PATHS.Length != 0 && world < PATHS.Length && world >= 0)  // check if there is at least one world path, and the current world has a path
         {
             // instantiate the world path
             currentPath = Instantiate(PATHS[world], pathController.gameObject.transform);
@@ -122,6 +124,9 @@ public class GameManager : MonoBehaviour
             UpdateLevelText();
 
             gameOn = true;
+
+            // Show level selection Cards
+            cardSelection.CardGeneration();
         }
     }
 
@@ -148,6 +153,9 @@ public class GameManager : MonoBehaviour
                 outputText.GetComponent<Text>().text += elixir + " ";
             }
             UpdateLevelText();
+
+            // Show level selection Cards
+            cardSelection.CardGeneration();
         }
     }
 
@@ -158,9 +166,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(pathController.gameObject.transform.GetChild(0).gameObject);
         }
+
         // change into a new world from the dropdown list
         world = worldDropdown.value;
-        level = levelDropdown.value;
+        level = cardSelection.Get_Level();
 
         UpdateLevelData();
         ResetGame();
@@ -169,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeLevel ()
     {
-        level = levelDropdown.value;
+        level = cardSelection.Get_Level();
         UpdateLevelData();
         ResetGame();
         CreateLevel();
@@ -184,7 +193,6 @@ public class GameManager : MonoBehaviour
     // this is temporary too
     void UpdateLevelDropdownMenuValues ()
     {
-        levelDropdown.value = level;
         worldDropdown.value = world;
     }
 }
