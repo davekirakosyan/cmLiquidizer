@@ -14,6 +14,12 @@ public class CardSelection : MonoBehaviour
     // game object for the game Manager
     public GameManager gameManager;
 
+    // Inventory manager object for filling inventory
+    public InventoryManager inventoryManager;
+
+    // current inventory set list
+    public List<InventoryManager.ElixirColor> currentInventory;
+
     void Start()
     {
         // first boot-up value for level
@@ -31,19 +37,32 @@ public class CardSelection : MonoBehaviour
     {
         GameObject selectedCard = transform.GetChild(childIndex).gameObject;
         selectedLevel = int.Parse(selectedCard.transform.GetChild(0).GetComponent<Text>().text);
-        gameManager.ChangeLevel();
+
+        // load selected level
+        gameManager.ChangeLevel(selectedLevel);
+
+        // refill inventory for selected level
+        inventoryManager.FillInventory(currentInventory);
+    }
+
+    // show cards
+    public void ShowLevelCards()
+    {
+        CardGeneration(false);
     }
 
     // card generation 
-    public void CardGeneration()
+    public void CardGeneration(bool forceGeneration = true)
     {
         // getting available levels for selected path (world)
         int levelCount = gameManager.currentPath.GetComponent<Path>().levels.Length;
 
         // checking if there are old cards in Card Holder and destroy them
         if (transform.childCount != 0)
+        {
             for (int i = 0; i < transform.childCount; i++)
                 GameObject.Destroy(transform.GetChild(i).gameObject);
+        }
 
         // creating new cards based on level count
         for (int i = 0; i < levelCount; i++)
@@ -53,9 +72,21 @@ public class CardSelection : MonoBehaviour
             
             // current card
             GameObject newCard = Instantiate(card, transform);
-            newCard.transform.position = new Vector3(newCard.transform.position.x, newCard.transform.position.y - (70 * i), newCard.transform.position.z);
+            newCard.transform.position = new Vector3(newCard.transform.position.x, newCard.transform.position.y - (150 * i), newCard.transform.position.z);
             newCard.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
+
+            if (forceGeneration)
+                newCard.transform.GetChild(1).gameObject.SetActive(false);
+
             newCard.GetComponent<Button>().onClick.AddListener(() => ClickHandler(newLevel));
         }
+    }
+
+    // Show completion filter on the card
+    public void CompleteLevel(int currentLevel)
+    {
+        GameObject currentCard = transform.GetChild(currentLevel).gameObject;
+        GameObject cardCompletionFilter = currentCard.transform.GetChild(1).gameObject;
+        cardCompletionFilter.SetActive(true);
     }
 }
