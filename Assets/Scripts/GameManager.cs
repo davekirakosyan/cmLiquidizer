@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public PathController pathController;
     public CardSelection cardSelection;
- 
+
     public GameObject gameOverMsg;
     public GameObject winningMsg;
     public GameObject endGameMsg;
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         if (selectedElixir != null)
         {
             //unhighlight previous selected item
-            selectedElixir.GetComponent<Image>().color= new Color(1, 1, 1, 1);
+            selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
 
         selectedColor = elixir.GetComponent<InventoryItem>().colorName;
@@ -111,6 +111,12 @@ public class GameManager : MonoBehaviour
             cardSelection.CardGeneration();
     }
 
+    // to perform refil after current level restarting
+    public void RefillInvetnory()
+    {
+        inventoryManager.FillInventory(currentInput);
+    }
+
     public void NextLevel()
     {
         // set current level card as completed
@@ -118,15 +124,15 @@ public class GameManager : MonoBehaviour
 
         level++;
 
-        // go to the next level (if it exists)
-        if (level < currentPath.GetComponent<Path>().levels.Length)
+        // go to the next level (if there are uncompleted levels)
+        if (cardSelection.GetCompletedLevelCount() != currentPath.GetComponent<Path>().levels.Length)
         {
             needUpdateLevelCards = false;
             ResetGame();
         }
 
-        // if the current path has no more levels go to the level 0 of the next path
-        else if (level >= currentPath.GetComponent<Path>().levels.Length && world < PATHS.Length)
+        // if the current path has no more levels to complete go to the level 0 of the next path
+        else if (world < PATHS.Length)
         {
             level = 0;
             world++;
@@ -141,7 +147,7 @@ public class GameManager : MonoBehaviour
     public void LoadWorld(int selectedWorld)
     {
         // check if there is at least one world path, and the current world has a path
-        if (PATHS.Length != 0 && selectedWorld < PATHS.Length && selectedWorld >= -1)  
+        if (PATHS.Length != 0 && selectedWorld < PATHS.Length && selectedWorld >= -1)
         {
             // perform reset to clean the user space UI
             ResetGame();
@@ -154,7 +160,7 @@ public class GameManager : MonoBehaviour
             }
 
             // get level from user selection
-            level = cardSelection.Get_Level();
+            level = cardSelection.GetLevel();
 
             // if there is any existing path remove it
             for (int i = 0; i < pathController.gameObject.transform.childCount; i++)
@@ -175,7 +181,7 @@ public class GameManager : MonoBehaviour
             if (needUpdateLevelCards)
                 cardSelection.CardGeneration();
             else
-               cardSelection.ShowLevelCards();
+                cardSelection.ShowLevelCards();
 
             // update world drop down menu for UI
             UpdateWorldDropdownMenuValues();
@@ -192,11 +198,13 @@ public class GameManager : MonoBehaviour
 
         // load the current level with its recuirements
         // check if the path has levels and the selected level is in the range
-        if (currentPath.GetComponent<Path>().levels.Length != 0 && level >= 0)   
+        if (currentPath.GetComponent<Path>().levels.Length != 0 && level >= 0)
         {
             currentLevel = currentPath.GetComponent<Path>().levels[level].GetComponent<Assignment>();
             currentInput = currentLevel.inputColors;
             currentOutput = currentLevel.outputColors;
+
+            // prepare elixir bottles for inventory
             cardSelection.currentInventory = currentInput;
 
             // display output by text (temporary solution)
@@ -209,22 +217,22 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO: Need to revisit !!!!!
-    public void ChangeLevel (int selectedLevel)
+    public void ChangeLevel(int selectedLevel)
     {
-        level = selectedLevel; 
+        level = selectedLevel;
         UpdateUserData();
         ResetGame();
         CreateLevel();
     }
 
     // this is temporary
-    void UpdateLevelText ()
+    void UpdateLevelText()
     {
-        worldLevelText.GetComponent<Text>().text = "World " + (world+1) + ", Level " + (level+1);
+        worldLevelText.GetComponent<Text>().text = "World " + (world + 1) + ", Level " + (level + 1);
     }
 
     // this is temporary too
-    void UpdateWorldDropdownMenuValues ()
+    void UpdateWorldDropdownMenuValues()
     {
         // this check prevents LoadWorld() function unnecessary call
         if (worldDropdown.value != world)
@@ -232,4 +240,4 @@ public class GameManager : MonoBehaviour
             worldDropdown.value = world;
         }
     }
-}
+};

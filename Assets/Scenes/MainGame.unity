@@ -1560,6 +1560,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 972302381}
+        m_MethodName: RefillInvetnory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &336945020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1817,7 +1828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -103, y: -32}
+  m_AnchoredPosition: {x: -102.99, y: -234}
   m_SizeDelta: {x: 182.5, y: 49.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &534525412
@@ -2882,7 +2893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -68.8999, y: -99.69995}
+  m_AnchoredPosition: {x: -37.155, y: -286.63}
   m_SizeDelta: {x: 50.830017, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799824897
@@ -4341,7 +4352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2bfb8646bb3344f83f0e1a894870d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 201213972872841038, guid: 8a61b9f189f61db47bd0a30da0c398d9, type: 3}
+  card: {fileID: 5668236387370302258, guid: 8a61b9f189f61db47bd0a30da0c398d9, type: 3}
+  spaceBetweenCards: 20
   gameManager: {fileID: 972302381}
   inventoryManager: {fileID: 0}
   currentInventory: 
@@ -6102,8 +6114,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1821116793}
   m_HandleRect: {fileID: 1275944982}
   m_Direction: 2
-  m_Value: 1.0000043
-  m_Size: 0.96458334
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
