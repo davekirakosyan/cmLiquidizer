@@ -3180,7 +3180,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -68.8999, y: -99.69995}
-  m_SizeDelta: {x: 70, y: 30}
+  m_SizeDelta: {x: 50.830017, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799824897
 MonoBehaviour:
@@ -3243,12 +3243,6 @@ MonoBehaviour:
     - m_Text: 6
       m_Image: {fileID: 0}
     - m_Text: 7
-      m_Image: {fileID: 0}
-    - m_Text: 8
-      m_Image: {fileID: 0}
-    - m_Text: 9
-      m_Image: {fileID: 0}
-    - m_Text: 10
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3877,8 +3871,6 @@ MonoBehaviour:
   - {fileID: 8181007728095961547, guid: 3aaba933c503f8d45b40c0907a917cdc, type: 3}
   - {fileID: 5650672890323385304, guid: 4e31ce53002c9ed488d23c4d58fc3e9d, type: 3}
   - {fileID: 7151587313560251311, guid: 3193c268e6890b548902acceebf2e739, type: 3}
-  - {fileID: 325172128284130751, guid: 334ce71928dab8643be5e9bd41d2f419, type: 3}
-  - {fileID: 101260816139799736, guid: 4b610d463228b73409a7df69dc782ef4, type: 3}
   currentLevel: {fileID: 0}
   currentInput: 
   currentOutput: 
@@ -6779,7 +6771,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -68.8999, y: -148}
-  m_SizeDelta: {x: 70, y: 30}
+  m_SizeDelta: {x: 50.830017, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1762152761
 MonoBehaviour:
