@@ -84,17 +84,19 @@ public class PathController : MonoBehaviour
     /// returns if screen has been clicked or touched
     private bool Clicked ()
     {
-        if (Input.touchSupported)   // check if the device supports touch 
+        try                           // check if the device supports touch 
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Ended|| dragged)
+            if (Input.GetTouch(0).phase == TouchPhase.Ended || dragged)
                 return true;
-            else return false;
+            else
+                return false;
         }
-        else                        // EDITOR
+        catch                        // EDITOR
         {
-            if (Input.GetMouseButtonDown(0)||dragged)
+            if (Input.GetMouseButtonDown(0) || dragged)
                 return true;
-            else return false;
+            else
+                return false;
         }
     }
 
