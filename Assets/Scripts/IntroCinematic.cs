@@ -9,6 +9,7 @@ public class IntroCinematic : MonoBehaviour
     public Animator characterAnimator;
     public GameObject pastPlants;
     public SpriteMask sm;   // masking test
+    public GameObject deadPlant;
 
     void Start()
     {
@@ -33,5 +34,16 @@ public class IntroCinematic : MonoBehaviour
         cameraAnimator.SetBool("start_intro", false);
         cameraAnimator.SetBool("walk_to_plant", true);
         characterAnimator.SetBool("walk_to_plant", true);
+    }
+
+    void PourElixirOnPlant ()
+    {
+        cameraAnimator.SetBool("pour_elixir_on_plant", true);
+        characterAnimator.SetBool("pour_elixir_on_plant", true);
+    }
+
+    void StartPlantTransformation ()
+    {
+        deadPlant.GetComponent<SpriteAnimator>().enabled = true;
     }
 }
