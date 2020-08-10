@@ -10,12 +10,14 @@ public class IntroCinematic : MonoBehaviour
     public GameObject pastPlants;
     public SpriteMask sm;   // masking test
     public GameObject deadPlant;
+    public GameObject pouringParticleEmitters;
 
     void Start()
     {
         pastPlants.SetActive(true);
         // start camera + boat movements
         cameraAnimator.SetBool("start_intro", true);
+        //StartDeadPlantWalk();
         boatAnimator.SetBool("start_floating", true);
 
     }
@@ -40,6 +42,14 @@ public class IntroCinematic : MonoBehaviour
     {
         cameraAnimator.SetBool("pour_elixir_on_plant", true);
         characterAnimator.SetBool("pour_elixir_on_plant", true);
+    }
+
+    void ElixirPouringVFX ()
+    {
+        for (int i = 0; i < pouringParticleEmitters.transform.childCount; i++)
+        {
+            pouringParticleEmitters.transform.GetChild(i).GetComponent<ParticleSystem>().Play();
+        }
     }
 
     void StartPlantTransformation ()
