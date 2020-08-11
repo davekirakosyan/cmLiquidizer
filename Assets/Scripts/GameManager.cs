@@ -88,9 +88,6 @@ public class GameManager : MonoBehaviour
         pathController.liveElixirs.Clear();
         pathController.liveElixirColors.Clear();
 
-        // prepare elixir bottles for inventory
-        cardSelection.currentInventory = currentInput;
-
         gameOn = true;
 
         // hide popups
@@ -108,13 +105,25 @@ public class GameManager : MonoBehaviour
 
         // if user presed the RESET button there will be generated all new level cards
         if (forcedReset)
+        {
+            // prepare elixir bottles for inventory
+            cardSelection.currentInventory = currentInput;
+
+            // generate level selection cards
             cardSelection.CardGeneration();
+        }
     }
 
     // to perform refil after current level restarting
     public void RefillInvetnory()
     {
         inventoryManager.FillInventory(currentInput);
+    }
+
+    public void CleanCompletedLevelNotes()
+    {
+        // remove completed level notes from memory
+        PlayerPrefs.DeleteKey("Completed Levels");
     }
 
     public void NextLevel()
@@ -136,6 +145,7 @@ public class GameManager : MonoBehaviour
         {
             level = 0;
             world++;
+            CleanCompletedLevelNotes();
             needUpdateLevelCards = true;
             LoadWorld(world);
         }

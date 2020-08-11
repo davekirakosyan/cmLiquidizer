@@ -9,6 +9,12 @@ public class CardAnimation : MonoBehaviour
     private Vector3 startPos;
     public Vector3 endPos;
 
+    private IEnumerator animationCorountine;
+
+    private bool disolveComplete = false;
+    private bool animateComplete = false;
+    private bool appearComplete = false;
+
     // card position after selection
     private Vector3 selectionPos;
 
@@ -47,29 +53,46 @@ public class CardAnimation : MonoBehaviour
     }
 
     // Animation handler for selected card
-    private void _AnimateSelectedCard()
+    private IEnumerator _AnimateSelectedCard()
     {
         MovingLerp += Time.deltaTime / MovingSpeed;
         this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, endPos, MovingLerp);
+        while (transform.localPosition != endPos)
+        {
+            animateComplete = true;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     // Card disolving animation handler, also disabling curent card gameObject
-    private void _CardDisolve()
+    private IEnumerator _CardDisolve()
     {
         DisolvingLerp += Time.deltaTime / DisolveSpeed;
         image.color = Color.Lerp(colorEnd, colorStart, DisolvingLerp);
-        if (image.color.a == colorStart.a)
-            this.gameObject.SetActive(false);
+        if (image.color.a != colorStart.a)
+        {
+            disolveComplete = true;
+            if (this.gameObject.activeInHierarchy)
+               this.gameObject.SetActive(false);
+
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     // card appearence animation handler
-    private void _AppearCard()
+    private IEnumerator _AppearCard()
     {
         AppearLerp += Time.deltaTime / AppearSpeed;
         image.color = Color.Lerp(colorStart, colorEnd, AppearLerp);
 
         MovingLerp += Time.deltaTime / MovingSpeed;
         this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, this.selectionPos, MovingLerp);
+
+        if (transform.localPosition != selectionPos)
+        {
+            appearComplete = true;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     // Card selecting animation 
@@ -97,13 +120,36 @@ public class CardAnimation : MonoBehaviour
         selectionPos = new Vector3(selectionPosX, selectionPosY, 0.0f);
     }
 
-    void Update()
+    public bool GetDisolveComplition()
+    {
+        return disolveComplete;
+    }
+
+    public bool GetAppearComplition()
+    {
+        return appearComplete;
+    }
+
+    public bool GetAnimateComplition()
+    {
+        return animateComplete;
+    }
+
+    void FixedUpdate()
     {
         if (!AppearCardState && AnimateCardState && !DisapearCardState)
-            _AnimateSelectedCard();
+        {
+            animationCorountine = _AnimateSelectedCard();
+        }
         else if (!AppearCardState && !AnimateCardState && DisapearCardState)
-            _CardDisolve();
+        {
+            animationCorountine = _CardDisolve();
+        }
         else if (AppearCardState && !AnimateCardState && !DisapearCardState)
-            _AppearCard();
+        {
+            animationCorountine = _AppearCard();
+        }
+
+        StartCoroutine(animationCorountine);
     }
 }

@@ -33,6 +33,20 @@ public class CardSelection : MonoBehaviour
     {
         // first boot-up value for level
         selectedLevel = PlayerPrefs.GetInt("Level");
+        string completedLevels = PlayerPrefs.GetString("Completed Levels");
+        if (completedLevels.Length > 0)
+        {
+
+            string[] tmpLevelArray = completedLevels.Split('x');
+
+            foreach (string tmpLevelString in tmpLevelArray)
+            {
+                int tmpLevel;
+                if (int.TryParse(tmpLevelString, out tmpLevel))
+                    CompleteLevel(tmpLevel, true);
+            }
+        }
+
     }
 
     // getter function for user selected level
@@ -152,12 +166,18 @@ public class CardSelection : MonoBehaviour
     }
 
     // Show completion filter on the card and allow user to select new level
-    public void CompleteLevel(int currentLevel)
+    public void CompleteLevel(int currentLevel, bool autoboot = false)
     {
+        string completedLevels = PlayerPrefs.GetString("Completed Levels");
+        completedLevels += "x" + currentLevel.ToString();
+        PlayerPrefs.SetString("Completed Levels", completedLevels);
+
         completedLevelsCount++;
         GameObject currentCard = transform.GetChild(currentLevel).gameObject;
         GameObject cardCompletionFilter = currentCard.transform.GetChild(1).gameObject;
-        currentCard.GetComponent<CardAnimation>().CardDisolve();
+        if (!autoboot)
+            currentCard.GetComponent<CardAnimation>().CardDisolve();
+
         cardCompletionFilter.SetActive(true);
         ShowLevelCards();
     }
