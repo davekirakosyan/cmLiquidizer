@@ -137,9 +137,44 @@ public class PathController : MonoBehaviour
                 }
             }
 
+
+            /* 
+             * Need logic to choose next "new" level by cards.
+             *  if (CurrentLevelCompleted()) {
+             *    1 Action  ->  show congratulation message
+             *      Code    ->  LevelWinningAction()
+             *                  {
+             *                      showWinningMessage();
+             *                  } 
+             *    2 Action  ->  check if there is unplayed level
+             *      Code    ->  if (LevelsArray.Length > 0) {
+             *                    1 Action  ->  show unplayed level cards
+             *                      Code    ->  LevelsArray = RemoveCompletedLevelFromLevelsArray(int LevelsArray[]);
+             *                      Code    ->  int selectedLevel = ShowLevelCards(int LevelsArray[]);
+             *                      Code    ->  SelectLevelByCards(int selectedLevel);
+             *                  } else {
+             *                      if (there is a next world "path") { 
+             *                        1 Action  ->  switch to the next world "path"
+             *                          Code    ->  LoadWorld(int worldNumber); 
+             *                      } else {
+             *                        2 Action  ->  end game
+             *                          Code    ->  GameWinningAction();
+             *                      }
+             *                  }
+             *  } else { // If player fails current level
+             *      Action  ->  Need to discuss
+             *                      Version 1: show uncompleted level cards but current card with some countdown timer and locked status.
+             *                      Version 2: force player to replay current level
+             *                      Version 3: suggest to complete current level with hints
+             *                      Version 4: skip level by using "COINS"
+             *      Code    ->  :)
+             *  }
+             */
+
+            //old implemetation
             if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
             {
-                gameManager.winningMsg.SetActive(true);
+                gameManager.NextLevel();
             }
             else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
             {
@@ -149,7 +184,8 @@ public class PathController : MonoBehaviour
             {
                 gameManager.gameOverMsg.SetActive(true);
             }
-            GameManager.gameOn = false;
+            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
+                GameManager.gameOn = false;
         }
     }
 }
