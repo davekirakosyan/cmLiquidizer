@@ -16,6 +16,7 @@ public class IntroCinematic : MonoBehaviour
     {
         pastPlants.SetActive(true);
         // start camera + boat movements
+        //StartDeadPlantWalk();
         cameraAnimator.SetBool("start_intro", true);
         boatAnimator.SetBool("start_floating", true);
 
@@ -54,5 +55,15 @@ public class IntroCinematic : MonoBehaviour
     void StartPlantTransformation ()
     {
         deadPlant.GetComponent<SpriteAnimator>().enabled = true;
+    }
+
+    void RaccoonGoToYourRoom ()
+    {
+        characterAnimator.SetBool("walk_to_tree", true);
+    }
+
+    void EndCinematicPart1 ()
+    {
+        GetComponent<Animator>().enabled = false;
     }
 }
