@@ -11,6 +11,7 @@ public class IntroCinematic : MonoBehaviour
     public SpriteMask sm;   // masking test
     public GameObject deadPlant;
     public GameObject pouringParticleEmitters;
+    public GameObject swipeControls;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class IntroCinematic : MonoBehaviour
         // start camera + boat movements
         cameraAnimator.SetBool("start_intro", true);
         boatAnimator.SetBool("start_floating", true);
+        swipeControls.SetActive(false);
 
     }
     private void Update()
@@ -54,5 +56,16 @@ public class IntroCinematic : MonoBehaviour
     void StartPlantTransformation ()
     {
         deadPlant.GetComponent<SpriteAnimator>().enabled = true;
+    }
+
+    void RaccoonGoToYourRoom ()
+    {
+        characterAnimator.SetBool("walk_to_tree", true);
+    }
+
+    void EndCinematicPart1 ()
+    {
+        swipeControls.SetActive(true);
+        GetComponent<Animator>().enabled = false;
     }
 }
