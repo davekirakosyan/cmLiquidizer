@@ -6,8 +6,12 @@ public class IntroCinematic : MonoBehaviour
 {
     public Animator cameraAnimator;
     public Animator boatAnimator;
+    public Animator characterAnimator;
     public GameObject pastPlants;
     public SpriteMask sm;   // masking test
+    public GameObject deadPlant;
+    public GameObject pouringParticleEmitters;
+    public GameObject swipeControls;
 
     void Start()
     {
@@ -15,6 +19,12 @@ public class IntroCinematic : MonoBehaviour
         // start camera + boat movements
         cameraAnimator.SetBool("start_intro", true);
         boatAnimator.SetBool("start_floating", true);
+        swipeControls.SetActive(false);
+
+    }
+    private void Update()
+    {
+        sm.alphaCutoff -= 0.001f;
     }
 
     void DeletePastPlants()
@@ -22,8 +32,40 @@ public class IntroCinematic : MonoBehaviour
         GameObject.Destroy(pastPlants);
     }
 
-    private void Update()
+    void StartDeadPlantWalk ()  
     {
-        sm.alphaCutoff -= 0.001f;
+        cameraAnimator.SetBool("start_intro", false);
+        cameraAnimator.SetBool("walk_to_plant", true);
+        characterAnimator.SetBool("walk_to_plant", true);
+    }
+
+    void PourElixirOnPlant ()
+    {
+        cameraAnimator.SetBool("pour_elixir_on_plant", true);
+        characterAnimator.SetBool("pour_elixir_on_plant", true);
+    }
+
+    void ElixirPouringVFX ()
+    {
+        for (int i = 0; i < pouringParticleEmitters.transform.childCount; i++)
+        {
+            pouringParticleEmitters.transform.GetChild(i).GetComponent<ParticleSystem>().Play();
+        }
+    }
+
+    void StartPlantTransformation ()
+    {
+        deadPlant.GetComponent<SpriteAnimator>().enabled = true;
+    }
+
+    void RaccoonGoToYourRoom ()
+    {
+        characterAnimator.SetBool("walk_to_tree", true);
+    }
+
+    void EndCinematicPart1 ()
+    {
+        swipeControls.SetActive(true);
+        GetComponent<Animator>().enabled = false;
     }
 }

@@ -8,8 +8,9 @@ public class SpriteAnimator : MonoBehaviour
     private Sprite[] frames;
     private int currFrame;
     private float timer;
-    private float frameRate = 0.1f;
+    private float frameRate = 0.15f;
     private SpriteRenderer spriteRenderer;
+    public bool loop = true;
 
     private void Awake()
     {
@@ -18,6 +19,9 @@ public class SpriteAnimator : MonoBehaviour
 
     void Update()
     {
+        if (currFrame >= frames.Length-1 && !loop)
+            Destroy(this);
+
         timer += Time.deltaTime;
 
         if (timer >= frameRate)
