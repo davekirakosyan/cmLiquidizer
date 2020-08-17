@@ -63,7 +63,8 @@ public class PathController : MonoBehaviour
 
         liveElixirs.Add(elixir);
         liveElixirColors.Add(colorName);
-        inventoryManager.RemoveUsedItemFromInventory();
+        if (liveElixirColors.Contains(GameManager.selectedColor))
+            inventoryManager.RemoveUsedItemFromInventory();
     }
 
 
