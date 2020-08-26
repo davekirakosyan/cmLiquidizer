@@ -28,6 +28,7 @@ public class IntroCinematic : MonoBehaviour
         }
         else
         {
+            // enable all the tree controls
             swipeControls.SetActive(true);
             treeNavigation.SetActive(true);
             GetComponent<Animator>().enabled = false;
