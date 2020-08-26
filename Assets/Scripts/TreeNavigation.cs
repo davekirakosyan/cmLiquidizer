@@ -1,17 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TreeNavigation : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -19,7 +15,8 @@ public class TreeNavigation : MonoBehaviour
             {
                 if (hit.collider.tag.Contains("floor"))
                 {
-                    print(hit.collider.GetComponent<Floor>().floorNumber);
+                    print("vtd");
+                    SceneManager.LoadScene(1);
                 }
             }
         }
