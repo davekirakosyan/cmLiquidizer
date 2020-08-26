@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class RoomManager : MonoBehaviour
                 {
                     tableView.SetActive(true);
                     roomView.SetActive(false);
+                } else if (hit.collider.tag.Contains("path"))
+                {
+                    SceneManager.LoadScene(2);
                 }
             }
         }
