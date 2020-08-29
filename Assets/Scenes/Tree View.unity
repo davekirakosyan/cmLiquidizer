@@ -1819,7 +1819,7 @@ MonoBehaviour:
     type: 3}
   tutorialCanvas: {fileID: 2090952339}
   position: {x: -120, y: 159}
-  rotation: 116
+  rotation: {x: 0, y: 116}
   size: {x: 100, y: 100}
   dialogue: {fileID: 338441681}
 --- !u!1 &459691347
