@@ -6,6 +6,9 @@ TagManager:
   tags:
   - tube
   - elixir
+  - work table
+  - floor
+  - path
   layers:
   - Default
   - TransparentFX

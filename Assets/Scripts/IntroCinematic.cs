@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IntroCinematic : MonoBehaviour
 {
+    public bool SKIP_CINEMATIC = false;
+
     public Animator cameraAnimator;
     public Animator boatAnimator;
     public Animator characterAnimator;
@@ -13,15 +15,25 @@ public class IntroCinematic : MonoBehaviour
     public GameObject pouringParticleEmitters;
     public GameObject swipeControls;
     public GameObject tutorial;
+    public GameObject treeNavigation;
 
     void Start()
     {
-        pastPlants.SetActive(true);
-        // start camera + boat movements
-        cameraAnimator.SetBool("start_intro", true);
-        boatAnimator.SetBool("start_floating", true);
-        swipeControls.SetActive(false);
-
+        if (!SKIP_CINEMATIC)
+        {
+            pastPlants.SetActive(true);
+            // start camera + boat movements
+            cameraAnimator.SetBool("start_intro", true);
+            boatAnimator.SetBool("start_floating", true);
+            swipeControls.SetActive(false);
+        }
+        else
+        {
+            // enable all the tree controls
+            swipeControls.SetActive(true);
+            treeNavigation.SetActive(true);
+            GetComponent<Animator>().enabled = false;
+        }
     }
     private void Update()
     {
@@ -68,6 +80,7 @@ public class IntroCinematic : MonoBehaviour
     {
         swipeControls.SetActive(true);
         tutorial.SetActive(true);
+        treeNavigation.SetActive(true);
         GetComponent<Animator>().enabled = false;
     }
 }
