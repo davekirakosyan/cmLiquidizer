@@ -12,6 +12,7 @@ public class IntroCinematic : MonoBehaviour
     public GameObject deadPlant;
     public GameObject pouringParticleEmitters;
     public GameObject swipeControls;
+    public GameObject tutorial;
 
     void Start()
     {
@@ -66,6 +67,7 @@ public class IntroCinematic : MonoBehaviour
     void EndCinematicPart1 ()
     {
         swipeControls.SetActive(true);
+        tutorial.SetActive(true);
         GetComponent<Animator>().enabled = false;
     }
 }
