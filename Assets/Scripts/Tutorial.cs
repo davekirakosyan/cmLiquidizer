@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-   /* public Image arrowImage;
-    public Image bubbleImage;
-    public Image highlightImage;
-    public Transform tutorialCanvas;
-    */
+   
     public int order;
 
     [TextArea(3,10)]
     public string explanation;
+
+    public Image arrowImage;
+    public Image bubbleImage;
+    public Image highlightImage;
+    public Transform tutorialCanvas;
+    public Vector2 position;
+    public Vector2 rotation;
+    public Vector2 size;
+    public Text dialogue;
 
     // Start is called before the first frame update
     void Awake()

@@ -24,6 +24,8 @@ public class TutorialManager : MonoBehaviour
     }
 
     private Tutorial currentTutorial;
+    Image bubble;
+    Image arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +42,10 @@ public class TutorialManager : MonoBehaviour
 
     public void completedTutorial()
     {
+        Image.Destroy(bubble);
+        Image.Destroy(arrow);
         SetNextTutorial(currentTutorial.order + 1);
+        Debug.Log("Tutorial completed");
     }
 
     public void SetNextTutorial(int currentOrder)
@@ -54,6 +59,20 @@ public class TutorialManager : MonoBehaviour
         }
 
         expText.text = currentTutorial.explanation;
+
+        arrow = Instantiate(currentTutorial.arrowImage) as Image;
+        arrow.rectTransform.position = new Vector3(currentTutorial.position.x,currentTutorial.position.y, 0);
+        arrow.rectTransform.eulerAngles = new Vector3(0, currentTutorial.rotation.x, currentTutorial.rotation.y);
+        arrow.rectTransform.sizeDelta = new Vector2(currentTutorial.size.x, currentTutorial.size.y);
+        arrow.transform.SetParent(currentTutorial.tutorialCanvas, false);
+
+        if (currentTutorial.explanation != "")
+        {
+            Image bubble = Instantiate(currentTutorial.bubbleImage) as Image;
+            bubble.transform.SetParent(currentTutorial.tutorialCanvas, false);
+            currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
+            currentTutorial.dialogue.transform.localPosition = new Vector3(0, 15, 0);
+        }
     }
 
     public void CompletedAllTutorials()
