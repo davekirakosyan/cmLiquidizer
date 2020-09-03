@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 8922424161783731012}
   - component: {fileID: 8922424161783731013}
   - component: {fileID: 3176016698480626649}
+  - component: {fileID: 3456328803909470449}
   m_Layer: 5
   m_Name: Elixir in Inventory UI
   m_TagString: Untagged
@@ -160,3 +161,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorName: 0
+  vibrator: {fileID: 3456328803909470449}
+--- !u!114 &3456328803909470449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8922424161783731015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75830fd11f7b084a9882286aa06d35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

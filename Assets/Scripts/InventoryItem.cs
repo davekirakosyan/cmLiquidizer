@@ -16,6 +16,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private float targetHeld = 0.5f;
     private float currentSBSize;
     private Color imageColor;
+    public Vibrator vibrator;
 
     IEnumerator waitForHold()
     {
@@ -35,6 +36,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     
     private void selectItem()
     {
+        vibrator.Vibrate();
         selected = true;
         transform.localScale = itemSize / 2;
         transform.position = Input.mousePosition;
