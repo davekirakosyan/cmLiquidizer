@@ -42,7 +42,6 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.transform.localPosition = nextPos;
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(elixirColor);
-            newInventoryItem.GetComponent<Button>().onClick.AddListener(() => GameManager.SelectElixir(newInventoryItem));
             nextPos.y -= 120;   // decrease y for the next item
         }
     }

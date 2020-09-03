@@ -2,35 +2,120 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
+//public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour
 {
     public InventoryManager.ElixirColor colorName;
-    Transform parent;
-    Vector3 itemPosition;
-    Vector3 itemSize;
+    private Transform parent;
+    private Vector3 itemPosition;
+    private Vector3 itemSize;
+    private bool holding = false;
+    private bool selected = false;
+    private float startHeld;
+    private float targetHeld = 0.5f;
+    private float currentSBSize;
 
-    public void OnBeginDrag(PointerEventData eventData)
+    /*
+    IEnumerator waitForHold()
+    {
+        print("Waiting...");
+        yield return new WaitUntil(() => (holding && Time.time >= startHeld + targetHeld));
+        print("SELECTED");
+        selectItem();
+    }
+
+    private void UpdateData()
     {
         itemPosition = transform.localPosition;
-        parent = transform.parent;
         itemSize = transform.localScale;
+        parent = transform.parent;
+        currentSBSize = 1.0f;
+    }
+    
+    private void selectItem()
+    {
+        selected = true;
+        transform.localScale = itemSize / 2;
+        transform.position = Input.mousePosition;
+    }
 
-        GameManager.SelectElixir(this.gameObject);
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        UpdateData();
+        holding = true;
+        startHeld = Time.time;
+        print("DOWN" + startHeld);
+        StartCoroutine(waitForHold());
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        print("UP");
+        if (selected)
+        {
+            transform.SetParent(parent);
+            transform.localPosition = itemPosition;
+            transform.localScale = itemSize;
+            PathController.dragged = true;
+            selected = false;
+        }
+        holding = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.SetParent(GetComponentInParent<Canvas>().transform);
-        transform.position = Input.mousePosition;
-        transform.localScale = itemSize / 3;
+        if (selected)
+        {
+            print("OnDrag");
+            transform.SetParent(GetComponentInParent<Canvas>().transform);
+            transform.position = Input.mousePosition;
+        }
+        else
+        {
+            holding = false;
+            float currentPos = GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition;
+
+            if (Input.GetAxis("Mouse Y") < 0)
+            {
+                GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition = Mathf.Lerp(currentPos, 1, 0.2f);
+                if (GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition + 0.2 >= 1)
+                {
+                    currentPos = GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size;
+                    GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size = Mathf.Lerp(currentPos, 0, 0.2f);
+                }
+            }
+            //else if (Input.GetAxis("Mouse Y") > 0)
+            else
+            {
+                GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition = Mathf.Lerp(currentPos, 0, 0.2f);
+                if (GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition - 0.2 <= 0)
+                {
+                    currentPos = GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size;
+                    GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size = Mathf.Lerp(currentPos, 0, 0.2f);
+                }
+            }
+
+            print("Scrolling" + currentPos);
+        }
+
+
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (selected)
+        {
+            print("OnBeginDrag");
+
+            GameManager.SelectElixir(this.gameObject);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.SetParent(parent);
-        transform.localPosition = itemPosition;
-        transform.localScale = itemSize;
-        PathController.dragged = true;
+        GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size = currentSBSize;
     }
+    */
 }
