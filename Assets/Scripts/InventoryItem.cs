@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-//public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
-public class InventoryItem : MonoBehaviour
+public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public InventoryManager.ElixirColor colorName;
     private Transform parent;
@@ -16,13 +15,11 @@ public class InventoryItem : MonoBehaviour
     private float startHeld;
     private float targetHeld = 0.5f;
     private float currentSBSize;
+    private Color imageColor;
 
-    /*
     IEnumerator waitForHold()
     {
-        print("Waiting...");
         yield return new WaitUntil(() => (holding && Time.time >= startHeld + targetHeld));
-        print("SELECTED");
         selectItem();
     }
 
@@ -32,6 +29,8 @@ public class InventoryItem : MonoBehaviour
         itemSize = transform.localScale;
         parent = transform.parent;
         currentSBSize = 1.0f;
+
+        imageColor = transform.gameObject.GetComponent<Image>().color;
     }
     
     private void selectItem()
@@ -46,13 +45,12 @@ public class InventoryItem : MonoBehaviour
         UpdateData();
         holding = true;
         startHeld = Time.time;
-        print("DOWN" + startHeld);
+        transform.gameObject.GetComponent<Image>().color = new Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a / 2);
         StartCoroutine(waitForHold());
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        print("UP");
         if (selected)
         {
             transform.SetParent(parent);
@@ -61,6 +59,8 @@ public class InventoryItem : MonoBehaviour
             PathController.dragged = true;
             selected = false;
         }
+
+        transform.gameObject.GetComponent<Image>().color = imageColor;
         holding = false;
     }
 
@@ -68,7 +68,6 @@ public class InventoryItem : MonoBehaviour
     {
         if (selected)
         {
-            print("OnDrag");
             transform.SetParent(GetComponentInParent<Canvas>().transform);
             transform.position = Input.mousePosition;
         }
@@ -86,8 +85,7 @@ public class InventoryItem : MonoBehaviour
                     GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size = Mathf.Lerp(currentPos, 0, 0.2f);
                 }
             }
-            //else if (Input.GetAxis("Mouse Y") > 0)
-            else
+            else if (Input.GetAxis("Mouse Y") > 0)
             {
                 GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition = Mathf.Lerp(currentPos, 0, 0.2f);
                 if (GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalNormalizedPosition - 0.2 <= 0)
@@ -96,19 +94,13 @@ public class InventoryItem : MonoBehaviour
                     GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size = Mathf.Lerp(currentPos, 0, 0.2f);
                 }
             }
-
-            print("Scrolling" + currentPos);
         }
-
-
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (selected)
         {
-            print("OnBeginDrag");
-
             GameManager.SelectElixir(this.gameObject);
         }
     }
@@ -117,5 +109,4 @@ public class InventoryItem : MonoBehaviour
     {
         GameObject.Find("Inventory").GetComponent<ScrollRect>().verticalScrollbar.size = currentSBSize;
     }
-    */
 }
