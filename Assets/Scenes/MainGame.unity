@@ -2244,7 +2244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 3
+  order: 0
   explanation: Press on card to select level
   indicatorImage: {fileID: 0}
   highlightObject: {fileID: 1189089644}
