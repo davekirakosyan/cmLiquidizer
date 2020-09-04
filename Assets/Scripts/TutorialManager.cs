@@ -25,7 +25,7 @@ public class TutorialManager : MonoBehaviour
 
     private Tutorial currentTutorial;
     Image bubble;
-    Image arrow;
+    Image indicator;
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +43,21 @@ public class TutorialManager : MonoBehaviour
     public void completedTutorial()
     {
         Image.Destroy(bubble);
-        Image.Destroy(arrow);
+        Image.Destroy(indicator);
+        if (currentTutorial.highlightObject)
+        {
+            Destroy(currentTutorial.highlightObject.transform.GetChild(0).gameObject.GetComponent<Outline>());
+        }
         SetNextTutorial(currentTutorial.order + 1);
         Debug.Log("Tutorial completed");
+    }
+
+    void CreateBubble()
+    {
+        Image bubble = Instantiate(currentTutorial.bubbleImage) as Image;
+        bubble.transform.SetParent(currentTutorial.tutorialCanvas, false);
+        currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
+        currentTutorial.dialogue.transform.localPosition = new Vector3(0, 15, 0);
     }
 
     public void SetNextTutorial(int currentOrder)
@@ -60,19 +72,29 @@ public class TutorialManager : MonoBehaviour
 
         expText.text = currentTutorial.explanation;
 
-        arrow = Instantiate(currentTutorial.arrowImage) as Image;
-        arrow.rectTransform.position = new Vector3(currentTutorial.position.x,currentTutorial.position.y, 0);
-        arrow.rectTransform.eulerAngles = new Vector3(0, currentTutorial.rotation.x, currentTutorial.rotation.y);
-        arrow.rectTransform.sizeDelta = new Vector2(currentTutorial.size.x, currentTutorial.size.y);
-        arrow.transform.SetParent(currentTutorial.tutorialCanvas, false);
-
-        if (currentTutorial.explanation != "")
+        if (currentTutorial.indicatorImage != null)
         {
-            Image bubble = Instantiate(currentTutorial.bubbleImage) as Image;
-            bubble.transform.SetParent(currentTutorial.tutorialCanvas, false);
-            currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
-            currentTutorial.dialogue.transform.localPosition = new Vector3(0, 15, 0);
+
+            indicator = Instantiate(currentTutorial.indicatorImage) as Image;
+            indicator.rectTransform.position = new Vector3(currentTutorial.position.x, currentTutorial.position.y, 0);
+            indicator.rectTransform.eulerAngles = new Vector3(0, currentTutorial.rotation.x, currentTutorial.rotation.y);
+            indicator.rectTransform.sizeDelta = new Vector2(currentTutorial.size.x, currentTutorial.size.y);
+            indicator.transform.SetParent(currentTutorial.tutorialCanvas, false);
+
+            if (currentTutorial.explanation != "")
+            {
+                CreateBubble();
+            }
+        } else
+        {
+            GameObject target = currentTutorial.highlightObject.transform.GetChild(0).gameObject;
+            target.AddComponent<Outline>();
+            target.GetComponent<Outline>().effectColor = new Color32(232, 255, 0, 150);
+            target.GetComponent<Outline>().effectDistance = new Vector2(2.5f, -2.5f);
+            CreateBubble();
+
         }
+        
     }
 
     public void CompletedAllTutorials()

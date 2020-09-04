@@ -11,9 +11,9 @@ public class Tutorial : MonoBehaviour
     [TextArea(3,10)]
     public string explanation;
 
-    public Image arrowImage;
+    public Image indicatorImage;
+    public GameObject highlightObject;
     public Image bubbleImage;
-    public Image highlightImage;
     public Transform tutorialCanvas;
     public Vector2 position;
     public Vector2 rotation;
@@ -31,7 +31,7 @@ public class Tutorial : MonoBehaviour
     }
 
     public virtual void CheckIfHappening() { }
-
+    
   /*  void ShowArrow(float x, float y, float width, float height, float rot)
     {
         Image arrow = Instantiate(arrowImage) as Image;
