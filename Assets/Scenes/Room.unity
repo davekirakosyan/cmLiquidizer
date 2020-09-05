@@ -406,11 +406,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 1
   explanation: Press on table to get closer
-  arrowImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
+  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
     type: 3}
+  highlightObject: {fileID: 0}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
-  highlightImage: {fileID: 0}
   tutorialCanvas: {fileID: 1843460851}
   position: {x: -120, y: 159}
   rotation: {x: 180, y: 65}
@@ -723,11 +723,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 2
   explanation: Press on colb to enter level menu
-  arrowImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
+  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
     type: 3}
+  highlightObject: {fileID: 0}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
-  highlightImage: {fileID: 0}
   tutorialCanvas: {fileID: 1843460851}
   position: {x: 37.5, y: 1.3}
   rotation: {x: 180, y: 65}

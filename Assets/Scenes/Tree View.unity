@@ -1812,8 +1812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 0
   explanation: Press on tree to enter
-  targetObject: {fileID: 836212953}
-  arrowImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
+  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
     type: 3}
   highlightObject: {fileID: 0}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
@@ -1823,6 +1822,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 116}
   size: {x: 100, y: 100}
   dialogue: {fileID: 338441681}
+  targetObject: {fileID: 836212953}
 --- !u!1 &459691347
 GameObject:
   m_ObjectHideFlags: 0
