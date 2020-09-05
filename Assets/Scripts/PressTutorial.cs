@@ -15,7 +15,6 @@ public class PressTutorial : Tutorial
         coll = targetObject.GetComponent<Collider>();
     }
 
-
     public override void CheckIfHappening()
     {
         if (Input.GetMouseButtonUp(0))
