@@ -329,6 +329,67 @@ Transform:
   m_Father: {fileID: 1079322655}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &486624447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486624448}
+  - component: {fileID: 486624449}
+  m_Layer: 0
+  m_Name: step 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &486624448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486624447}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1515296357}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &486624449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486624447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 0
+  explanation: Wow! Looks like no one has been here for ages!
+  indicatorImage: {fileID: 0}
+  highlightObject: {fileID: 0}
+  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
+    type: 3}
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  left: 0
+  characterFacingBack: 1
+  tutorialCanvas: {fileID: 1843460851}
+  position: {x: 0, y: 0}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 450, y: 70}
+  dialogue: {fileID: 1984132933}
+  waitTime: 5
 --- !u!1 &673262987
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +433,7 @@ GameObject:
   - component: {fileID: 910807642}
   - component: {fileID: 910807643}
   m_Layer: 0
-  m_Name: step 2
+  m_Name: step 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,11 +447,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910807641}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 150, y: 555, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1515296357}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &910807643
 MonoBehaviour:
@@ -405,16 +466,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   order: 1
-  explanation: Press on table to get closer
+  explanation: Tap on the table to see what we have
   indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
     type: 3}
   highlightObject: {fileID: 0}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  left: 0
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 1843460851}
-  position: {x: -120, y: 159}
-  rotation: {x: 180, y: 65}
-  size: {x: 100, y: 100}
+  position: {x: -40, y: 25}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 375, y: 38}
   dialogue: {fileID: 1984132933}
   targetObject: {fileID: 61480413}
 --- !u!1 &1021748643
@@ -597,6 +664,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1283011653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283011654}
+  - component: {fileID: 1283011655}
+  m_Layer: 0
+  m_Name: step 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283011654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283011653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1515296357}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1283011655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283011653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 2
+  explanation: 
+  indicatorImage: {fileID: 0}
+  highlightObject: {fileID: 0}
+  bubbleImage: {fileID: 0}
+  characterImage: {fileID: 0}
+  characterFacingBackImage: {fileID: 0}
+  left: 0
+  characterFacingBack: 0
+  tutorialCanvas: {fileID: 1843460851}
+  position: {x: 0, y: 0}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 0, y: 0}
+  dialogue: {fileID: 1984132933}
+  waitTime: 2
 --- !u!1 &1367693295
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +814,7 @@ GameObject:
   - component: {fileID: 1423989559}
   - component: {fileID: 1423989560}
   m_Layer: 0
-  m_Name: step 3
+  m_Name: step 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,11 +828,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423989558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 150, y: 555, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1515296357}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1423989560
 MonoBehaviour:
@@ -721,19 +846,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 2
-  explanation: Press on colb to enter level menu
+  order: 3
+  explanation: 'The Path is where we do all the magic.
+
+    Touch it to start.'
   indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
     type: 3}
   highlightObject: {fileID: 0}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  left: 0
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 1843460851}
-  position: {x: 37.5, y: 1.3}
-  rotation: {x: 180, y: 65}
-  size: {x: 100, y: 100}
+  position: {x: -258, y: -30}
+  rotation: {x: 180, y: 35}
+  bubbleSize: {x: 385, y: 68}
   dialogue: {fileID: 1984132933}
   targetObject: {fileID: 1662053031}
+--- !u!1 &1515296355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515296357}
+  - component: {fileID: 1515296356}
+  m_Layer: 0
+  m_Name: Tutorial Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1515296356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515296355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77d6ebf77a83934db6f3caaec5d160c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tutorials: []
+  expText: {fileID: 1984132933}
+--- !u!4 &1515296357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515296355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 150, y: 555, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 486624448}
+  - {fileID: 910807642}
+  - {fileID: 1283011654}
+  - {fileID: 1423989559}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662053031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9165353073776263151, guid: 63c202db51ac1cc4b8791eca076635d1,
@@ -1135,7 +1317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.73333335, g: 0.5019608, b: 0.07058824, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1143,7 +1325,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1152,7 +1334,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Error
 --- !u!222 &1984132934
@@ -1172,7 +1354,7 @@ RectTransform:
   m_GameObject: {fileID: 1984132932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.36, y: 2.36, z: 2.36}
+  m_LocalScale: {x: 1, y: 1, z: 2.36}
   m_Children: []
   m_Father: {fileID: 1843460851}
   m_RootOrder: 0
@@ -1180,5 +1362,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 401.7, y: 24.45491}
   m_Pivot: {x: 0.5, y: 0.5}

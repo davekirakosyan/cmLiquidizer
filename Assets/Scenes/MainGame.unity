@@ -688,6 +688,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144795662}
   m_CullTransparentMesh: 0
+--- !u!1 &146835779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146835780}
+  - component: {fileID: 146835781}
+  m_Layer: 0
+  m_Name: step 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &146835780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146835779}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -275.61084, y: -88.50721, z: 40.496555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2130618885}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &146835781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146835779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 1
+  explanation: This is your recipe card
+  indicatorImage: {fileID: 0}
+  highlightObject: {fileID: 1189089644}
+  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
+    type: 3}
+  characterImage: {fileID: 0}
+  left: 0
+  tutorialCanvas: {fileID: 11873607}
+  position: {x: 0, y: 0}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 0, y: 0}
+  dialogue: {fileID: 328624562}
+  waitTime: 3
 --- !u!1 &159413076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.73333335, g: 0.5019608, b: 0.07058824, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1928,18 +1985,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Error
 --- !u!222 &328624563
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2212,7 +2269,7 @@ GameObject:
   - component: {fileID: 431756560}
   - component: {fileID: 431756561}
   m_Layer: 0
-  m_Name: step 4
+  m_Name: step 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2244,16 +2301,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 3
-  explanation: Press on card to select level
+  order: 0
+  explanation: Let's start from level 1.
   indicatorImage: {fileID: 0}
   highlightObject: {fileID: 1189089644}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
+  characterImage: {fileID: 0}
+  left: 0
   tutorialCanvas: {fileID: 11873607}
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
-  size: {x: 0, y: 0}
+  bubbleSize: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
   targetObject: {fileID: 114122194}
 --- !u!1 &486754141
@@ -3322,6 +3381,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648994674}
   m_CullTransparentMesh: 0
+--- !u!1 &662244332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662244333}
+  - component: {fileID: 662244334}
+  m_Layer: 0
+  m_Name: step 7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &662244333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662244332}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -275.61084, y: -88.50721, z: 40.496555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2130618885}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &662244334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662244332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 2
+  explanation: The upper part shows you what elixir you have
+  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
+    type: 3}
+  highlightObject: {fileID: 0}
+  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
+    type: 3}
+  characterImage: {fileID: 0}
+  left: 0
+  tutorialCanvas: {fileID: 11873607}
+  position: {x: 150, y: 140}
+  rotation: {x: 180, y: 280}
+  bubbleSize: {x: 0, y: 0}
+  dialogue: {fileID: 328624562}
+  waitTime: 4
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -7568,6 +7685,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859540225}
   m_CullTransparentMesh: 0
+--- !u!1 &1908624298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908624299}
+  - component: {fileID: 1908624300}
+  m_Layer: 0
+  m_Name: step 8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1908624299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908624298}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -275.61084, y: -88.50721, z: 40.496555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2130618885}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1908624300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908624298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 3
+  explanation: Here you can see elixirs you need to produce
+  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
+    type: 3}
+  highlightObject: {fileID: 0}
+  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
+    type: 3}
+  characterImage: {fileID: 0}
+  left: 0
+  tutorialCanvas: {fileID: 11873607}
+  position: {x: 150, y: 70}
+  rotation: {x: 180, y: 280}
+  bubbleSize: {x: 0, y: 0}
+  dialogue: {fileID: 328624562}
+  waitTime: 4
 --- !u!1 &1927380666
 GameObject:
   m_ObjectHideFlags: 0
@@ -8792,6 +8967,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 431756560}
+  - {fileID: 146835780}
+  - {fileID: 662244333}
+  - {fileID: 1908624299}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

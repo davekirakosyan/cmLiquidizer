@@ -27,11 +27,12 @@ public class TutorialManager : MonoBehaviour
     private Tutorial currentTutorial;
     Image bubble;
     Image indicator;
+    Image character;
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         SetNextTutorial(0);
     }
 
@@ -44,8 +45,9 @@ public class TutorialManager : MonoBehaviour
 
     public void completedTutorial()
     {
-        Image.Destroy(bubble);
-        Image.Destroy(indicator);
+        Destroy(bubble);
+        Destroy(indicator);
+        Destroy(character);
         if (currentTutorial.highlightObject)
         {
             Destroy(currentTutorial.highlightObject.transform.GetChild(0).gameObject.GetComponent<Outline>());
@@ -54,16 +56,33 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Tutorial completed");
     }
 
-    void CreateBubble()
+
+    void CreateBubbleAndCharacter()
     {
-        Image bubble = Instantiate(currentTutorial.bubbleImage) as Image;
-        bubble.transform.SetParent(currentTutorial.tutorialCanvas, false);
+        float charactersPositionY=-76;
+        bubble = Instantiate(currentTutorial.bubbleImage, currentTutorial.tutorialCanvas) as Image;
+        bubble.rectTransform.sizeDelta = currentTutorial.bubbleSize;
         currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
-        currentTutorial.dialogue.transform.localPosition = new Vector3(0, 15, 0);
+        currentTutorial.dialogue.transform.localPosition = new Vector3(0, 0, 0);
+        character = Instantiate(currentTutorial.characterImage) as Image;
+        if (currentTutorial.characterFacingBack)
+        {
+            character = Instantiate(currentTutorial.characterFacingBackImage) as Image;
+            charactersPositionY = -170;
+        }
+        character.rectTransform.position = new Vector3(270, charactersPositionY, 0);
+        character.rectTransform.eulerAngles = new Vector3(0, 180, 0);
+        if (currentTutorial.left)
+        {
+            character.rectTransform.position = new Vector2(-220, charactersPositionY);
+            character.rectTransform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        character.transform.SetParent(currentTutorial.tutorialCanvas, false);
     }
 
     public void SetNextTutorial(int currentOrder)
     {
+        
         currentTutorial = GetTutorialByOrder(currentOrder);
 
         if (!currentTutorial)
@@ -74,34 +93,38 @@ public class TutorialManager : MonoBehaviour
 
         expText.text = currentTutorial.explanation;
 
-        if (currentTutorial.indicatorImage != null)
+        if (currentTutorial.indicatorImage != null && currentTutorial.highlightObject == null && currentTutorial.characterImage != null)
         {
 
             indicator = Instantiate(currentTutorial.indicatorImage) as Image;
             indicator.rectTransform.position = new Vector3(currentTutorial.position.x, currentTutorial.position.y, 0);
             indicator.rectTransform.eulerAngles = new Vector3(0, currentTutorial.rotation.x, currentTutorial.rotation.y);
-            indicator.rectTransform.sizeDelta = new Vector2(currentTutorial.size.x, currentTutorial.size.y);
             indicator.transform.SetParent(currentTutorial.tutorialCanvas, false);
 
             if (currentTutorial.explanation != "")
             {
-                CreateBubble();
+                CreateBubbleAndCharacter();
             }
-        } else
+        }
+        else if (currentTutorial.indicatorImage == null && currentTutorial.highlightObject != null && currentTutorial.characterImage != null)
         {
+            CreateBubbleAndCharacter();
             GameObject target = currentTutorial.highlightObject.transform.GetChild(0).gameObject;
-            target.AddComponent<Outline>();
-            target.GetComponent<Outline>().effectColor = new Color32(232, 255, 0, 150);
-            target.GetComponent<Outline>().effectDistance = new Vector2(2.5f, -2.5f);
-            CreateBubble();
+            Outline outline = target.AddComponent<Outline>();
+            outline.effectColor = new Color32(232, 255, 0, 150);
+            outline.effectDistance = new Vector2(2.5f, -2.5f);
 
+        }
+        else if (currentTutorial.indicatorImage == null && currentTutorial.highlightObject == null && currentTutorial.characterImage != null)
+        {
+            CreateBubbleAndCharacter();
         }
         
     }
 
     public void CompletedAllTutorials()
     {
-        expText.text = "You have copleted all the tutorials";
+        expText.text = "";
 
         //load next scene
     }

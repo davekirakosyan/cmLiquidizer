@@ -1404,7 +1404,7 @@ RectTransform:
   m_GameObject: {fileID: 338441679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.36, y: 2.36, z: 2.36}
+  m_LocalScale: {x: 1, y: 1, z: 2.36}
   m_Children: []
   m_Father: {fileID: 2090952339}
   m_RootOrder: 0
@@ -1412,7 +1412,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 580, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &338441681
 MonoBehaviour:
@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.73333335, g: 0.5019608, b: 0.07058824, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1435,7 +1435,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1444,7 +1444,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Error
 --- !u!222 &338441682
@@ -1796,7 +1796,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459691349}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &422440209
 MonoBehaviour:
@@ -1817,10 +1817,16 @@ MonoBehaviour:
   highlightObject: {fileID: 0}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  left: 0
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 2090952339}
-  position: {x: -120, y: 159}
-  rotation: {x: 0, y: 116}
-  size: {x: 100, y: 100}
+  position: {x: 120, y: 140}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 230, y: 50}
   dialogue: {fileID: 338441681}
   targetObject: {fileID: 836212953}
 --- !u!1 &459691347
@@ -1865,7 +1871,6 @@ Transform:
   m_LocalPosition: {x: 150, y: 555, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2090952339}
   - {fileID: 422440207}
   m_Father: {fileID: 0}
   m_RootOrder: 17
@@ -16336,8 +16341,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 338441680}
-  m_Father: {fileID: 459691349}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

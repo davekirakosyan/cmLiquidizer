@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
@@ -14,10 +15,14 @@ public class Tutorial : MonoBehaviour
     public Image indicatorImage;
     public GameObject highlightObject;
     public Image bubbleImage;
+    public Image characterImage;
+    public Image characterFacingBackImage;
+    public bool left;
+    public bool characterFacingBack;
     public Transform tutorialCanvas;
     public Vector2 position;
     public Vector2 rotation;
-    public Vector2 size;
+    public Vector2 bubbleSize;
     public Text dialogue;
 
     // Start is called before the first frame update
@@ -29,6 +34,7 @@ public class Tutorial : MonoBehaviour
 
         TutorialManager.Instace.Tutorials.Add(this);
     }
+
 
     public virtual void CheckIfHappening() { }
     
