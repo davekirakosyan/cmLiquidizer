@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -751,8 +751,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
   bubbleSize: {x: 245, y: 36}
-  highlightSize: {x: 29.6, y: 79}
-  highlightPos: {x: 280, y: 121}
+  highlightSize: {x: 35, y: 96}
+  highlightPos: {x: 325, y: 145}
   higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
   targetObject: {fileID: 0}
@@ -2219,7 +2219,7 @@ Transform:
   m_GameObject: {fileID: 367996287}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 306.84, y: 173, z: 1}
+  m_LocalScale: {x: 360, y: 200, z: 1}
   m_Children: []
   m_Father: {fileID: 11873607}
   m_RootOrder: 2
@@ -2412,8 +2412,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
   bubbleSize: {x: 245, y: 37}
-  highlightSize: {x: 30, y: 83}
-  highlightPos: {x: -115, y: 0}
+  highlightSize: {x: 35, y: 96}
+  highlightPos: {x: -133.3, y: 0}
   higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
   targetObject: {fileID: 114122194}
@@ -3544,8 +3544,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
   bubbleSize: {x: 316, y: 70}
-  highlightSize: {x: 29.6, y: 40}
-  highlightPos: {x: 280, y: 161}
+  highlightSize: {x: 35, y: 48}
+  highlightPos: {x: 325.08, y: 186.3}
   higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
   targetObject: {fileID: 0}
@@ -8052,8 +8052,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
   bubbleSize: {x: 316, y: 70}
-  highlightSize: {x: 29.6, y: 40}
-  highlightPos: {x: 280, y: 85}
+  highlightSize: {x: 35, y: 48}
+  highlightPos: {x: 325.08, y: 99}
   higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
   targetObject: {fileID: 0}

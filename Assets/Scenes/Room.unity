@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106661978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -382,13 +382,19 @@ MonoBehaviour:
     type: 3}
   characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
     type: 3}
+  highlight: {fileID: 0}
+  curtain: {fileID: 0}
   left: 0
   characterFacingBack: 1
   tutorialCanvas: {fileID: 1843460851}
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
-  bubbleSize: {x: 450, y: 70}
+  bubbleSize: {x: 297, y: 70}
+  highlightSize: {x: 0, y: 0}
+  highlightPos: {x: 0, y: 0}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 1984132933}
+  targetObject: {fileID: 0}
   waitTime: 5
 --- !u!1 &673262987
 GameObject:
@@ -414,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673262987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 11.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1040512533}
@@ -476,12 +482,17 @@ MonoBehaviour:
     type: 3}
   characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
     type: 3}
+  highlight: {fileID: 0}
+  curtain: {fileID: 0}
   left: 0
   characterFacingBack: 0
   tutorialCanvas: {fileID: 1843460851}
   position: {x: -40, y: 25}
   rotation: {x: 0, y: 0}
   bubbleSize: {x: 375, y: 38}
+  highlightSize: {x: 0, y: 0}
+  highlightPos: {x: 0, y: 0}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 1984132933}
   targetObject: {fileID: 61480413}
 --- !u!1 &1021748643
@@ -714,13 +725,19 @@ MonoBehaviour:
   bubbleImage: {fileID: 0}
   characterImage: {fileID: 0}
   characterFacingBackImage: {fileID: 0}
+  highlight: {fileID: 0}
+  curtain: {fileID: 0}
   left: 0
   characterFacingBack: 0
   tutorialCanvas: {fileID: 1843460851}
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
   bubbleSize: {x: 0, y: 0}
+  highlightSize: {x: 0, y: 0}
+  highlightPos: {x: 0, y: 0}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 1984132933}
+  targetObject: {fileID: 0}
   waitTime: 2
 --- !u!1 &1367693295
 GameObject:
@@ -859,12 +876,17 @@ MonoBehaviour:
     type: 3}
   characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
     type: 3}
+  highlight: {fileID: 0}
+  curtain: {fileID: 0}
   left: 0
   characterFacingBack: 0
   tutorialCanvas: {fileID: 1843460851}
   position: {x: -258, y: -30}
   rotation: {x: 180, y: 35}
   bubbleSize: {x: 385, y: 68}
+  highlightSize: {x: 0, y: 0}
+  highlightPos: {x: 0, y: 0}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 1984132933}
   targetObject: {fileID: 1662053031}
 --- !u!1 &1515296355
@@ -1210,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1229,9 +1251,9 @@ Canvas:
   m_GameObject: {fileID: 1843460850}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 106661980}
+  m_PlaneDistance: 4
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1239,7 +1261,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1877134380
 GameObject:
