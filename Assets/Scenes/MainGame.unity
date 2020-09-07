@@ -188,9 +188,9 @@ Canvas:
   m_GameObject: {fileID: 11873603}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 963194227}
+  m_PlaneDistance: 4
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -198,7 +198,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &11873607
 RectTransform:
@@ -212,6 +212,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 328624561}
+  - {fileID: 1316306008}
+  - {fileID: 367996288}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -699,7 +701,7 @@ GameObject:
   - component: {fileID: 146835780}
   - component: {fileID: 146835781}
   m_Layer: 0
-  m_Name: step 6
+  m_Name: step 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +719,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2130618885}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &146835781
 MonoBehaviour:
@@ -731,19 +733,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 1
+  order: 2
   explanation: This is your recipe card
   indicatorImage: {fileID: 0}
   highlightObject: {fileID: 1189089644}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
-  characterImage: {fileID: 0}
-  left: 0
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  highlight: {fileID: 1316306007}
+  curtain: {fileID: 367996287}
+  left: 1
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 11873607}
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
-  bubbleSize: {x: 0, y: 0}
+  bubbleSize: {x: 245, y: 36}
+  highlightSize: {x: 29.6, y: 79}
+  highlightPos: {x: 280, y: 121}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
+  targetObject: {fileID: 0}
   waitTime: 3
 --- !u!1 &159413076
 GameObject:
@@ -1443,7 +1455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.072428055}
   m_AnchorMax: {x: 0.5, y: 0.072428055}
-  m_AnchoredPosition: {x: -79.8, y: -3.4}
+  m_AnchoredPosition: {x: -79.8, y: -3.4000015}
   m_SizeDelta: {x: 127, y: 49.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297546129
@@ -1962,7 +1974,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 400, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328624562
 MonoBehaviour:
@@ -2181,6 +2193,87 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.000054121017}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &367996287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367996288}
+  - component: {fileID: 367996289}
+  m_Layer: 0
+  m_Name: curtain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &367996288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367996287}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 306.84, y: 173, z: 1}
+  m_Children: []
+  m_Father: {fileID: 11873607}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &367996289
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367996287}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: 9f3e314d6ac224e49b76e7129845c43a, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.25, y: 2.25}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 2
+  m_SpriteSortPoint: 0
 --- !u!1 &413850801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2269,7 +2362,7 @@ GameObject:
   - component: {fileID: 431756560}
   - component: {fileID: 431756561}
   m_Layer: 0
-  m_Name: step 5
+  m_Name: step 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2287,7 +2380,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2130618885}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &431756561
 MonoBehaviour:
@@ -2301,18 +2394,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 0
+  order: 1
   explanation: Let's start from level 1.
   indicatorImage: {fileID: 0}
   highlightObject: {fileID: 1189089644}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
-  characterImage: {fileID: 0}
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  highlight: {fileID: 1316306007}
+  curtain: {fileID: 367996287}
   left: 0
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 11873607}
   position: {x: 0, y: 0}
   rotation: {x: 0, y: 0}
-  bubbleSize: {x: 0, y: 0}
+  bubbleSize: {x: 245, y: 37}
+  highlightSize: {x: 30, y: 83}
+  highlightPos: {x: -115, y: 0}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
   targetObject: {fileID: 114122194}
 --- !u!1 &486754141
@@ -2503,7 +2605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -102.99, y: -234}
+  m_AnchoredPosition: {x: -102.98999, y: -234}
   m_SizeDelta: {x: 182.5, y: 49.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &534525412
@@ -3392,7 +3494,7 @@ GameObject:
   - component: {fileID: 662244333}
   - component: {fileID: 662244334}
   m_Layer: 0
-  m_Name: step 7
+  m_Name: step 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3410,7 +3512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2130618885}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662244334
 MonoBehaviour:
@@ -3424,20 +3526,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 2
+  order: 3
   explanation: The upper part shows you what elixir you have
-  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
-    type: 3}
-  highlightObject: {fileID: 0}
+  indicatorImage: {fileID: 0}
+  highlightObject: {fileID: 1189089644}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
-  characterImage: {fileID: 0}
-  left: 0
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  highlight: {fileID: 1316306007}
+  curtain: {fileID: 367996287}
+  left: 1
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 11873607}
-  position: {x: 150, y: 140}
-  rotation: {x: 180, y: 280}
-  bubbleSize: {x: 0, y: 0}
+  position: {x: 0, y: 0}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 316, y: 70}
+  highlightSize: {x: 29.6, y: 40}
+  highlightPos: {x: 280, y: 161}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
+  targetObject: {fileID: 0}
   waitTime: 4
 --- !u!1 &705507993
 GameObject:
@@ -3805,7 +3916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -47.1, y: -346}
+  m_AnchoredPosition: {x: -47.100006, y: -346}
   m_SizeDelta: {x: 75, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799824897
@@ -4119,9 +4230,9 @@ Canvas:
   m_GameObject: {fileID: 928642377}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 963194227}
+  m_PlaneDistance: 5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -4129,7 +4240,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &928642381
 RectTransform:
@@ -4618,6 +4729,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040266502}
   m_CullTransparentMesh: 0
+--- !u!1 &1044357748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1044357749}
+  - component: {fileID: 1044357750}
+  m_Layer: 0
+  m_Name: step 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1044357749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044357748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -469.61444, y: 411.9579, z: 43.66779}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2130618885}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044357750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044357748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 0
+  explanation: 
+  indicatorImage: {fileID: 0}
+  highlightObject: {fileID: 0}
+  bubbleImage: {fileID: 0}
+  characterImage: {fileID: 0}
+  characterFacingBackImage: {fileID: 0}
+  highlight: {fileID: 0}
+  curtain: {fileID: 0}
+  left: 0
+  characterFacingBack: 0
+  tutorialCanvas: {fileID: 0}
+  position: {x: 0, y: 0}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 0, y: 0}
+  highlightSize: {x: 0, y: 0}
+  highlightPos: {x: 0, y: 0}
+  higlightRot: {x: 0, y: 0}
+  dialogue: {fileID: 0}
+  targetObject: {fileID: 0}
+  waitTime: 1.7
 --- !u!1 &1055805083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4806,7 +4981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -102.99, y: -410}
+  m_AnchoredPosition: {x: -102.98999, y: -410}
   m_SizeDelta: {x: 182.5, y: 49.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1077178437
@@ -5679,6 +5854,137 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275944981}
   m_CullTransparentMesh: 0
+--- !u!1 &1316306007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316306008}
+  - component: {fileID: 1316306010}
+  - component: {fileID: 1316306009}
+  m_Layer: 0
+  m_Name: mask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1316306008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316306007}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_Children: []
+  m_Father: {fileID: 11873607}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!331 &1316306009
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316306007}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: dd65f06155d630e409da2aed8f5f25de, type: 3}
+  m_MaskAlphaCutoff: 0.2
+  m_FrontSortingLayerID: 0
+  m_BackSortingLayerID: 0
+  m_FrontSortingLayer: 0
+  m_BackSortingLayer: 0
+  m_FrontSortingOrder: 0
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 0
+  m_SpriteSortPoint: 0
+--- !u!212 &1316306010
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316306007}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3, y: 0.73}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1317417234
 GameObject:
   m_ObjectHideFlags: 0
@@ -6614,7 +6920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.072428055}
   m_AnchorMax: {x: 0.5, y: 0.072428055}
-  m_AnchoredPosition: {x: 81.7, y: -3.4}
+  m_AnchoredPosition: {x: 81.7, y: -3.4000015}
   m_SizeDelta: {x: 127, y: 49.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593209331
@@ -7696,7 +8002,7 @@ GameObject:
   - component: {fileID: 1908624299}
   - component: {fileID: 1908624300}
   m_Layer: 0
-  m_Name: step 8
+  m_Name: step 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7714,7 +8020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2130618885}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1908624300
 MonoBehaviour:
@@ -7728,20 +8034,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 3
-  explanation: Here you can see elixirs you need to produce
-  indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
-    type: 3}
-  highlightObject: {fileID: 0}
+  order: 4
+  explanation: Here you can see what elixirs you need to produce
+  indicatorImage: {fileID: 0}
+  highlightObject: {fileID: 1189089644}
   bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
     type: 3}
-  characterImage: {fileID: 0}
-  left: 0
+  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
+    type: 3}
+  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
+    type: 3}
+  highlight: {fileID: 1316306007}
+  curtain: {fileID: 367996287}
+  left: 1
+  characterFacingBack: 0
   tutorialCanvas: {fileID: 11873607}
-  position: {x: 150, y: 70}
-  rotation: {x: 180, y: 280}
-  bubbleSize: {x: 0, y: 0}
+  position: {x: 0, y: 0}
+  rotation: {x: 0, y: 0}
+  bubbleSize: {x: 316, y: 70}
+  highlightSize: {x: 29.6, y: 40}
+  highlightPos: {x: 280, y: 85}
+  higlightRot: {x: 0, y: 0}
   dialogue: {fileID: 328624562}
+  targetObject: {fileID: 0}
   waitTime: 4
 --- !u!1 &1927380666
 GameObject:
@@ -8966,6 +9281,7 @@ Transform:
   m_LocalPosition: {x: 619.61444, y: 143.04211, z: -43.66779}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1044357749}
   - {fileID: 431756560}
   - {fileID: 146835780}
   - {fileID: 662244333}

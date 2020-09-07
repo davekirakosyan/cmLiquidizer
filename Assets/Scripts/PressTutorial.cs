@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class PressTutorial : Tutorial
 {
-
-    public GameObject targetObject;    
+   
     private Collider coll;
     
 

@@ -48,6 +48,11 @@ public class TutorialManager : MonoBehaviour
         Destroy(bubble);
         Destroy(indicator);
         Destroy(character);
+        if (currentTutorial.highlight != null && currentTutorial.curtain != null)
+        {
+            currentTutorial.highlight.SetActive(false);
+            currentTutorial.curtain.SetActive(false);
+        }
         if (currentTutorial.highlightObject)
         {
             Destroy(currentTutorial.highlightObject.transform.GetChild(0).gameObject.GetComponent<Outline>());
@@ -64,6 +69,7 @@ public class TutorialManager : MonoBehaviour
         bubble.rectTransform.sizeDelta = currentTutorial.bubbleSize;
         currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
         currentTutorial.dialogue.transform.localPosition = new Vector3(0, 0, 0);
+        currentTutorial.dialogue.rectTransform.sizeDelta = new Vector2(290, 55);
         character = Instantiate(currentTutorial.characterImage) as Image;
         if (currentTutorial.characterFacingBack)
         {
@@ -74,7 +80,7 @@ public class TutorialManager : MonoBehaviour
         character.rectTransform.eulerAngles = new Vector3(0, 180, 0);
         if (currentTutorial.left)
         {
-            character.rectTransform.position = new Vector2(-220, charactersPositionY);
+            character.rectTransform.position = new Vector2(-240, charactersPositionY);
             character.rectTransform.eulerAngles = new Vector3(0, 0, 0);
         }
         character.transform.SetParent(currentTutorial.tutorialCanvas, false);
@@ -113,7 +119,11 @@ public class TutorialManager : MonoBehaviour
             Outline outline = target.AddComponent<Outline>();
             outline.effectColor = new Color32(232, 255, 0, 150);
             outline.effectDistance = new Vector2(2.5f, -2.5f);
-
+            currentTutorial.curtain.SetActive(true);
+            currentTutorial.highlight.SetActive(true);
+            currentTutorial.highlight.transform.localScale = currentTutorial.highlightSize;
+            currentTutorial.highlight.transform.localPosition = currentTutorial.highlightPos;
+            currentTutorial.highlight.transform.eulerAngles = currentTutorial.higlightRot;
         }
         else if (currentTutorial.indicatorImage == null && currentTutorial.highlightObject == null && currentTutorial.characterImage != null)
         {
