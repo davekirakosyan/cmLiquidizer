@@ -64,7 +64,7 @@ public class TutorialManager : MonoBehaviour
 
     void CreateBubbleAndCharacter()
     {
-        float charactersPositionY=-107;
+        float charactersPositionY=0;
         bubble = Instantiate(currentTutorial.bubbleImage, currentTutorial.tutorialCanvas) as Image;
         bubble.rectTransform.sizeDelta = currentTutorial.bubbleSize;
         currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
@@ -74,7 +74,6 @@ public class TutorialManager : MonoBehaviour
         if (currentTutorial.characterFacingBack)
         {
             character = Instantiate(currentTutorial.characterFacingBackImage) as Image;
-            charactersPositionY = -200;
         }
         character.rectTransform.position = new Vector3(270, charactersPositionY, 0);
         character.rectTransform.eulerAngles = new Vector3(0, 180, 0);

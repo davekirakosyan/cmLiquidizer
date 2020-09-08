@@ -489,7 +489,7 @@ MonoBehaviour:
   tutorialCanvas: {fileID: 1843460851}
   position: {x: -40, y: 25}
   rotation: {x: 0, y: 0}
-  bubbleSize: {x: 375, y: 38}
+  bubbleSize: {x: 325.86, y: 61.5}
   highlightSize: {x: 0, y: 0}
   highlightPos: {x: 0, y: 0}
   higlightRot: {x: 0, y: 0}
@@ -666,7 +666,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079322654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 9.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1367693297}
@@ -864,9 +864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   order: 3
-  explanation: 'The Path is where we do all the magic.
-
-    Touch it to start.'
+  explanation: The Path is where we do all the magic. Touch it to start.
   indicatorImage: {fileID: 7918550038552156046, guid: 3f992d89c17cd4141bdc711e9a966e16,
     type: 3}
   highlightObject: {fileID: 0}
@@ -883,7 +881,7 @@ MonoBehaviour:
   tutorialCanvas: {fileID: 1843460851}
   position: {x: -258, y: -30}
   rotation: {x: 180, y: 35}
-  bubbleSize: {x: 385, y: 68}
+  bubbleSize: {x: 320, y: 68}
   highlightSize: {x: 0, y: 0}
   highlightPos: {x: 0, y: 0}
   higlightRot: {x: 0, y: 0}
@@ -1261,7 +1259,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!1 &1877134380
 GameObject:
