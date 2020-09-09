@@ -48,14 +48,18 @@ public class TutorialManager : MonoBehaviour
         Destroy(bubble);
         Destroy(indicator);
         Destroy(character);
+        
         if (currentTutorial.highlight != null && currentTutorial.curtain != null)
         {
             currentTutorial.highlight.SetActive(false);
             currentTutorial.curtain.SetActive(false);
+            
         }
         if (currentTutorial.highlightObject)
         {
             Destroy(currentTutorial.highlightObject.transform.GetChild(0).gameObject.GetComponent<Outline>());
+            if (currentTutorial.highlightObject.name == "Viewport")
+                currentTutorial.highlightObject.GetComponent<Mask>().enabled = true;
         }
         SetNextTutorial(currentTutorial.order + 1);
         Debug.Log("Tutorial completed");
@@ -68,9 +72,9 @@ public class TutorialManager : MonoBehaviour
         bubble = Instantiate(currentTutorial.bubbleImage, currentTutorial.tutorialCanvas) as Image;
         bubble.rectTransform.sizeDelta = currentTutorial.bubbleSize;
         currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
-        currentTutorial.dialogue.transform.localPosition = new Vector3(0, 0, 0);
         currentTutorial.dialogue.rectTransform.sizeDelta = new Vector2(290, 55);
         character = Instantiate(currentTutorial.characterImage) as Image;
+        bubble.rectTransform.localPosition = new Vector3(0.3f, -170, 0);
         if (currentTutorial.characterFacingBack)
         {
             character = Instantiate(currentTutorial.characterFacingBackImage) as Image;
@@ -123,6 +127,8 @@ public class TutorialManager : MonoBehaviour
             currentTutorial.highlight.transform.localScale = currentTutorial.highlightSize;
             currentTutorial.highlight.transform.localPosition = currentTutorial.highlightPos;
             currentTutorial.highlight.transform.eulerAngles = currentTutorial.higlightRot;
+            if (currentTutorial.highlightObject.name == "Viewport")
+                currentTutorial.highlightObject.GetComponent<Mask>().enabled = false;
         }
         else if (currentTutorial.indicatorImage == null && currentTutorial.highlightObject == null && currentTutorial.characterImage != null)
         {
