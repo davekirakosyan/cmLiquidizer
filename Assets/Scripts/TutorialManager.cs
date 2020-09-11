@@ -33,9 +33,10 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         //DontDestroyOnLoad(this);
-        
+        //uncomment row below to uncomplete tutorial
+        PlayerPrefs.SetInt("Tutorial completed", 0);
     }
 
     private void Awake()
