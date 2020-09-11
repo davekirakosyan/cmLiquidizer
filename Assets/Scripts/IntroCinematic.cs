@@ -19,7 +19,9 @@ public class IntroCinematic : MonoBehaviour
 
     void Start()
     {
-        if (!SKIP_CINEMATIC)
+        //uncomment row below to unwatch cinematic
+        //PlayerPrefs.SetInt("Cinematic watched", 0);
+        if (!SKIP_CINEMATIC && PlayerPrefs.GetInt("Cinematic watched") == 0)
         {
             pastPlants.SetActive(true);
             // start camera + boat movements
@@ -27,7 +29,7 @@ public class IntroCinematic : MonoBehaviour
             boatAnimator.SetBool("start_floating", true);
             swipeControls.SetActive(false);
         }
-        else
+        else if (SKIP_CINEMATIC || PlayerPrefs.GetInt("Cinematic watched") == 1)
         {
             // enable all the tree controls
             swipeControls.SetActive(true);
@@ -82,5 +84,6 @@ public class IntroCinematic : MonoBehaviour
         tutorial.SetActive(true);
         treeNavigation.SetActive(true);
         GetComponent<Animator>().enabled = false;
+        PlayerPrefs.SetInt("Cinematic watched", 1);
     }
 }
