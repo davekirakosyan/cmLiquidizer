@@ -17,6 +17,13 @@ public class IntroCinematic : MonoBehaviour
     public GameObject tutorial;
     public GameObject treeNavigation;
 
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("Cinematic watched"))
+            PlayerPrefs.SetInt("Cinematic watched", 0);
+    }
+
     void Start()
     {
         //uncomment row below to unwatch cinematic

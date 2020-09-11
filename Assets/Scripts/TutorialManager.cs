@@ -28,17 +28,30 @@ public class TutorialManager : MonoBehaviour
     Image bubble;
     Image indicator;
     Image character;
+    bool tutorialStarted = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         //DontDestroyOnLoad(this);
-        SetNextTutorial(0);
+        
+    }
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("Tutorial completed"))
+            PlayerPrefs.SetInt("Tutorial completed", 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed")==0)
+        {
+            SetNextTutorial(0);
+            tutorialStarted = true;
+        }
         if (currentTutorial)
             currentTutorial.CheckIfHappening();
     }
@@ -91,10 +104,12 @@ public class TutorialManager : MonoBehaviour
 
     public void SetNextTutorial(int currentOrder)
     {
-        
+        int previousOrder=0;
         currentTutorial = GetTutorialByOrder(currentOrder);
-
-        if (!currentTutorial)
+        if (currentOrder > 0)
+            previousOrder = currentOrder-1;
+ 
+        if (GetTutorialByOrder(previousOrder).name == "step 16")
         {
             CompletedAllTutorials();
             return;
@@ -140,7 +155,8 @@ public class TutorialManager : MonoBehaviour
     public void CompletedAllTutorials()
     {
         expText.text = "";
-
+        Debug.Log("completed all tutorials");
+        PlayerPrefs.SetInt("Tutorial completed", 1);
         //load next scene
     }
 

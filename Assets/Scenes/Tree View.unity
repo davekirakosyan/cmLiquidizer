@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcec2c40352002247a2221e3b54bdc95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SKIP_CINEMATIC: 1
+  SKIP_CINEMATIC: 0
   cameraAnimator: {fileID: 315227441}
   boatAnimator: {fileID: 924037822}
   characterAnimator: {fileID: 758708045}
