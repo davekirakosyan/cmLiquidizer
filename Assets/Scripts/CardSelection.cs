@@ -11,6 +11,8 @@ public class CardSelection : MonoBehaviour
     // game object for the card prefab
     public GameObject card;
 
+    public TutorialManager tutorialManager;
+
     // counter for completed levels
     private int completedLevelsCount = 0;
     
@@ -70,6 +72,9 @@ public class CardSelection : MonoBehaviour
 
         // move selected card to prepared place
         selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
+
+        if (GameManager.tutorialNeed)
+            tutorialManager.clicked = true;
 
         // load selected level
         gameManager.ChangeLevel(selectedLevel);

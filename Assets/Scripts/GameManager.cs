@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public PathController pathController;
     public CardSelection cardSelection;
+    public TutorialManager tutorialManager;
 
     public GameObject gameOverMsg;
     public GameObject winningMsg;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     private bool needUpdateLevelCards;
     private static bool firstBoot = true;
+    public static bool tutorialNeed = true;
 
     private void Awake()
     {
@@ -198,6 +200,11 @@ public class GameManager : MonoBehaviour
 
             // update user Specific data
             UpdateUserData();
+
+            if (tutorialNeed)
+            {
+                tutorialManager.loadTurorial(); 
+            }
         }
     }
 

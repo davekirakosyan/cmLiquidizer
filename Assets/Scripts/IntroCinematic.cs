@@ -17,8 +17,11 @@ public class IntroCinematic : MonoBehaviour
     {
         pastPlants.SetActive(true);
         // start camera + boat movements
-        cameraAnimator.SetBool("start_intro", true);
-        boatAnimator.SetBool("start_floating", true);
+        // cameraAnimator.SetBool("start_intro", true);
+        // boatAnimator.SetBool("start_floating", true);
+
+        EndCinematicPart1();
+
         swipeControls.SetActive(false);
 
     }

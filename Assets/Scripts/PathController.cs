@@ -18,6 +18,7 @@ public class PathController : MonoBehaviour
     public bool checkCountdownInProgress = false;
     public Text countdownText;
     public Coroutine countDown;
+    public TutorialManager tutorialManager;
 
     void Update()
     {
@@ -40,12 +41,15 @@ public class PathController : MonoBehaviour
             {
                 // if clicked on tubes create an elixir at that hit point and initialize its main components
                 CreateElixir(hit.point, gameManager.currentLevel.elixirSpeed, gameManager.currentLevel.elixirLength, GameManager.selectedColor);
+                if (GameManager.tutorialNeed)
+                    tutorialManager.clicked = true;
             }
             if (!checkCountdownInProgress)
             {
                 countDown = StartCoroutine(CheckReseults());
             }
         }
+
     }
 
     public void CreateElixir (Vector3 position, float speed, float length, InventoryManager.ElixirColor colorName)
