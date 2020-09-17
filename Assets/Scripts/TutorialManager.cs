@@ -166,7 +166,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
-        GameManager.tutorialNeed = false;
+        
     }
 
     public void loadTurorial()
