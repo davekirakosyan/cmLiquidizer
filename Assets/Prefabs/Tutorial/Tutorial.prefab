@@ -135,7 +135,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7303633880249496309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77d6ebf77a83934db6f3caaec5d160c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6948e528289bdff43be4bf65aea7d2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   FullMask: {fileID: 7303633880726404552}
@@ -147,8 +147,8 @@ MonoBehaviour:
   ReceipeMask: {fileID: 8950505650487737455}
   ReceipeMaskUpper: {fileID: 7462398866100421532}
   ReceipeMaskBottom: {fileID: 1102524823902379671}
-  guidTextForRight: {fileID: 3494156911082728774}
-  guidTextForLeft: {fileID: 3494156910974945146}
+  guidTextForRight: {fileID: 3494156910974945146}
+  guidTextForLeft: {fileID: 3494156911082728774}
   Arrow: {fileID: 6525077084474102537}
   clicked: 0
   selection: 0

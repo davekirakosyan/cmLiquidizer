@@ -366,32 +366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8548bce325a987f4089be4440b033986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 7
-  explanation: Pour one of the elixirs into the path. You can either drag and drop
-    or select the elixir and touch the path.
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 0}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 334, y: 127}
-  highlightSize: {x: 0, y: 0}
-  highlightPos: {x: 0, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
-  pathController: {fileID: 1015420021939945176}
-  elixirCount: 1
 --- !u!1 &35482268
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,27 +409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 8
-  explanation: 
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 0}
-  bubbleImage: {fileID: 0}
-  characterImage: {fileID: 0}
-  characterFacingBackImage: {fileID: 0}
-  highlight: {fileID: 0}
-  curtain: {fileID: 0}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 0}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 0, y: 0}
-  highlightSize: {x: 0, y: 0}
-  highlightPos: {x: 0, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 0}
-  targetObject: {fileID: 0}
-  waitTime: 1.7
 --- !u!1 &80930329
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,29 +949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 2
-  explanation: This is your recipe card
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 1189089644}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 1
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 245, y: 36}
-  highlightSize: {x: 35, y: 96}
-  highlightPos: {x: 325, y: 145}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
 --- !u!1 &159413076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,31 +1654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44cb8b91683b7b4d9d5891edd7b92ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 11
-  explanation: brrr
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 0}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 0, y: 0}
-  highlightSize: {x: 0, y: 0}
-  highlightPos: {x: 0, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
-  winMsg: {fileID: 648994674}
-  loseMsg: {fileID: 2006860960}
 --- !u!1 &272584800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,30 +1771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 9
-  explanation: Once you pour the elixir in the path, it will start flowing with constant
-    speed and direction.
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 0}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 668328535}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 316, y: 100}
-  highlightSize: {x: 0, y: 0}
-  highlightPos: {x: 0, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
 --- !u!1 &297546127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,29 +2619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 1
-  explanation: Let's start from level 1.
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 1189089644}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 245, y: 37}
-  highlightSize: {x: 35, y: 96}
-  highlightPos: {x: -133.3, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 114122194}
 --- !u!1 &488066400
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,29 +2876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 6
-  explanation: This is the glass tube in which you should pour the given elixirs
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 6927074538054273802}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 668328535}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 316, y: 70}
-  highlightSize: {x: 81.4, y: 131.3}
-  highlightPos: {x: 15, y: -18}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
 --- !u!1 &545575177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,6 +3907,130 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648994674}
   m_CullTransparentMesh: 0
+--- !u!1001 &651916435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1902652246496992232, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496308, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303633880249496309, guid: 67c899e8b5124ba4790bd8b8bb107a52,
+        type: 3}
+      propertyPath: m_Name
+      value: Tutorial (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 67c899e8b5124ba4790bd8b8bb107a52, type: 3}
 --- !u!1 &662244332
 GameObject:
   m_ObjectHideFlags: 0
@@ -4115,29 +4074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 3
-  explanation: The upper part shows you what elixir you have
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 1189089644}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 1
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 316, y: 70}
-  highlightSize: {x: 35, y: 48}
-  highlightPos: {x: 325.08, y: 186.3}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
 --- !u!1 &668328535
 GameObject:
   m_ObjectHideFlags: 0
@@ -5642,27 +5578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbca2c04623526241bb67eea39e24bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 0
-  explanation: 
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 0}
-  bubbleImage: {fileID: 0}
-  characterImage: {fileID: 0}
-  characterFacingBackImage: {fileID: 0}
-  highlight: {fileID: 0}
-  curtain: {fileID: 0}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 0}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 0, y: 0}
-  highlightSize: {x: 0, y: 0}
-  highlightPos: {x: 0, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 0}
-  targetObject: {fileID: 0}
-  waitTime: 1.7
 --- !u!1 &1055805083
 GameObject:
   m_ObjectHideFlags: 0
@@ -8780,32 +8695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8548bce325a987f4089be4440b033986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 10
-  explanation: Now pour the second elixir. Make sure that it does not touch the first
-    one, or they will mix.
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 0}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 334, y: 127}
-  highlightSize: {x: 0, y: 0}
-  highlightPos: {x: 0, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
-  pathController: {fileID: 1015420021939945176}
-  elixirCount: 2
 --- !u!1 &1908624298
 GameObject:
   m_ObjectHideFlags: 0
@@ -8849,29 +8738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 4
-  explanation: Here you can see what elixirs you need to produce
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 1189089644}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 1
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 316, y: 70}
-  highlightSize: {x: 35, y: 48}
-  highlightPos: {x: 325.08, y: 99}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
 --- !u!1 &1927380666
 GameObject:
   m_ObjectHideFlags: 0
@@ -9067,29 +8933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f15ef5f6a31bcb498de5e338e90378b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 5
-  explanation: Your elixirs are located in this inventory
-  indicatorImage: {fileID: 0}
-  highlightObject: {fileID: 159413076}
-  bubbleImage: {fileID: 5249886990151108017, guid: 0ff89de491fc43a41ad2b051bc2cbc6a,
-    type: 3}
-  characterImage: {fileID: 7983227165804823865, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
-    type: 3}
-  characterFacingBackImage: {fileID: 2390692259852182618, guid: d6179d88beb6a60409446edeb897aeef,
-    type: 3}
-  highlight: {fileID: 1316306007}
-  curtain: {fileID: 367996287}
-  left: 0
-  characterFacingBack: 0
-  tutorialCanvas: {fileID: 11873607}
-  position: {x: 0, y: 0}
-  rotation: {x: 0, y: 0}
-  bubbleSize: {x: 316, y: 70}
-  highlightSize: {x: 45.2, y: 238.2}
-  highlightPos: {x: -321, y: 0}
-  higlightRot: {x: 0, y: 0}
-  dialogue: {fileID: 328624562}
-  targetObject: {fileID: 0}
 --- !u!1 &2002269461
 GameObject:
   m_ObjectHideFlags: 0
@@ -10367,13 +10210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77d6ebf77a83934db6f3caaec5d160c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tutorials: []
-  expText: {fileID: 328624562}
-  currentTutorial: {fileID: 0}
-  bubble: {fileID: 0}
-  indicator: {fileID: 0}
-  character: {fileID: 0}
-  tutorialStarted: 0
 --- !u!4 &2130618885
 Transform:
   m_ObjectHideFlags: 0
