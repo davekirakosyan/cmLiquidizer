@@ -24,6 +24,33 @@ public class TutorialManager : MonoBehaviour
     public bool pouring = false;
     bool tutorialStarted = false;
 
+    void Start()
+    {
+
+        //DontDestroyOnLoad(this);
+        //uncomment row below to uncomplete tutorial
+        //PlayerPrefs.SetInt("Tutorial completed", 0);
+    }
+
+    private void Awake()
+    {
+        //PlayerPrefs.DeleteAll();
+        if (!PlayerPrefs.HasKey("Tutorial completed"))
+            PlayerPrefs.SetInt("Tutorial completed", 0);
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !selection && !pouring)
+            clicked = true;
+
+        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed") == 0)
+        {
+            StartCoroutine(tutorialWait());
+            tutorialStarted = true;
+        }
+    }
+
     public void ShowFullMask()
     {
         FullMask.SetActive(true);
@@ -175,30 +202,4 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(tutorialWait());
     }
 
-    void Start()
-    {
-
-        //DontDestroyOnLoad(this);
-        //uncomment row below to uncomplete tutorial
-        //PlayerPrefs.SetInt("Tutorial completed", 0);
-    }
-
-    private void Awake()
-    {
-        //PlayerPrefs.DeleteAll();
-        if (!PlayerPrefs.HasKey("Tutorial completed"))
-            PlayerPrefs.SetInt("Tutorial completed", 0);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && !selection && !pouring)
-            clicked = true;
-
-        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed") == 0)
-        {
-            StartCoroutine(tutorialWait());
-            tutorialStarted = true;
-        }
-    }
 }
