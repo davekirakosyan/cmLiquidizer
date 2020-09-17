@@ -1,176 +1,182 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
+using System.Collections;
+using System.Collections.Generic;
 
 public class TutorialManager : MonoBehaviour
 {
-
-    public List<Tutorial> Tutorials = new List<Tutorial>();
-    public Text expText;
-    private static TutorialManager instance;
-    public static TutorialManager Instace
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<TutorialManager>();
-                Debug.Log("There is no TutorialManager");
-            }
-
-            return instance;
-        }
-    }
-
-    private Tutorial currentTutorial;
-    Image bubble;
-    Image indicator;
-    Image character;
-    bool tutorialStarted = false;
-
     // Start is called before the first frame update
-    void Start()
-    {
+    public GameObject FullMask;
+    public GameObject PathMask;
+    public GameObject Pour1Mask;
+    public GameObject Pour2Mask;
+    public GameObject InventoryMask;
+    public GameObject MaskForCard;
+    public GameObject ReceipeMask;
+    public GameObject ReceipeMaskUpper;
+    public GameObject ReceipeMaskBottom;
+    public GameObject guidTextForRight;
+    public GameObject guidTextForLeft;
+    public GameObject Arrow;
+    public bool clicked = false;
+    public bool selection = false;
+    public bool pouring = false;
 
-        //DontDestroyOnLoad(this);
-        //uncomment row below to uncomplete tutorial
-        //PlayerPrefs.SetInt("Tutorial completed", 0);
+    public void ShowFullMask()
+    {
+        FullMask.SetActive(true);
     }
 
-    private void Awake()
+    public void ShowPathMask()
     {
-        //PlayerPrefs.DeleteAll();
-        if (!PlayerPrefs.HasKey("Tutorial completed"))
-            PlayerPrefs.SetInt("Tutorial completed", 0);
+        PathMask.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowPour1Mask(bool needPouring = true)
     {
-        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed")==0)
-        {
-            SetNextTutorial(0);
-            tutorialStarted = true;
-        }
-        if (currentTutorial)
-            currentTutorial.CheckIfHappening();
+        Pour1Mask.SetActive(true);
+        pouring = needPouring;
     }
 
-    public void completedTutorial()
+    public void ShowPour2Mask(bool needPouring = true)
     {
-        Destroy(bubble);
-        Destroy(indicator);
-        Destroy(character);
-        
-        if (currentTutorial.highlight != null && currentTutorial.curtain != null)
-        {
-            currentTutorial.highlight.SetActive(false);
-            currentTutorial.curtain.SetActive(false);
-            
-        }
-        if (currentTutorial.highlightObject)
-        {
-            Destroy(currentTutorial.highlightObject.transform.GetChild(0).gameObject.GetComponent<Outline>());
-            if (currentTutorial.highlightObject.name == "Viewport")
-                currentTutorial.highlightObject.GetComponent<Mask>().enabled = true;
-        }
-        SetNextTutorial(currentTutorial.order + 1);
-        Debug.Log("Tutorial completed");
+        Pour1Mask.SetActive(true);
+        pouring = needPouring;
     }
 
-
-    void CreateBubbleAndCharacter()
+    public void ShowInventoryMask()
     {
-        float charactersPositionY=0;
-        bubble = Instantiate(currentTutorial.bubbleImage, currentTutorial.tutorialCanvas) as Image;
-        bubble.rectTransform.sizeDelta = currentTutorial.bubbleSize;
-        currentTutorial.dialogue.transform.SetParent(bubble.transform, false);
-        currentTutorial.dialogue.rectTransform.sizeDelta = new Vector2(290, 55);
-        character = Instantiate(currentTutorial.characterImage) as Image;
-        bubble.rectTransform.localPosition = new Vector3(0.3f, -170, 0);
-        if (currentTutorial.characterFacingBack)
-        {
-            character = Instantiate(currentTutorial.characterFacingBackImage) as Image;
-        }
-        character.rectTransform.position = new Vector3(270, charactersPositionY, 0);
-        character.rectTransform.eulerAngles = new Vector3(0, 180, 0);
-        if (currentTutorial.left)
-        {
-            character.rectTransform.position = new Vector2(-240, charactersPositionY);
-            character.rectTransform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        character.transform.SetParent(currentTutorial.tutorialCanvas, false);
+        InventoryMask.SetActive(true);
     }
 
-    public void SetNextTutorial(int currentOrder)
+    public void ShowCardSelectionMask()
     {
-        int previousOrder=0;
-        currentTutorial = GetTutorialByOrder(currentOrder);
-        if (currentOrder > 0)
-            previousOrder = currentOrder-1;
- 
-        if (GetTutorialByOrder(previousOrder).name == "step 16")
-        {
-            CompletedAllTutorials();
-            return;
-        }
-
-        expText.text = currentTutorial.explanation;
-
-        if (currentTutorial.indicatorImage != null && currentTutorial.highlightObject == null && currentTutorial.characterImage != null)
-        {
-
-            indicator = Instantiate(currentTutorial.indicatorImage) as Image;
-            indicator.rectTransform.position = new Vector3(currentTutorial.position.x, currentTutorial.position.y, 0);
-            indicator.rectTransform.eulerAngles = new Vector3(0, currentTutorial.rotation.x, currentTutorial.rotation.y);
-            indicator.transform.SetParent(currentTutorial.tutorialCanvas, false);
-
-            if (currentTutorial.explanation != "")
-            {
-                CreateBubbleAndCharacter();
-            }
-        }
-        else if (currentTutorial.indicatorImage == null && currentTutorial.highlightObject != null && currentTutorial.characterImage != null)
-        {
-            CreateBubbleAndCharacter();
-            GameObject target = currentTutorial.highlightObject.transform.GetChild(0).gameObject;
-            Outline outline = target.AddComponent<Outline>();
-            outline.effectColor = new Color32(232, 255, 0, 150);
-            outline.effectDistance = new Vector2(2.5f, -2.5f);
-            currentTutorial.curtain.SetActive(true);
-            currentTutorial.highlight.SetActive(true);
-            currentTutorial.highlight.transform.localScale = currentTutorial.highlightSize;
-            currentTutorial.highlight.transform.localPosition = currentTutorial.highlightPos;
-            currentTutorial.highlight.transform.eulerAngles = currentTutorial.higlightRot;
-            if (currentTutorial.highlightObject.name == "Viewport")
-                currentTutorial.highlightObject.GetComponent<Mask>().enabled = false;
-        }
-        else if (currentTutorial.indicatorImage == null && currentTutorial.highlightObject == null && currentTutorial.characterImage != null)
-        {
-            CreateBubbleAndCharacter();
-        }
-        
+        MaskForCard.SetActive(true);
+        selection = true;
     }
 
-    public void CompletedAllTutorials()
+    public void ShowReceipeMask()
     {
-        expText.text = "";
-        Debug.Log("completed all tutorials");
-        PlayerPrefs.SetInt("Tutorial completed", 1);
-        //load next scene
+        ReceipeMask.SetActive(true);
     }
 
-    public Tutorial GetTutorialByOrder(int order)
+    public void ShowReceipeMaskUpper()
     {
-        for(int i = 0; i < Tutorials.Count; i++)
-        {
-            if (Tutorials[i].order == order)
-                return Tutorials[i];
-        }
-
-        return null;
+        ReceipeMaskUpper.SetActive(true);
     }
 
+    public void ShowReceipeMaskBottom()
+    {
+        ReceipeMaskBottom.SetActive(true);
+    }
+
+    private void ShowGuidTextForRightSide(string text, int fontSize)
+    {
+        guidTextForRight.SetActive(true);
+        guidTextForRight.transform.GetChild(1).GetComponent<Text>().text = text;
+        guidTextForRight.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
+    }
+
+    private void ShowGuidTextForLeftSide(string text, int fontSize)
+    {
+        guidTextForLeft.SetActive(true);
+        guidTextForLeft.transform.GetChild(1).GetComponent<Text>().text = text;
+        guidTextForLeft.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
+    }
+
+    public void ShowGuidText(string text, int fontSize, bool side = true)
+    {
+        if (side)   // Tutorial object is on right half of the screen
+            ShowGuidTextForRightSide(text, fontSize);
+        else        // Tutorial object is on left half of the screen
+            ShowGuidTextForLeftSide(text, fontSize);
+    }
+
+    public void ShowArrow(Vector2 cords, bool side = false)
+    {
+        Arrow.SetActive(true);
+        Arrow.transform.localPosition = new Vector3(cords.x, cords.y);
+        if (side)   // Arrow points to the right
+            Arrow.transform.localPosition = new Vector3(0f, 180.0f, Arrow.transform.localPosition.z);
+        else        // Arrow points to the left
+            Arrow.transform.localPosition = new Vector3(0f, 0f, Arrow.transform.localPosition.z);
+    }
+
+    public void HideTurorial()
+    {
+        Arrow.SetActive(false);
+        guidTextForLeft.SetActive(false);
+        guidTextForRight.SetActive(false);
+        FullMask.SetActive(false);
+        PathMask.SetActive(false);
+        InventoryMask.SetActive(false);
+        MaskForCard.SetActive(false);
+        ReceipeMask.SetActive(false);
+        ReceipeMaskUpper.SetActive(false);
+        ReceipeMaskBottom.SetActive(false);
+        Pour1Mask.SetActive(false);
+        Pour2Mask.SetActive(false);
+        clicked = false;
+        selection = false;
+        pouring = false;
+    }
+
+    IEnumerator tutorialWait()
+    {
+        ShowFullMask();
+        ShowGuidText("Welcome to main game scene, touch to continue.", 35);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowCardSelectionMask();
+        ShowArrow(new Vector2(0,0));
+        ShowGuidText("Let's start from first level, touch to card to continue.", 50, false);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowReceipeMask();
+        ShowGuidText("This is your receipe card, touch to continue.", 35);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowReceipeMaskUpper();
+        ShowGuidText("The upper part shows you what elixirs you have, touch to continue.", 35);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowReceipeMaskBottom();
+        ShowGuidText("Here you can see what elixirs you neet to produce, touch to continue.", 35);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowInventoryMask();
+        ShowGuidText("Your elixirs are located in this inventory, touch to continue.", 50, false);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowPathMask();
+        ShowGuidText("This is the glass tube in which you should pour the given elixirs, touch to continue.", 50, false);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowPour1Mask();
+        ShowGuidText("Pour one of the elixirs into the path. You can either drag and drop or select the elixir and thouch the path.", 45, false);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowPour2Mask(false);
+        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction, touch to continue.", 45, false);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+        ShowPour1Mask();
+        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 50, false);
+        yield return new WaitUntil(() => clicked);
+        HideTurorial();
+
+        GameManager.tutorialNeed = false;
+    }
+
+    public void loadTurorial()
+    {
+        StartCoroutine(tutorialWait());
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !selection && !pouring)
+            clicked = true;
+    }
 }

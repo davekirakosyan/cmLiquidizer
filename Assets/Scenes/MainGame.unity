@@ -10369,6 +10369,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tutorials: []
   expText: {fileID: 328624562}
+  currentTutorial: {fileID: 0}
+  bubble: {fileID: 0}
+  indicator: {fileID: 0}
+  character: {fileID: 0}
+  tutorialStarted: 0
 --- !u!4 &2130618885
 Transform:
   m_ObjectHideFlags: 0
