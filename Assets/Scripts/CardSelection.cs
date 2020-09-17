@@ -20,6 +20,9 @@ public class CardSelection : MonoBehaviour
     // game object for the game Manager
     public GameManager gameManager;
 
+    // game object for the tutorial Manager
+    public TutorialManager tutorialManager;
+
     // Inventory manager object for filling inventory
     public InventoryManager inventoryManager;
 
@@ -70,6 +73,9 @@ public class CardSelection : MonoBehaviour
 
         // move selected card to prepared place
         selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
+
+
+        tutorialManager.clicked = true;
 
         // load selected level
         gameManager.ChangeLevel(selectedLevel);
