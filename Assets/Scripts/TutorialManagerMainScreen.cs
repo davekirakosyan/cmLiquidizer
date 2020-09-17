@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class TutorialManager : MonoBehaviour
+public class TutorialManagerMainScreen : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject FullMask;
@@ -20,8 +20,8 @@ public class TutorialManager : MonoBehaviour
     public GameObject guidTextForLeft;
     public GameObject Arrow;
     public bool clicked = false;
-    public bool selection = false;
-    public bool pouring = false;
+    bool selection = false;
+    bool pouring = false;
     bool tutorialStarted = false;
 
     void Start()
@@ -29,7 +29,7 @@ public class TutorialManager : MonoBehaviour
 
         //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
-        //PlayerPrefs.SetInt("Tutorial completed", 0);
+        PlayerPrefs.SetInt("Tutorial completed", 0);
     }
 
     private void Awake()
@@ -41,7 +41,7 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !selection && !pouring)
+        if (Input.GetMouseButtonUp(0) && !selection && !pouring)
             clicked = true;
 
         if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed") == 0)
@@ -158,43 +158,43 @@ public class TutorialManager : MonoBehaviour
         HideTurorial();
         ShowCardSelectionMask();
         ShowArrow(new Vector2(0,0));
-        ShowGuidText("Let's start from first level, touch to card to continue.", 50, false);
+        ShowGuidText("Let's start from first level, touch to card to continue.", 35, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowReceipeMask();
-        ShowGuidText("This is your receipe card, touch to continue.", 35);
+        ShowGuidText("This is your receipe card.", 50);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowReceipeMaskUpper();
-        ShowGuidText("The upper part shows you what elixirs you have, touch to continue.", 35);
+        ShowGuidText("The upper part shows you what elixirs you have.", 50);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowReceipeMaskBottom();
-        ShowGuidText("Here you can see what elixirs you neet to produce, touch to continue.", 35);
+        ShowGuidText("Here you can see what elixirs you need to produce.", 50);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowInventoryMask();
-        ShowGuidText("Your elixirs are located in this inventory, touch to continue.", 50, false);
+        ShowGuidText("Your elixirs are located in the inventory.", 35, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowPathMask();
-        ShowGuidText("This is the glass tube in which you should pour the given elixirs, touch to continue.", 50, false);
+        ShowGuidText("This is the glass tube in which you should pour the given elixirs.", 35, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowPour1Mask();
         ShowGuidText("Pour one of the elixirs into the path. You can either drag and drop or select the elixir and thouch the path.", 45, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
-        ShowPour2Mask(false);
-        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction, touch to continue.", 45, false);
+        ShowPour1Mask(false);
+        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction.", 35, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowPour1Mask();
-        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 50, false);
+        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 35, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
-        
+        PlayerPrefs.SetInt("Tutorial completed", 1);
     }
 
     public void loadTurorial()

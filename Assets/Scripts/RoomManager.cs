@@ -7,6 +7,7 @@ public class RoomManager : MonoBehaviour
 {
     public GameObject roomView;
     public GameObject tableView;
+    public TutorialManagerRoom tutorialManagerRoom;
 
     void Update()
     {
@@ -21,6 +22,7 @@ public class RoomManager : MonoBehaviour
                 {
                     tableView.SetActive(true);
                     roomView.SetActive(false);
+                    tutorialManagerRoom.clicked = true;
                 }
                 // detect the click on the path, to start the game
                 else if (hit.collider.tag.Contains("path"))

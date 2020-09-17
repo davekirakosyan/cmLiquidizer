@@ -21,7 +21,7 @@ public class CardSelection : MonoBehaviour
     public GameManager gameManager;
 
     // game object for the tutorial Manager
-    public TutorialManager tutorialManager;
+    public TutorialManagerMainScreen tutorialManager;
 
     // Inventory manager object for filling inventory
     public InventoryManager inventoryManager;
