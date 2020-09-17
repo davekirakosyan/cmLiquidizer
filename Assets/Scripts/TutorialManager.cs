@@ -36,11 +36,12 @@ public class TutorialManager : MonoBehaviour
 
         //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
-        PlayerPrefs.SetInt("Tutorial completed", 0);
+        //PlayerPrefs.SetInt("Tutorial completed", 0);
     }
 
     private void Awake()
     {
+        //PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Tutorial completed"))
             PlayerPrefs.SetInt("Tutorial completed", 0);
     }
