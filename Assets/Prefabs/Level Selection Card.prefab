@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.48925248, g: 0.7075472, b: 0, a: 0.5529412}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -160,6 +162,7 @@ GameObject:
   - component: {fileID: 1908328724658724959}
   - component: {fileID: 8908948616958968279}
   - component: {fileID: 272119083722079522}
+  - component: {fileID: -9159781438970050428}
   m_Layer: 0
   m_Name: Level Selection Card
   m_TagString: Untagged
@@ -211,6 +214,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.26711282, g: 0.11725702, b: 0.8018868, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -283,3 +287,16 @@ MonoBehaviour:
   MovingSpeed: 15
   DisolveSpeed: 1.3
   AppearSpeed: 1.3
+--- !u!65 &-9159781438970050428
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668236387370302258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 120.79947, y: 178.97389, z: 0.100000024}
+  m_Center: {x: -0.24150085, y: 0.3212967, z: 0.5}

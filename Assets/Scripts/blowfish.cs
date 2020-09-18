@@ -6,7 +6,7 @@
 
 /*USAGE:
 
-Provide the key when creating the object. The key can be any size up to 448 bits.
+Provide the key when creating the object. The key can be any bubbleSize up to 448 bits.
 The key can be given as a hex string or an array of bytes.
   BlowFish b = new BlowFish("04B915BA43FEB5B6");
 
@@ -578,7 +578,7 @@ namespace BlowFishCS
         //SBLOCKS ARE THE HEX DIGITS OF PI. 
         //The amount of hex digits can be increased if you want to experiment with more rounds and longer key lengths
 
-        //Increase the size of this array when increasing the number of rounds
+        //Increase the bubbleSize of this array when increasing the number of rounds
         private uint[] SetupP()
         {
             return new uint[] {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
         //highlight selected item in inventory
         selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
     }
-
+    
     public void ResetGame(bool forcedReset = false)
     {
         // remove all elixir bottles from the inventory due they will create by user card choice
@@ -112,6 +113,11 @@ public class GameManager : MonoBehaviour
             // generate level selection cards
             cardSelection.CardGeneration();
         }
+    }
+
+    public void BackToRoom()
+    {
+        SceneManager.LoadScene(1);
     }
 
     // to perform refil after current level restarting

@@ -26,7 +26,7 @@ public class InventoryManager : MonoBehaviour
     {
         // first get rid of the old elixirs from the inventory (if there is any)
         removeInventoryItems();
-        // adjust content size
+        // adjust content bubbleSize
         inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Count * 120);
 
         // keep the position of the first item
