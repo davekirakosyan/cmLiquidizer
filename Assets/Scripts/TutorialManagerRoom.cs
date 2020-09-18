@@ -24,7 +24,7 @@ public class TutorialManagerRoom : MonoBehaviour
 
         //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
-        PlayerPrefs.SetInt("Tutorial completed", 0);
+        //PlayerPrefs.SetInt("Tutorial completed", 0);
         coll = targetObject[0].GetComponent<Collider>();
     }
 

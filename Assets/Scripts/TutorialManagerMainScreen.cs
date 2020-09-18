@@ -29,7 +29,7 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
         //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
-        PlayerPrefs.SetInt("Tutorial completed", 0);
+        //PlayerPrefs.SetInt("Tutorial completed", 0);
     }
 
     private void Awake()
