@@ -570,6 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Pulse
+  index: 3
   pathCreators:
   - {fileID: 8073123426488175759}
   levels:

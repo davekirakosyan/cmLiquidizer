@@ -389,7 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07afd1205615cf74dac3bc90b72a91ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  name: Hexagon
+  index: 9
   pathCreators:
   - {fileID: 325172127497725546}
   - {fileID: 325172128082163662}
