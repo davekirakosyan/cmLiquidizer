@@ -17,9 +17,10 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
     public Transform inventoryContent;
 
+    private int gapBetweenElixirs = 165;
     public GameObject usedElixir;
 
-    Vector2 firstItemPosition = new Vector2(0, -70);
+    Vector2 firstItemPosition = new Vector2(0, -100);
 
     // given a list of elixir colors, fills up the inventory
     public void FillInventory (List<ElixirColor> inputColorNamesList)
@@ -27,11 +28,11 @@ public class InventoryManager : MonoBehaviour
         // first get rid of the old elixirs from the inventory (if there is any)
         removeInventoryItems();
         // adjust content bubbleSize
-        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Count * 120);
+        inventoryContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 + inputColorNamesList.Count * gapBetweenElixirs);
 
         // keep the position of the first item
         Vector2 nextPos = firstItemPosition;
-        nextPos.x = GetComponent<RectTransform>().rect.width/2;
+        nextPos.x = inventoryContent.GetComponent<RectTransform>().rect.width/2;
 
         // go through all the color names and create corresponding color items in the inventory
         foreach (ElixirColor elixirColor in inputColorNamesList)
@@ -43,7 +44,7 @@ public class InventoryManager : MonoBehaviour
             newInventoryItem.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             newInventoryItem.transform.GetChild(0).GetComponent<RawImage>().texture = getTextureByColorName(elixirColor);
             newInventoryItem.GetComponent<Button>().onClick.AddListener(() => GameManager.SelectElixir(newInventoryItem));
-            nextPos.y -= 120;   // decrease y for the next item
+            nextPos.y -= gapBetweenElixirs;   // decrease y for the next item
         }
     }
 
@@ -93,14 +94,14 @@ public class InventoryManager : MonoBehaviour
 
         // keep the position of the first item
         Vector2 nextPos = firstItemPosition;
-        nextPos.x = GetComponent<RectTransform>().rect.width / 2;
+        nextPos.x = inventoryContent.GetComponent<RectTransform>().rect.width / 2;
         yield return new WaitForEndOfFrame();
 
         // go through all the items and fix position
         for (int i = 0; i < inventoryContent.childCount; i++)
         {
             inventoryContent.GetChild(i).transform.localPosition = nextPos;
-            nextPos.y -= 120;   // decrease y for the next item
+            nextPos.y -= gapBetweenElixirs;   // decrease y for the next item
         }
     }
 
