@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Flower
+  index: 7
   pathCreators:
   - {fileID: 8612718023388210030}
   - {fileID: 4212817114924715688}

@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Infinity
+  index: 1
   pathCreators:
   - {fileID: 8073123426488175759}
   levels:

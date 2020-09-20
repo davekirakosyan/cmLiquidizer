@@ -15,7 +15,7 @@ public class TreeNavigation : MonoBehaviour
             {
                 if (hit.collider.tag.Contains("floor"))
                 {
-                    // here the selected floor number should be stored in the player prefs, as world number
+                    PlayerPrefs.SetInt("World", hit.collider.gameObject.GetComponent<Floor>().floorNumber-1);
                     SceneManager.LoadScene(1);
                 }
             }

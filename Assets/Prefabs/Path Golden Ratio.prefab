@@ -417,6 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Golden Ratio
+  index: 8
   pathCreators:
   - {fileID: 3911570767437304841}
   levels:
