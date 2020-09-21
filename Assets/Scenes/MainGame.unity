@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -421,7 +421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -78, y: 59.100006}
+  m_AnchoredPosition: {x: -78, y: 59.099976}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &80930331
@@ -2925,7 +2925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -198, y: 59.100006}
+  m_AnchoredPosition: {x: -198, y: 59.099976}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &561212246
@@ -8105,24 +8105,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 972302381}
   templateSprites:
-  - {fileID: 21300000, guid: fd4cc2864ead3d045991c747eed45d60, type: 3}
-  - {fileID: 21300000, guid: 0202e822b0c3e834ea996688ea0950a1, type: 3}
-  - {fileID: 21300000, guid: bc2eea16805be1a4393a32ddbe1d5d55, type: 3}
-  - {fileID: 21300000, guid: 473250b10da11dc45a56336eba5abc09, type: 3}
-  - {fileID: 21300000, guid: e98ffda03348a824d9f450684ec70a12, type: 3}
-  - {fileID: 21300000, guid: 37e05e6312993874794daa740f975bb3, type: 3}
-  - {fileID: 21300000, guid: e4eed33aa35d7d547a38fa647f4ab5ad, type: 3}
-  - {fileID: 21300000, guid: 59eb088a77dead447885a58450c1e992, type: 3}
-  - {fileID: 21300000, guid: 8ec3528fcfac9af4b8772503731e8f19, type: 3}
-  - {fileID: 21300000, guid: 6cf419c2e5e19a64e9d31e00d28a7d45, type: 3}
-  - {fileID: 21300000, guid: de0beeedb3c16644f9d3ddc3e58a19e8, type: 3}
-  - {fileID: 21300000, guid: c87ce4c54d57d3c4abe2c0736daf4f00, type: 3}
-  - {fileID: 21300000, guid: aa2994d55789f0a4282171e35dad7b42, type: 3}
-  - {fileID: 21300000, guid: 8d767b1c14e28254288b7b85728ec122, type: 3}
-  - {fileID: 21300000, guid: c232b4a0e2865b7418e6ab44416dae64, type: 3}
-  - {fileID: 21300000, guid: 39803e4729a1ad44589731d13679bf8f, type: 3}
-  - {fileID: 21300000, guid: 1d0d2792a6bd8314d9408d046dff7469, type: 3}
-  - {fileID: 21300000, guid: 8f4f9846028c3ff4e84f129ef5610052, type: 3}
+  - {fileID: 6483549163373013595, guid: e6467b698a4ea574d9a008333cf6c27e, type: 3}
+  - {fileID: 6483549163373013595, guid: 27149b873e5eae74b8d624c7b12bacea, type: 3}
+  - {fileID: 6483549163373013595, guid: 573ef807e41b50a42bf5474096fc9a32, type: 3}
+  - {fileID: 6483549163373013595, guid: 8cf468be385dfed4db5fa5acf3120efa, type: 3}
+  - {fileID: 6483549163373013595, guid: 304aca3022341f54b9e8fc71789f2afc, type: 3}
+  - {fileID: 6483549163373013595, guid: 9a99f5346d1d80d4d9c1b7c9507520da, type: 3}
+  - {fileID: 6483549163373013595, guid: 78834d475a9b79c47a426a384875436c, type: 3}
+  - {fileID: 6483549163373013595, guid: 59029d19dbcc44642aa683ff0519583c, type: 3}
+  - {fileID: 6483549163373013595, guid: 0cf0b7dbca295574fb441183e43236a8, type: 3}
+  - {fileID: 6483549163373013595, guid: 51f275730b68b3e48a9df68f72d93c8f, type: 3}
+  - {fileID: 6483549163373013595, guid: fc75a3a62250cc64484264f975a5e8b6, type: 3}
+  - {fileID: 6483549163373013595, guid: 59e3adc54fb633b449a942a2ae9dac8f, type: 3}
+  - {fileID: 6483549163373013595, guid: 0a9b6d2a7a04c54459a5a856ede87897, type: 3}
+  - {fileID: 6483549163373013595, guid: edc9a6a2d1fa09f4ab4e50087cdb2021, type: 3}
+  - {fileID: 6483549163373013595, guid: 0d756f9f87639204fa6504914cb143b0, type: 3}
+  - {fileID: 6483549163373013595, guid: 91ba0508ba49205458b4f2224641f5d1, type: 3}
+  - {fileID: 6483549163373013595, guid: b529eade2c2f53d4d9f5de8049b290b9, type: 3}
+  - {fileID: 6483549163373013595, guid: 224550d9f91c79c49b17a4f4a2b69422, type: 3}
 --- !u!4 &1487350986
 Transform:
   m_ObjectHideFlags: 0
@@ -9367,7 +9367,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1275944982}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.96610427
+  m_Size: 0.95836586
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

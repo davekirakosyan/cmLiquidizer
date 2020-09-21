@@ -28,26 +28,20 @@ public class CardTemplatesManager : MonoBehaviour
         _5_5 = 16,
         _6_6 = 17
     };
+    
+    // this contains all the template prefabs with the same indices as the enum
+    public GameObject[] templateSprites;
 
-    // this contains all the template sprites with the same indices as the enum
-    public Sprite[] templateSprites;
-
-    private Sprite getTemplateSprite(Template tmp)
+    private GameObject getTemplateSprite(Template tmp)
     {
         // return the sprite with the corresponding index
         return templateSprites[(int)tmp];
     }
 
+    // adding the corresponding temple to the card
     public void applyCorrectTemplate (GameObject card, int index)
     {
-        // find the right image in the card prefab
-        Transform schemeTransform = card.transform.Find("instruction scheme");
-        if (schemeTransform != null)
-        {
-            // update the sprite of the image with the corresponding instruction template
-            GameObject scheme = schemeTransform.gameObject;
-            scheme.GetComponent<Image>().sprite = getTemplateSprite(gameManager.currentPath.GetComponent<Path>().levels[index].instructionsTemplate);
-        }
+        GameObject instructionTemplate = Instantiate(getTemplateSprite(gameManager.currentPath.GetComponent<Path>().levels[index].instructionsTemplate), card.transform);
+        instructionTemplate.transform.localPosition = new Vector3(0, 0, 0);
     }
-
 }
