@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
         if (firstBoot)
         {
             needUpdateLevelCards = true;
-            cardSelection.inventoryManager = inventoryManager;
 
             // disable later checks for first boot
             firstBoot = false;
