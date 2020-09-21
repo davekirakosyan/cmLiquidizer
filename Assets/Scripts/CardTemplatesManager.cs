@@ -43,5 +43,22 @@ public class CardTemplatesManager : MonoBehaviour
     {
         GameObject instructionTemplate = Instantiate(getTemplateSprite(gameManager.currentPath.GetComponent<Path>().levels[index].instructionsTemplate), card.transform);
         instructionTemplate.transform.localPosition = new Vector3(0, 0, 0);
+        
+        GameObject inputs = instructionTemplate.transform.GetChild(0).gameObject;
+        GameObject outputs = instructionTemplate.transform.GetChild(1).gameObject;
+
+        // get correct textures for input elixirs
+        for (int i = 0; i < inputs.transform.childCount; i++)
+        {
+            InventoryManager.ElixirColor col = gameManager.currentPath.GetComponent<Path>().levels[index].inputColors[i];
+            inputs.transform.GetChild(i).GetComponent<RawImage>().texture = gameManager.inventoryManager.getTextureByColorName(col);
+        }
+
+        // get correct textures for output elixirs
+        for (int i = 0; i < outputs.transform.childCount; i++)
+        {
+            InventoryManager.ElixirColor col = gameManager.currentPath.GetComponent<Path>().levels[index].outputColors[i];
+            outputs.transform.GetChild(i).GetComponent<RawImage>().texture = gameManager.inventoryManager.getTextureByColorName(col);
+        }
     }
 }
