@@ -86,6 +86,7 @@ MonoBehaviour:
   elixirSpeed: 1
   inputColors: 0000000004000000030000000200000005000000
   outputColors: 01000000040000000300000005000000
+  instructionsTemplate: 13
 --- !u!65 &4980738466087308044
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -495,6 +496,7 @@ MonoBehaviour:
   elixirSpeed: 1
   inputColors: 000000000400000003000000
   outputColors: 000000000400000003000000
+  instructionsTemplate: 4
 --- !u!65 &3735301327695277725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -581,6 +583,7 @@ MonoBehaviour:
   elixirSpeed: 1
   inputColors: 0000000004000000
   outputColors: 0000000004000000
+  instructionsTemplate: 1
 --- !u!65 &2045887433520525832
 BoxCollider:
   m_ObjectHideFlags: 0
