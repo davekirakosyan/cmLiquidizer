@@ -99,6 +99,7 @@ MonoBehaviour:
   elixirSpeed: 2
   inputColors: 0000000004000000
   outputColors: 0000000004000000
+  instructionsTemplate: 1
 --- !u!65 &2531551227053569488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -322,8 +323,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elixirLength: 1.6
   elixirSpeed: 2
-  inputColors: 000000000400000002000000
-  outputColors: 0100000004000000
+  inputColors: 040000000000000002000000
+  outputColors: 0400000001000000
+  instructionsTemplate: 3
 --- !u!1 &8208559701890257915
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +373,7 @@ MonoBehaviour:
   elixirSpeed: 2
   inputColors: 010000000000000004000000
   outputColors: 0100000005000000
+  instructionsTemplate: 3
 --- !u!1 &9165353073330905731
 GameObject:
   m_ObjectHideFlags: 0

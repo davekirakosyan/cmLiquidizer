@@ -32,6 +32,8 @@ public class CardSelection : MonoBehaviour
     // Card Animation object for performing animations
     private CardAnimation cardAnimator;
 
+    public CardTemplatesManager cardTemplatesManager;
+
     void Start()
     {
         // first boot-up value for level
@@ -159,6 +161,8 @@ public class CardSelection : MonoBehaviour
             
             // current card
             GameObject newCard = Instantiate(card, transform);
+            cardTemplatesManager.applyCorrectTemplate(newCard, i);
+
             Vector3 tmp = CalculateCardPos(newCard, levelCount, i);
             cardAnimator = newCard.GetComponent<CardAnimation>();
             cardAnimator.AppearCard(tmp.x, tmp.y);

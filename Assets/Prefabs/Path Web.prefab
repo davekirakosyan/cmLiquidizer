@@ -101,8 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elixirLength: 0.35
   elixirSpeed: 2
-  inputColors: 00000000020000000500000003000000
-  outputColors: 010000000500000003000000
+  inputColors: 05000000020000000000000003000000
+  outputColors: 050000000100000003000000
+  instructionsTemplate: 8
 --- !u!65 &96606585753155
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -176,6 +177,7 @@ MonoBehaviour:
   elixirSpeed: 2
   inputColors: 00000000020000000400000000000000
   outputColors: 0100000005000000
+  instructionsTemplate: 6
 --- !u!65 &659045909695765272
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -532,6 +534,7 @@ MonoBehaviour:
   elixirSpeed: 2
   inputColors: 0100000005000000
   outputColors: 0100000005000000
+  instructionsTemplate: 1
 --- !u!65 &4078142360884435110
 BoxCollider:
   m_ObjectHideFlags: 0

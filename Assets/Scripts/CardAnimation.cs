@@ -7,7 +7,7 @@ public class CardAnimation : MonoBehaviour
 {
     // card positions for moving animation
     private Vector3 startPos;
-    public Vector3 endPos;
+    private Vector3 endPos;
 
     private IEnumerator animationCorountine;
 
@@ -50,6 +50,13 @@ public class CardAnimation : MonoBehaviour
         colorStart = image.color; 
         colorEnd = image.color;
         colorEnd.a = 1;
+
+        Vector2 canvasSize = new Vector2 (GameObject.Find("Level UI").GetComponent<RectTransform>().sizeDelta.x,
+                                          GameObject.Find("Level UI").GetComponent<RectTransform>().sizeDelta.y);
+        Vector2 imageSize = new Vector2(image.GetComponent<RectTransform>().sizeDelta.x,
+                                        image.GetComponent<RectTransform>().sizeDelta.y);
+        endPos.x = canvasSize.x/2 - imageSize.x/2;
+        endPos.y = canvasSize.y/2 - imageSize.y/2;
     }
 
     // Animation handler for selected card
