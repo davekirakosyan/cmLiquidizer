@@ -257,8 +257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elixirLength: 0.35
   elixirSpeed: 2
-  inputColors: 00000000020000000500000003000000
-  outputColors: 010000000500000003000000
+  inputColors: 05000000020000000000000003000000
+  outputColors: 050000000100000003000000
   instructionsTemplate: 8
 --- !u!65 &7728637361813772862
 BoxCollider:

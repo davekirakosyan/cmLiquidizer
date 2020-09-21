@@ -339,8 +339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elixirLength: 1.5
   elixirSpeed: 2
-  inputColors: 000000000400000003000000
-  outputColors: 0500000003000000
+  inputColors: 030000000400000000000000
+  outputColors: 0300000005000000
   instructionsTemplate: 3
 --- !u!1 &325172128284130751
 GameObject:
