@@ -52,6 +52,7 @@ public class CardTemplatesManager : MonoBehaviour
         {
             InventoryManager.ElixirColor col = gameManager.currentPath.GetComponent<Path>().levels[index].inputColors[i];
             inputs.transform.GetChild(i).GetComponent<RawImage>().texture = gameManager.inventoryManager.getTextureByColorName(col);
+            inputs.transform.GetChild(i).localScale = new Vector3(1.7f, 1.7f, 1.7f);
         }
 
         // get correct textures for output elixirs
@@ -59,6 +60,7 @@ public class CardTemplatesManager : MonoBehaviour
         {
             InventoryManager.ElixirColor col = gameManager.currentPath.GetComponent<Path>().levels[index].outputColors[i];
             outputs.transform.GetChild(i).GetComponent<RawImage>().texture = gameManager.inventoryManager.getTextureByColorName(col);
+            outputs.transform.GetChild(i).localScale = new Vector3(1.7f, 1.7f, 1.7f);
         }
     }
 }
