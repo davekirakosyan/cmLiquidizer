@@ -190,7 +190,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -360}
-  m_SizeDelta: {x: 189.27563, y: 283.91345}
+  m_SizeDelta: {x: 210.85498, y: 316.28247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6961173622671218253
 CanvasRenderer:
@@ -284,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74a51af289d18548a9a675e69bbebaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPos: {x: 325, y: 145, z: 0}
   MovingSpeed: 15
   DisolveSpeed: 1.3
   AppearSpeed: 1.3
@@ -336,7 +335,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 4.1225}
-  m_SizeDelta: {x: 171.95923, y: 250.07791}
+  m_SizeDelta: {x: 187.0661, y: 272.04764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8055988793976871851
 CanvasRenderer:
