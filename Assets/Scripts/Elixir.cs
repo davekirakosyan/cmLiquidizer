@@ -71,6 +71,14 @@ public class Elixir : MonoBehaviour
             }
             else
             {
+                GameObject selectedCard = pathController.cardSelection.GetSelectedCard();
+                selectedCard.transform.parent = pathController.gameOverMsg.transform;
+                selectedCard.transform.SetSiblingIndex(0);
+                selectedCard.transform.localPosition = new Vector3(10, -10);
+                selectedCard.transform.localScale = new Vector3(1, 1, 1);
+                selectedCard.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 243);
+                pathController.gameManager.SetUpdateGameOver(true);
+
                 pathController.gameOverMsg.SetActive(true);
                 GameManager.gameOn = false;
 

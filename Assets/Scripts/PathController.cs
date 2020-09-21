@@ -12,6 +12,7 @@ public class PathController : MonoBehaviour
     public PathCreator[] pathCreators;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
+    public CardSelection cardSelection;
     public InventoryManager inventoryManager;
     public List<GameObject> liveElixirs = new List<GameObject>();
     public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
@@ -178,7 +179,14 @@ public class PathController : MonoBehaviour
             //old implemetation
             if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
             {
-                gameManager.NextLevel();
+                GameObject selectedCard = cardSelection.GetSelectedCard();
+                selectedCard.transform.parent = gameManager.winningMsg.transform;
+                selectedCard.transform.SetSiblingIndex(0);
+                selectedCard.transform.localPosition = new Vector3(10, -10);
+                selectedCard.transform.localScale = new Vector3(1, 1, 1);
+                selectedCard.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 243);
+                gameManager.SetUpdateWinning(true);
+                gameManager.winningMsg.SetActive(true);
             }
             else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
             {
@@ -186,6 +194,13 @@ public class PathController : MonoBehaviour
             }
             else
             {
+                GameObject selectedCard = cardSelection.GetSelectedCard();
+                selectedCard.transform.parent = gameManager.gameOverMsg.transform;
+                selectedCard.transform.SetSiblingIndex(0);
+                selectedCard.transform.localPosition = new Vector3(10, -10);
+                selectedCard.transform.localScale = new Vector3(1, 1, 1);
+                selectedCard.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 243);
+                gameManager.SetUpdateGameOver(true);
                 gameManager.gameOverMsg.SetActive(true);
             }
             if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)

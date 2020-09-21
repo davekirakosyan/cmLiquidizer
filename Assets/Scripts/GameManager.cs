@@ -35,6 +35,29 @@ public class GameManager : MonoBehaviour
     private bool needUpdateLevelCards;
     private static bool firstBoot = true;
 
+    private bool needToUpdateGameOver = false;
+    private bool needToUpdateWinning = false;
+
+    public bool GetUpdateGameOver()
+    {
+        return needToUpdateGameOver;
+    }
+
+    public bool GetUpdateWinning()
+    {
+        return needToUpdateWinning;
+    }
+
+    public void SetUpdateGameOver(bool value)
+    {
+        needToUpdateGameOver = value;
+    }
+
+    public void SetUpdateWinning(bool value)
+    {
+        needToUpdateWinning = value;
+    }
+
     private void Awake()
     {
         // Check if it first boot, if it is then initialize some variables
@@ -94,6 +117,18 @@ public class GameManager : MonoBehaviour
         gameOverMsg.SetActive(false);
         endGameMsg.SetActive(false);
         winningMsg.SetActive(false);
+
+        if (needToUpdateWinning)
+        {
+            Destroy(winningMsg.transform.GetChild(0).gameObject);
+            needToUpdateWinning = false;
+        }
+
+        if (needToUpdateGameOver)
+        {
+            Destroy(gameOverMsg.transform.GetChild(0).gameObject);
+            needToUpdateGameOver = false;
+        }
 
         // stop the existing countdown
         if (pathController.countDown != null)

@@ -20,6 +20,8 @@ public class CardSelection : MonoBehaviour
     // game object for the game Manager
     public GameManager gameManager;
 
+    private GameObject selectedCard;
+
     // game object for the tutorial Manager
     public TutorialManagerMainScreen tutorialManager;
 
@@ -70,7 +72,7 @@ public class CardSelection : MonoBehaviour
     private void ClickHandler(int childIndex)
     {
         // parsing level name from selected card
-        GameObject selectedCard = transform.GetChild(childIndex).gameObject;
+        selectedCard = transform.GetChild(childIndex).gameObject;
         selectedLevel = int.Parse(selectedCard.transform.GetChild(0).GetComponent<Text>().text) - 1;
 
         // move selected card to prepared place
@@ -117,6 +119,11 @@ public class CardSelection : MonoBehaviour
         cardPos.y = 0;
 
         return cardPos;
+    }
+
+    public GameObject GetSelectedCard()
+    {
+        return Instantiate(selectedCard);
     }
 
     // card generation 
