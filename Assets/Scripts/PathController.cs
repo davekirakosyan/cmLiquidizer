@@ -12,6 +12,7 @@ public class PathController : MonoBehaviour
     public PathCreator[] pathCreators;
     int nextUniqueNumber = 0;
     public GameObject gameOverMsg;
+    public CardSelection cardSelection;
     public InventoryManager inventoryManager;
     public List<GameObject> liveElixirs = new List<GameObject>();
     public List<InventoryManager.ElixirColor> liveElixirColors = new List<InventoryManager.ElixirColor>();
@@ -23,7 +24,7 @@ public class PathController : MonoBehaviour
     void Update()
     {
         // detect the click
-        if (Clicked() && GameManager.gameOn && GameManager.selectedElixir != null)
+        if (Clicked() && GameManager.selectedElixir != null)
         {
             PlayerClicked();
             dragged = false;
@@ -177,19 +178,11 @@ public class PathController : MonoBehaviour
 
             //old implemetation
             if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-            {
-                gameManager.NextLevel();
-            }
+                gameManager.win();
             else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
-            {
                 gameManager.endGameMsg.SetActive(true);
-            }
             else
-            {
-                gameManager.gameOverMsg.SetActive(true);
-            }
-            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-                GameManager.gameOn = false;
+                gameManager.lose();
         }
     }
 }

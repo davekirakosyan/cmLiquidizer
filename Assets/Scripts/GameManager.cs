@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     // global variables
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
-    public static bool gameOn = false;
     public int world;
     public int level;
 
@@ -34,6 +33,29 @@ public class GameManager : MonoBehaviour
 
     private bool needUpdateLevelCards;
     private static bool firstBoot = true;
+
+    private bool needToUpdateGameOver = false;
+    private bool needToUpdateWinning = false;
+
+    public bool GetUpdateGameOver()
+    {
+        return needToUpdateGameOver;
+    }
+
+    public bool GetUpdateWinning()
+    {
+        return needToUpdateWinning;
+    }
+
+    public void SetUpdateGameOver(bool value)
+    {
+        needToUpdateGameOver = value;
+    }
+
+    public void SetUpdateWinning(bool value)
+    {
+        needToUpdateWinning = value;
+    }
 
     private void Awake()
     {
@@ -78,6 +100,8 @@ public class GameManager : MonoBehaviour
     
     public void ResetGame(bool forcedReset = false)
     {
+        if (cardSelection.selectedCard != null)
+            cardSelection.selectedCard.SetActive(true);
         // remove all elixir bottles from the inventory due they will create by user card choice
         inventoryManager.removeInventoryItems();
 
@@ -88,12 +112,23 @@ public class GameManager : MonoBehaviour
         pathController.liveElixirs.Clear();
         pathController.liveElixirColors.Clear();
 
-        gameOn = true;
 
         // hide popups
         gameOverMsg.SetActive(false);
         endGameMsg.SetActive(false);
         winningMsg.SetActive(false);
+
+        if (needToUpdateWinning)
+        {
+            Destroy(winningMsg.transform.GetChild(0).gameObject);
+            needToUpdateWinning = false;
+        }
+
+        if (needToUpdateGameOver)
+        {
+            Destroy(gameOverMsg.transform.GetChild(0).gameObject);
+            needToUpdateGameOver = false;
+        }
 
         // stop the existing countdown
         if (pathController.countDown != null)
@@ -190,7 +225,6 @@ public class GameManager : MonoBehaviour
 
             UpdateLevelText(); // TODO: Need to remove!!!!!!
 
-            gameOn = true;
 
             // Show level selection Cards
             if (needUpdateLevelCards)
@@ -254,5 +288,31 @@ public class GameManager : MonoBehaviour
         {
             worldDropdown.value = world;
         }
+    }
+
+    public void win()
+    {
+        // move the instruction card under the winning message
+        moveCardUnderTheMessage(winningMsg);
+        SetUpdateWinning(true);
+        winningMsg.SetActive(true);
+    }
+
+    public void lose ()
+    {
+        // move the instruction card under the gameover message
+        moveCardUnderTheMessage(gameOverMsg);
+        SetUpdateGameOver(true);
+        gameOverMsg.SetActive(true);
+    }
+
+    public void moveCardUnderTheMessage(GameObject message)
+    {
+        GameObject selectedCard = Instantiate(cardSelection.selectedCard, message.transform);
+        cardSelection.selectedCard.SetActive(false);
+        selectedCard.transform.SetSiblingIndex(0);
+        selectedCard.transform.localPosition = new Vector3(10, -10);
+        selectedCard.GetComponent<CardAnimation>().enabled = false;
+        selectedCard.transform.localScale = new Vector3(.8f, .8f, .8f);
     }
 };
