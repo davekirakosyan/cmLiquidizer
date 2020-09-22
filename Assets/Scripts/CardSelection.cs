@@ -74,12 +74,11 @@ public class CardSelection : MonoBehaviour
     private void ClickHandler(int childIndex)
     {
         blackCover.SetActive(false);
-        // parsing level name from selected card
         selectedCard = transform.GetChild(childIndex).gameObject;
-        selectedLevel = int.Parse(selectedCard.transform.GetChild(0).GetComponent<Text>().text) - 1;
 
         // move selected card to prepared place
         selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
+        selectedLevel = selectedCard.transform.GetSiblingIndex();
 
 
         tutorialManager.clicked = true;
@@ -173,10 +172,9 @@ public class CardSelection : MonoBehaviour
             Vector3 tmp = CalculateCardPos(newCard, levelCount, i);
             cardAnimator = newCard.GetComponent<CardAnimation>();
             cardAnimator.AppearCard(tmp.x, tmp.y);
-            newCard.transform.GetChild(0).GetComponent<Text>().text = (i + 1).ToString();
 
             if (forceGeneration)
-                newCard.transform.GetChild(1).gameObject.SetActive(false);
+                newCard.transform.GetChild(0).gameObject.SetActive(false);
 
             newCard.GetComponent<Button>().onClick.AddListener(() => ClickHandler(newLevel));
         }
@@ -191,7 +189,7 @@ public class CardSelection : MonoBehaviour
 
         completedLevelsCount++;
         GameObject currentCard = transform.GetChild(currentLevel).gameObject;
-        GameObject cardCompletionFilter = currentCard.transform.GetChild(1).gameObject;
+        GameObject cardCompletionFilter = currentCard.transform.GetChild(0).gameObject;
         if (!autoboot)
             currentCard.GetComponent<CardAnimation>().CardDisolve();
 
