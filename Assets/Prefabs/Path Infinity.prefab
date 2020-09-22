@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 1.6
+  elixirLength: 1.1
   elixirSpeed: 2
   inputColors: 0000000004000000
   outputColors: 0000000004000000
@@ -58,9 +58,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4323610569136432193}
   - component: {fileID: 181912237675482816}
-  m_Layer: 0
+  - component: {fileID: 4630147051277461498}
+  m_Layer: 8
   m_Name: path-infinity
-  m_TagString: Untagged
+  m_TagString: tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +130,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &4630147051277461498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793234392629928310}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 2.87, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4655984598887068435
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +232,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -282,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 1.6
+  elixirLength: 1
   elixirSpeed: 2
   inputColors: 040000000000000002000000
   outputColors: 0400000001000000
@@ -330,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 1.6
+  elixirLength: 1
   elixirSpeed: 2
   inputColors: 010000000000000004000000
   outputColors: 0100000005000000
