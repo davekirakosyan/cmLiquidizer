@@ -22,7 +22,7 @@ public class InventoryItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     public void OnDrag(PointerEventData eventData)
     {
         transform.SetParent(GetComponentInParent<Canvas>().transform);
-        transform.localPosition = new Vector3(Input.mousePosition.x-Screen.width/2, Input.mousePosition.y-Screen.height/2, 0);
+        transform.position = Input.mousePosition;
         transform.localScale = itemSize / 3;
     }
 
