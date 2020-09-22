@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
     
     public void ResetGame(bool forcedReset = false)
     {
+        if (cardSelection.selectedCard != null)
+            cardSelection.selectedCard.SetActive(true);
         // remove all elixir bottles from the inventory due they will create by user card choice
         inventoryManager.removeInventoryItems();
 
@@ -289,5 +291,33 @@ public class GameManager : MonoBehaviour
         {
             worldDropdown.value = world;
         }
+    }
+
+    public void win()
+    {
+        // move the instruction card under the winning message
+        moveCardUnderTheMessage(winningMsg);
+        SetUpdateWinning(true);
+        winningMsg.SetActive(true);
+        GameManager.gameOn = false;
+    }
+
+    public void lose ()
+    {
+        // move the instruction card under the gameover message
+        moveCardUnderTheMessage(gameOverMsg);
+        SetUpdateGameOver(true);
+        gameOverMsg.SetActive(true);
+        GameManager.gameOn = false;
+    }
+
+    public void moveCardUnderTheMessage(GameObject message)
+    {
+        GameObject selectedCard = Instantiate(cardSelection.selectedCard, message.transform);
+        cardSelection.selectedCard.SetActive(false);
+        selectedCard.transform.SetSiblingIndex(0);
+        selectedCard.transform.localPosition = new Vector3(10, -10);
+        selectedCard.GetComponent<CardAnimation>().enabled = false;
+        selectedCard.transform.localScale = new Vector3(.8f, .8f, .8f);
     }
 };

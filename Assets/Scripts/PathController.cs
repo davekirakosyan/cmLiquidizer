@@ -178,31 +178,12 @@ public class PathController : MonoBehaviour
 
             //old implemetation
             if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-            {
-                GameObject selectedCard = cardSelection.GetSelectedCard();
-                selectedCard.transform.parent = gameManager.winningMsg.transform;
-                selectedCard.transform.SetSiblingIndex(0);
-                selectedCard.transform.localPosition = new Vector3(10, -10);
-                selectedCard.transform.localScale = new Vector3(1, 1, 1);
-                selectedCard.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 243);
-                gameManager.SetUpdateWinning(true);
-                gameManager.winningMsg.SetActive(true);
-            }
+                gameManager.win();
             else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
-            {
                 gameManager.endGameMsg.SetActive(true);
-            }
             else
-            {
-                GameObject selectedCard = cardSelection.GetSelectedCard();
-                selectedCard.transform.parent = gameManager.gameOverMsg.transform;
-                selectedCard.transform.SetSiblingIndex(0);
-                selectedCard.transform.localPosition = new Vector3(10, -10);
-                selectedCard.transform.localScale = new Vector3(1, 1, 1);
-                selectedCard.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 243);
-                gameManager.SetUpdateGameOver(true);
-                gameManager.gameOverMsg.SetActive(true);
-            }
+                gameManager.lose();
+
             if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
                 GameManager.gameOn = false;
         }
