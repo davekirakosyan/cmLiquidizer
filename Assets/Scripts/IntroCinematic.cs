@@ -20,6 +20,7 @@ public class IntroCinematic : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Cinematic watched"))
             PlayerPrefs.SetInt("Cinematic watched", 0);
     }
