@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TreeNavigation : MonoBehaviour
 {
     public GameObject FloorComfirmation;
+    public TutorialManagerTreeView tutorialManager;
     private RaycastHit hit;
 
     private void Start()
@@ -22,7 +23,14 @@ public class TreeNavigation : MonoBehaviour
             {
                 if (hit.collider.tag.Contains("floor"))
                 {
-                    FloorComfirmation.SetActive(true);
+                    if (tutorialManager.GetTutorialState())
+                    {
+                        FloorComfirmation.SetActive(true);
+                    }
+                    else
+                    {
+                        EnterFloor();
+                    }
                 }
             }
         }

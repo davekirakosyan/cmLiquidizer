@@ -731,6 +731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloorComfirmation: {fileID: 1908798749}
+  tutorialManager: {fileID: 1819110282}
 --- !u!4 &196622681
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcec2c40352002247a2221e3b54bdc95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SKIP_CINEMATIC: 1
+  SKIP_CINEMATIC: 0
   cameraAnimator: {fileID: 315227441}
   boatAnimator: {fileID: 924037822}
   characterAnimator: {fileID: 758708045}
@@ -17966,7 +17967,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

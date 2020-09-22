@@ -13,6 +13,12 @@ public class TutorialManagerTreeView : MonoBehaviour
     public GameObject guidTextForRight;
     public GameObject guidTextForLeft;
     public GameObject Arrow;
+    private bool tutorialState = false;
+
+    public bool GetTutorialState()
+    {
+        return tutorialState;
+    }
 
     void Start()
     {
@@ -21,6 +27,7 @@ public class TutorialManagerTreeView : MonoBehaviour
         //uncomment row below to uncomplete tutorial
         //PlayerPrefs.SetInt("Tutorial completed", 0);
         coll = targetObject.GetComponent<Collider>();
+        tutorialState = true;
     }
 
     private void Awake()
@@ -87,12 +94,13 @@ public class TutorialManagerTreeView : MonoBehaviour
         Arrow.SetActive(false);
         guidTextForLeft.SetActive(false);
         guidTextForRight.SetActive(false);
+        tutorialState = false;
     }
 
 
     IEnumerator tutorialWait()
     {
-        ShowGuidText("Tap on tree to enter.", 35);
+        ShowGuidText("Tap on tree to enter.", 70);
         ShowArrow(new Vector2(107.9f, 125.37f));
         yield return new WaitUntil(() => clicked);
         HideTurorial();
