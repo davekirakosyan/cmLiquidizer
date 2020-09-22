@@ -231,7 +231,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -368,9 +368,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9088442596965230283}
   - component: {fileID: 7417207165165608273}
-  m_Layer: 0
+  - component: {fileID: 6408462104676660077}
+  m_Layer: 8
   m_Name: path-hexagon
-  m_TagString: Untagged
+  m_TagString: tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,6 +440,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &6408462104676660077
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408362110522942064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.52, y: 5.1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1710995502124146652
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 0.6
+  elixirLength: 0.3
   elixirSpeed: 1
   inputColors: 0000000002000000040000000300000005000000
   outputColors: 01000000040000000300000005000000
@@ -141,7 +141,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -172,9 +172,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1667379523371275794}
   - component: {fileID: 5470767714071682281}
-  m_Layer: 0
+  - component: {fileID: 8610490287668881234}
+  m_Layer: 8
   m_Name: path-triple-loop
-  m_TagString: Untagged
+  m_TagString: tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,6 +244,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8610490287668881234
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658390000341659178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.6525307, y: 4.074483, z: 0.19999997}
+  m_Center: {x: 0.019942349, y: -0.059827916, z: 0}
 --- !u!1 &4673237180059384077
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4673237180059384077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.36, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6163501920539585289}
@@ -342,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 0.6
+  elixirLength: 0.3
   elixirSpeed: 1
   inputColors: 000000000400000003000000
   outputColors: 000000000400000003000000
@@ -390,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 1.2
+  elixirLength: 1
   elixirSpeed: 1
   inputColors: 0000000004000000
   outputColors: 0000000004000000

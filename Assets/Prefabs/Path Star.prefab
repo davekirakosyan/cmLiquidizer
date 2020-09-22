@@ -213,7 +213,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -292,9 +292,10 @@ GameObject:
   m_Component:
   - component: {fileID: 525929320079980301}
   - component: {fileID: 1154935446932861715}
-  m_Layer: 0
+  - component: {fileID: 6856771233933713875}
+  m_Layer: 8
   m_Name: path-star
-  m_TagString: Untagged
+  m_TagString: tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,6 +364,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &6856771233933713875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952606444490237365}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.25, y: 4.96, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9165353073776263151
 GameObject:
   m_ObjectHideFlags: 0

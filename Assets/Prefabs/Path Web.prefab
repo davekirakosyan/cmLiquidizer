@@ -114,9 +114,10 @@ GameObject:
   m_Component:
   - component: {fileID: 579144012141212790}
   - component: {fileID: 7517495049109293555}
-  m_Layer: 0
+  - component: {fileID: 8594610337284243184}
+  m_Layer: 8
   m_Name: path-web
-  m_TagString: Untagged
+  m_TagString: tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,6 +186,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8594610337284243184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215039904846761589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.3682113, y: 4.630486, z: 0.2}
+  m_Center: {x: -0.056585524, y: 0.056584686, z: 0}
 --- !u!1 &1459069691686344118
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +376,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1

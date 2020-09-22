@@ -58,9 +58,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6221631383714140673}
   - component: {fileID: 1119780116820323875}
-  m_Layer: 0
+  - component: {fileID: 2117427299971636915}
+  m_Layer: 8
   m_Name: path-pulse
-  m_TagString: Untagged
+  m_TagString: tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +130,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &2117427299971636915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3752555060869971896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.6, y: 4.41, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4041685286316757303
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 0.77
+  elixirLength: 0.65
   elixirSpeed: 2
   inputColors: 020000000400000000000000
   outputColors: 020000000400000000000000
@@ -334,7 +348,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
