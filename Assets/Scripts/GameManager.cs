@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     // global variables
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
-    public static bool gameOn = false;
     public int world;
     public int level;
 
@@ -113,7 +112,6 @@ public class GameManager : MonoBehaviour
         pathController.liveElixirs.Clear();
         pathController.liveElixirColors.Clear();
 
-        gameOn = true;
 
         // hide popups
         gameOverMsg.SetActive(false);
@@ -227,7 +225,6 @@ public class GameManager : MonoBehaviour
 
             UpdateLevelText(); // TODO: Need to remove!!!!!!
 
-            gameOn = true;
 
             // Show level selection Cards
             if (needUpdateLevelCards)
@@ -299,7 +296,6 @@ public class GameManager : MonoBehaviour
         moveCardUnderTheMessage(winningMsg);
         SetUpdateWinning(true);
         winningMsg.SetActive(true);
-        GameManager.gameOn = false;
     }
 
     public void lose ()
@@ -308,7 +304,6 @@ public class GameManager : MonoBehaviour
         moveCardUnderTheMessage(gameOverMsg);
         SetUpdateGameOver(true);
         gameOverMsg.SetActive(true);
-        GameManager.gameOn = false;
     }
 
     public void moveCardUnderTheMessage(GameObject message)

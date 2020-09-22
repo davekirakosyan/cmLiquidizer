@@ -24,7 +24,7 @@ public class PathController : MonoBehaviour
     void Update()
     {
         // detect the click
-        if (Clicked() && GameManager.gameOn && GameManager.selectedElixir != null)
+        if (Clicked() && GameManager.selectedElixir != null)
         {
             PlayerClicked();
             dragged = false;
@@ -183,9 +183,6 @@ public class PathController : MonoBehaviour
                 gameManager.endGameMsg.SetActive(true);
             else
                 gameManager.lose();
-
-            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-                GameManager.gameOn = false;
         }
     }
 }
