@@ -78,6 +78,7 @@ public class CardSelection : MonoBehaviour
 
         // move selected card to prepared place
         selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
+        selectedLevel = selectedCard.transform.GetSiblingIndex();
 
 
         tutorialManager.clicked = true;
