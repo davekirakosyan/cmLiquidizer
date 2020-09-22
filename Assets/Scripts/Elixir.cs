@@ -71,8 +71,7 @@ public class Elixir : MonoBehaviour
             }
             else
             {
-                pathController.gameOverMsg.SetActive(true);
-                GameManager.gameOn = false;
+                pathController.gameManager.lose();
 
                 // stop the existing countdown
                 if (pathController.countDown != null)
