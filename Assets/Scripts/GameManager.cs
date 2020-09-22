@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
     public GameObject winningMsg;
     public GameObject endGameMsg;
     public Dropdown worldDropdown;
-    public Text outputText;
-    public Text worldLevelText;
 
     public GameObject currentPath;
     public GameObject[] PATHS;
@@ -223,9 +221,6 @@ public class GameManager : MonoBehaviour
             // create level || TODO: Need to revisit !!!!!!
             CreateLevel();
 
-            UpdateLevelText(); // TODO: Need to remove!!!!!!
-
-
             // Show level selection Cards
             if (needUpdateLevelCards)
                 cardSelection.CardGeneration();
@@ -255,13 +250,6 @@ public class GameManager : MonoBehaviour
 
             // prepare elixir bottles for inventory
             cardSelection.currentInventory = currentInput;
-
-            // display output by text (temporary solution)
-            outputText.GetComponent<Text>().text = "";
-            foreach (InventoryManager.ElixirColor elixir in currentOutput)
-                outputText.GetComponent<Text>().text += elixir + " ";
-
-            UpdateLevelText(); // TODO: Need to remove!!!!!!
         }
     }
 
@@ -272,12 +260,6 @@ public class GameManager : MonoBehaviour
         UpdateUserData();
         ResetGame();
         CreateLevel();
-    }
-
-    // this is temporary
-    void UpdateLevelText()
-    {
-        worldLevelText.GetComponent<Text>().text = "World " + (world + 1) + ", Level " + (level + 1);
     }
 
     // this is temporary too
