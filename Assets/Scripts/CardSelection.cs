@@ -183,9 +183,12 @@ public class CardSelection : MonoBehaviour
     // Show completion filter on the card and allow user to select new level
     public void CompleteLevel(int currentLevel, bool autoboot = false)
     {
-        string completedLevels = PlayerPrefs.GetString("Completed Levels");
-        completedLevels += "x" + currentLevel.ToString();
-        PlayerPrefs.SetString("Completed Levels", completedLevels);
+        if (!autoboot)
+        {
+            string completedLevels = PlayerPrefs.GetString("Completed Levels");
+            completedLevels += "x" + currentLevel.ToString();
+            PlayerPrefs.SetString("Completed Levels", completedLevels);
+        }
 
         completedLevelsCount++;
         GameObject currentCard = transform.GetChild(currentLevel).gameObject;
