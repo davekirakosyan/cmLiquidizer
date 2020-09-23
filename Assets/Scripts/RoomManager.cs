@@ -9,6 +9,15 @@ public class RoomManager : MonoBehaviour
     public GameObject tableView;
     public TutorialManagerRoom tutorialManagerRoom;
 
+    private void Start()
+    {
+        if (CrossScene.LoadTable)
+        {
+            tableView.SetActive(true);
+            roomView.SetActive(false);
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonUp(0))

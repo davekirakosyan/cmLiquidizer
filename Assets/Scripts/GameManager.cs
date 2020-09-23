@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
     public void BackToRoom()
     {
         SceneManager.LoadScene(1);
+        CrossScene.LoadTable = true;
     }
 
     // to perform refil after current level restarting
