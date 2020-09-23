@@ -39,6 +39,7 @@ public class TreeNavigation : MonoBehaviour
     public void EnterFloor()
     {
         PlayerPrefs.SetInt("World", hit.collider.gameObject.GetComponent<Floor>().floorNumber-1);
+        CrossScene.LoadTable = false;
         SceneManager.LoadScene(1);
     }
 }
