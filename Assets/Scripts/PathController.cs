@@ -33,10 +33,13 @@ public class PathController : MonoBehaviour
 
     public void PlayerClicked()
     {
-        // cast a ray and check if it hits any of tube coliders
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, 200))
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 4.8f; // select distance = 4.8 units from the camera
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2 mousePos2D = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+
+        if (hit.collider != null)
         {
             if (hit.transform.gameObject.layer == 8) // layer 8 is Path
             {
