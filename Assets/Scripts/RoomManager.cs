@@ -18,6 +18,20 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public void BackButton()
+    {
+        if (tableView.activeInHierarchy)
+        {
+            tableView.SetActive(false);
+            roomView.SetActive(true);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+            CrossScene.LoadTable = false;
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonUp(0))
