@@ -732,6 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorComfirmation: {fileID: 1908798749}
   tutorialManager: {fileID: 1819110282}
+  swipeController: {fileID: 1312206939}
 --- !u!4 &196622681
 Transform:
   m_ObjectHideFlags: 0
@@ -872,7 +873,7 @@ PrefabInstance:
     - target: {fileID: 96246247593833205, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 96246247593833205, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
         type: 3}
@@ -16538,7 +16539,7 @@ PrefabInstance:
     - target: {fileID: 96246247593833205, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 96246247593833205, guid: abd84bf540bda3b4cb1eb1457b5ba52d,
         type: 3}
