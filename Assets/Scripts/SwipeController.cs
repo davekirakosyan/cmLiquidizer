@@ -1,62 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SwipeController : MonoBehaviour
 {
-    private bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
+    private bool swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isDragging = false;
-    private Vector2 startTouch, swipeDelta;
+    private Vector2 swipeDelta;
 
-    private void Update()
+    public float swipeThreshold = 100.0f;
+
+    void OnSwipe(Vector2 data)
     {
-        tap = swipeLeft = swipeDown = swipeUp = swipeRight = false;
-
-        //mouse input
-        if (Input.GetMouseButtonDown(0))
-        {
-            tap = true;
-            isDragging = true;
-            startTouch = Input.mousePosition;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-            Reset();
-        }
-
-        //Mobile inputs
-        if(Input.touches.Length!= 0)
-        {
-            if (Input.touches[0].phase == TouchPhase.Began)
-            {
-                tap = true;
-                isDragging = true;
-                startTouch = Input.touches[0].position;
-            }
-            else if(Input.touches[0].phase==TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
-            {
-                isDragging = false;
-                Reset();
-            }
-        }
-
-        //calculate the distance
-        swipeDelta = Vector2.zero;
-        if (isDragging)
-        {
-            if (Input.touches.Length != 0)
-                swipeDelta = Input.touches[0].position - startTouch;
-            else if (Input.GetMouseButton(0))
-                swipeDelta = (Vector2)Input.mousePosition - startTouch;
-        }
-
-        //checking dead zone passing
-        if (swipeDelta.magnitude > 100)
+        isDragging = true;
+        if (data.magnitude > swipeThreshold)
         {
             //check direction
-            float x = swipeDelta.x;
-            float y = swipeDelta.y;
+            float x = data.x;
+            float y = data.y;
             if (Mathf.Abs(x) > Mathf.Abs(y))
             {
                 //Left or right
@@ -73,15 +35,60 @@ public class SwipeController : MonoBehaviour
                 else
                     swipeUp = true;
             }
-            Reset();
+            swipeDelta = Vector2.zero;
         }
     }
 
-    //resets Vector2s back to zero
-    private void Reset()
+    IEnumerator SwipeInput(Action<Vector2> onSwipe)
     {
-        startTouch = swipeDelta = Vector2.zero;
+        Dictionary<int, Touch> activeTouches = new Dictionary<int, Touch>();
+        Dictionary<int, Vector3> activeButtons = new Dictionary<int, Vector3>();
+        while (true)
+        {
+            if (Input.touches.Length > 0)
+            {
+                switch (Input.touches[0].phase)
+                {
+                    case TouchPhase.Began:
+                        activeTouches[0] = Input.touches[0];
+                        break;
+                    case TouchPhase.Ended:
+                        if (activeTouches.ContainsKey(0))
+                        {
+                            Vector2 delta = Input.touches[0].position - activeTouches[0].position;
+                            if (delta.magnitude > swipeThreshold)
+                                onSwipe(delta);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    activeButtons[0] = Input.mousePosition;
+                }
+                else if (Input.GetMouseButtonUp(0) && activeButtons.ContainsKey(0))
+                {
+                    Vector2 delta = Input.mousePosition - activeButtons[0];
+                    if (delta.magnitude > swipeThreshold)
+                        onSwipe(delta);
+                }
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    void FixedUpdate()
+    {
         isDragging = false;
+        swipeLeft = swipeDown = swipeUp = swipeRight = false;
+
+        // Mouse input
+        // or
+        // Mobile input
+        if (Input.GetMouseButtonDown(0) || ((Input.touches.Length != 0) && (Input.touches[0].phase == TouchPhase.Began)))
+            StartCoroutine(SwipeInput(OnSwipe));
     }
 
     public Vector2 SwipeDelta { get { return swipeDelta; } }
@@ -89,6 +96,5 @@ public class SwipeController : MonoBehaviour
     public bool SwipeUp { get { return swipeUp; } }
     public bool SwipeDown { get { return swipeDown; } }
     public bool SwipeRight { get { return swipeRight; } }
-
-
+    public bool IsDragging { get { return isDragging; } }
 }
