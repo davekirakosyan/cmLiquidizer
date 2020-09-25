@@ -15,7 +15,6 @@ public class IntroCinematic : MonoBehaviour
     public GameObject pouringParticleEmitters;
     public GameObject swipeControls;
     public GameObject tutorial;
-    public GameObject treeNavigation;
 
 
     private void Awake()
@@ -40,7 +39,6 @@ public class IntroCinematic : MonoBehaviour
         {
             // enable all the tree controls
             swipeControls.SetActive(true);
-            treeNavigation.SetActive(true);
             GetComponent<Animator>().enabled = false;
         }
     }
@@ -89,7 +87,6 @@ public class IntroCinematic : MonoBehaviour
     {
         swipeControls.SetActive(true);
         tutorial.SetActive(true);
-        treeNavigation.SetActive(true);
         GetComponent<Animator>().enabled = false;
         PlayerPrefs.SetInt("Cinematic watched", 1);
     }
