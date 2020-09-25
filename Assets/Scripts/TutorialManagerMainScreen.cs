@@ -14,7 +14,6 @@ public class TutorialManagerMainScreen : MonoBehaviour
     public GameObject ReceipeMask;
     public GameObject guidTextForRight;
     public GameObject guidTextForLeft;
-    public GameObject Arrow;
     public bool clicked = false;
     bool selection = false;
     bool pouring = false;
@@ -26,16 +25,13 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
     void Start()
     {
-
-        //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
-        PlayerPrefs.SetInt("Tutorial completed", 0);
-        PlayerPrefs.SetInt("Cinematic watched", 1);
+        //PlayerPrefs.SetInt("Tutorial completed", 0);
+        //PlayerPrefs.SetInt("Cinematic watched", 1);
     }
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Tutorial completed"))
             PlayerPrefs.SetInt("Tutorial completed", 0);
     }
@@ -142,19 +138,8 @@ public class TutorialManagerMainScreen : MonoBehaviour
             ShowGuidTextForLeftSide(text, fontSize, touchText);
     }
 
-    public void ShowArrow(Vector2 cords, bool side = false)
-    {
-        Arrow.SetActive(true);
-        Arrow.transform.localPosition = new Vector3(cords.x, cords.y);
-        if (side)   // Arrow points to the right
-            Arrow.transform.localPosition = new Vector3(0f, 180.0f, Arrow.transform.localPosition.z);
-        else        // Arrow points to the left
-            Arrow.transform.localPosition = new Vector3(0f, 0f, Arrow.transform.localPosition.z);
-    }
-
     public void HideTurorial()
     {
-        Arrow.SetActive(false);
         guidTextForLeft.SetActive(false);
         guidTextForRight.SetActive(false);
         FullMask.SetActive(false);
@@ -178,54 +163,54 @@ public class TutorialManagerMainScreen : MonoBehaviour
         HideTurorial();
 
         ShowCardSelectionMask();
-        ShowGuidText("Let's start from the first level, tap on the card to continue.", 50, true);
+        ShowGuidText("Let's start from the first level, tap on the card to continue.", 43, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
 
         ShowReceipeMask();
-        ShowGuidText("This is your receipe card.", 50, false);
+        ShowGuidText("This is your recipe card.", 40, false, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
 
         ShowReceipeMaskUpper();
-        ShowGuidText("The upper part shows you what elixirs you have.", 50, false);
+        ShowGuidText("The upper part shows you what elixirs you have.", 33, false, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
 
         ShowReceipeMaskBottom();
-        ShowGuidText("Here you can see what elixirs you need to produce.", 50, false);
+        ShowGuidText("And here you can see what elixirs you need to produce.", 33, false, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
 
         ShowInventoryMask();
-        ShowGuidText("Your elixirs are located in the inventory.", 35);
+        ShowGuidText("Your elixirs are located in the inventory.", 50, true, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
         ShowPathMask();
-        ShowGuidText("This is the glass tube in which you should pour the given elixirs.", 35);
+        ShowGuidText("This is the glass tube in which you should pour the given elixirs.", 45, true, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 
         ShowPour1Mask();
         selectedCardMask.SetActive(false);
         inventoryBLocker.SetActive(false);
-        ShowGuidText("Pour one of the elixirs into the path. You can either drag and drop or selectthe elixir and touch the path.", 35);
+        ShowGuidText("Pour one of the elixirs into the path. You can either drag and drop or select the elixir and touch the path.", 45);
         yield return new WaitUntil(() => clicked);
         inventoryBLocker.SetActive(true);
         HideTurorial();
 
         ShowPour1Mask(false);
-        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction.", 35);
+        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction.", 45, true, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowPour1Mask();
         inventoryBLocker.SetActive(false);
-        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 35);
+        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 45);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
 

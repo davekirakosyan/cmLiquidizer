@@ -45,7 +45,7 @@ public class RoomManager : MonoBehaviour
                 {
                     tableView.SetActive(true);
                     roomView.SetActive(false);
-                    tutorialManagerRoom.clicked = true;
+                    tutorialManagerRoom.tableClick = true;
                 }
                 // detect the click on the path, to start the game
                 else if (hit.collider.tag.Contains("path"))
