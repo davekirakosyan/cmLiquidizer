@@ -1,100 +1,143 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class SwipeController : MonoBehaviour
 {
-    private bool swipeLeft, swipeRight, swipeUp, swipeDown;
-    private bool isDragging = false;
-    private Vector2 swipeDelta;
+    public int FloorCount;
+    public float moveUnit;
+    public float swipeThreshold;
 
-    public float swipeThreshold = 100.0f;
+    public Transform moveObject;
+    public GameObject FloorComfirmation;
+    public TutorialManagerTreeView tutorialManager;
+
+    private RaycastHit hit;
+    private Vector3 startPosition, endPosition, topFloor;
+
+    private Touch touch;
+    private bool tap = false;
+    private Vector3 beginTouchPosition, endTouchPosition;
+
+    private void Start()
+    {
+        FloorComfirmation.SetActive(false);
+
+        if (swipeThreshold < 10)
+            swipeThreshold = 30.0f;
+
+        if (moveUnit < 1)
+            moveUnit = 10;
+
+        startPosition = moveObject.transform.position;
+        endPosition = startPosition;
+        if (FloorCount < 1)
+            FloorCount = 1;
+        else
+            FloorCount -= 1;
+
+        topFloor = startPosition + Vector3.up * FloorCount * moveUnit;
+    }
 
     void OnSwipe(Vector2 data)
     {
-        isDragging = true;
         if (data.magnitude > swipeThreshold)
         {
             //check direction
             float x = data.x;
             float y = data.y;
-            if (Mathf.Abs(x) > Mathf.Abs(y))
+
+            if (y < 0)
             {
-                //Left or right
-                if (x < 0)
-                    swipeLeft = true;
-                else
-                    swipeRight = true;
+                if (endPosition.y >= startPosition.y && endPosition.y < topFloor.y)
+                    endPosition += Vector3.up * moveUnit;
             }
             else
             {
-                //up or down
-                if (y < 0)
-                    swipeDown = true;
-                else
-                    swipeUp = true;
+                if (endPosition.y > startPosition.y && endPosition.y <= topFloor.y)
+                    endPosition += Vector3.down * moveUnit;
             }
-            swipeDelta = Vector2.zero;
         }
     }
 
-    IEnumerator SwipeInput(Action<Vector2> onSwipe)
+    private void OnTouch(Vector3 pos)
     {
-        Dictionary<int, Touch> activeTouches = new Dictionary<int, Touch>();
-        Dictionary<int, Vector3> activeButtons = new Dictionary<int, Vector3>();
-        while (true)
+        Ray ray = Camera.main.ScreenPointToRay(pos);
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, 200))
         {
-            if (Input.touches.Length > 0)
+            if (hit.collider.tag.Contains("floor"))
             {
-                switch (Input.touches[0].phase)
+                if (tutorialManager.GetTutorialState())
                 {
-                    case TouchPhase.Began:
-                        activeTouches[0] = Input.touches[0];
-                        break;
-                    case TouchPhase.Ended:
-                        if (activeTouches.ContainsKey(0))
-                        {
-                            Vector2 delta = Input.touches[0].position - activeTouches[0].position;
-                            if (delta.magnitude > swipeThreshold)
-                                onSwipe(delta);
-                        }
-                        break;
+                    FloorComfirmation.SetActive(true);
+                }
+                else
+                {
+                    EnterFloor();
                 }
             }
-            else
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    activeButtons[0] = Input.mousePosition;
-                }
-                else if (Input.GetMouseButtonUp(0) && activeButtons.ContainsKey(0))
-                {
-                    Vector2 delta = Input.mousePosition - activeButtons[0];
-                    if (delta.magnitude > swipeThreshold)
-                        onSwipe(delta);
-                }
-            }
-            yield return new WaitForFixedUpdate();
         }
     }
 
-    void FixedUpdate()
+    public void EnterFloor()
     {
-        isDragging = false;
-        swipeLeft = swipeDown = swipeUp = swipeRight = false;
-
-        // Mouse input
-        // or
-        // Mobile input
-        if (Input.GetMouseButtonDown(0) || ((Input.touches.Length != 0) && (Input.touches[0].phase == TouchPhase.Began)))
-            StartCoroutine(SwipeInput(OnSwipe));
+        PlayerPrefs.SetInt("World", hit.collider.gameObject.GetComponent<Floor>().floorNumber - 1);
+        CrossScene.LoadTable = false;
+        SceneManager.LoadScene(1);
     }
 
-    public Vector2 SwipeDelta { get { return swipeDelta; } }
-    public bool SwipeLeft { get { return swipeLeft; } }
-    public bool SwipeUp { get { return swipeUp; } }
-    public bool SwipeDown { get { return swipeDown; } }
-    public bool SwipeRight { get { return swipeRight; } }
-    public bool IsDragging { get { return isDragging; } }
+    private void processTouch(Vector3 begin, Vector3 end)
+    {
+        if (begin == end)
+        {
+            OnTouch(end);
+        }
+        else if (begin != end)
+        {
+            Vector2 delta = end - begin;
+            if (delta.magnitude > swipeThreshold)
+                OnSwipe(delta);
+            else
+                OnTouch(end);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            touch = Input.GetTouch(0);
+            switch(touch.phase)
+            {
+                case TouchPhase.Began:
+                    beginTouchPosition = touch.position;
+                    break;
+                case TouchPhase.Ended:
+                    endTouchPosition = touch.position;
+                    processTouch(beginTouchPosition, endTouchPosition);
+                    break;
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0) && !tap)
+            {
+                tap = true;
+                beginTouchPosition = Input.mousePosition;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                tap = false;
+                endTouchPosition = Input.mousePosition;
+                processTouch(beginTouchPosition, endTouchPosition);
+            }
+        }
+
+        if (endPosition.y != moveObject.transform.position.y)
+            moveObject.transform.position = Vector3.MoveTowards(moveObject.transform.position, endPosition, 3f * moveUnit * Time.deltaTime);
+    }
 }

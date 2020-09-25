@@ -701,52 +701,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &196622679
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 196622681}
-  - component: {fileID: 196622680}
-  m_Layer: 0
-  m_Name: treeNavigation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &196622680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196622679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c9fc0ed68b6594aa7e62f2134f6b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FloorComfirmation: {fileID: 1908798749}
-  tutorialManager: {fileID: 1819110282}
-  swipeController: {fileID: 1312206939}
---- !u!4 &196622681
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196622679}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203015861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &298206006
 GameObject:
@@ -1687,7 +1641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcec2c40352002247a2221e3b54bdc95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SKIP_CINEMATIC: 0
+  SKIP_CINEMATIC: 1
   cameraAnimator: {fileID: 315227441}
   boatAnimator: {fileID: 924037822}
   characterAnimator: {fileID: 758708045}
@@ -1697,7 +1651,6 @@ MonoBehaviour:
   pouringParticleEmitters: {fileID: 538025047}
   swipeControls: {fileID: 1312206938}
   tutorial: {fileID: 459691347}
-  treeNavigation: {fileID: 196622679}
 --- !u!82 &315227443
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2486,7 +2439,7 @@ Transform:
   m_Children:
   - {fileID: 422440207}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &460143677
 GameObject:
@@ -5057,10 +5010,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1312206941}
-  - component: {fileID: 1312206940}
   - component: {fileID: 1312206939}
   m_Layer: 0
-  m_Name: swipeContols
+  m_Name: TreeViewNavigation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5078,22 +5030,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c6e4f7764d3b7468277acfee13c142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swipeThreshold: 100
---- !u!114 &1312206940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312206938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aed742779130ae4792cd34c41e73d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swipeController: {fileID: 1312206939}
+  FloorCount: 10
+  moveUnit: 10
+  swipeThreshold: 40
   moveObject: {fileID: 315227440}
-  moveUnit: 8.18
+  FloorComfirmation: {fileID: 1908798749}
+  tutorialManager: {fileID: 1819110282}
 --- !u!4 &1312206941
 Transform:
   m_ObjectHideFlags: 0
@@ -6314,7 +6256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376940999
 GameObject:
@@ -16477,7 +16419,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 196622680}
+      - m_Target: {fileID: 1312206939}
         m_MethodName: EnterFloor
         m_Mode: 1
         m_Arguments:
@@ -18292,7 +18234,7 @@ RectTransform:
   - {fileID: 1819110281}
   - {fileID: 1908798750}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
