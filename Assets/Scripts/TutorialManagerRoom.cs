@@ -76,11 +76,11 @@ public class TutorialManagerRoom : MonoBehaviour
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowArrow(new Vector2(-28.04f, 31.6f),new Vector3(0,0,0));
-        ShowGuidTextForRightSide("Tap on the table to see what we have.", 35);
+        ShowGuidTextForRightSide("Tap on the table to see what we have.", 50);
         tabelColl.enabled = true;
         yield return new WaitUntil(() => tableClick);
         HideTurorial();
         ShowArrow(new Vector2(-259.58f,-5f), new Vector3(0, 0, 151.1f));
-        ShowGuidTextForRightSide("The Path is where we will do all the magic. Touch it to start.", 35);
+        ShowGuidTextForRightSide("The Path is where we will do all the magic. Touch it to start.", 42);
     }
 }

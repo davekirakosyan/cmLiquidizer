@@ -26,6 +26,7 @@ public class TutorialManagerMainScreen : MonoBehaviour
     void Start()
     {
         //uncomment row below to uncomplete tutorial
+        //PlayerPrefs.DeleteAll();
         //PlayerPrefs.SetInt("Tutorial completed", 0);
         //PlayerPrefs.SetInt("Cinematic watched", 1);
     }
@@ -215,6 +216,8 @@ public class TutorialManagerMainScreen : MonoBehaviour
         HideTurorial();
 
         UIButtons.SetActive(true);
+        for (int i = 0; i < cardHolder.childCount; i++)
+            cardHolder.GetChild(i).GetComponent<CardAnimation>().mask.SetActive(false);
 
 
         PlayerPrefs.SetInt("Tutorial completed", 1);
