@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 10
   m_Viewport: {fileID: 2015698790}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 922232120}
@@ -4818,14 +4818,14 @@ MonoBehaviour:
   PATHS:
   - {fileID: 9165353073776263151, guid: 6fe8028c3d795cf4496089178218ecf5, type: 3}
   - {fileID: 9165353073776263151, guid: e469c964aaa3d2a4783f571e59faf7b8, type: 3}
+  - {fileID: 5650672890323385304, guid: 4e31ce53002c9ed488d23c4d58fc3e9d, type: 3}
   - {fileID: 9165353073776263151, guid: 63c202db51ac1cc4b8791eca076635d1, type: 3}
   - {fileID: 9165353073776263151, guid: 7e7e4de6d3f5e0e4291b341db95c9951, type: 3}
   - {fileID: 4673237180059384077, guid: 47c278f120f4d584a922b59888bba46c, type: 3}
-  - {fileID: 5650672890323385304, guid: 4e31ce53002c9ed488d23c4d58fc3e9d, type: 3}
-  - {fileID: 8181007728095961547, guid: 3aaba933c503f8d45b40c0907a917cdc, type: 3}
-  - {fileID: 7151587313560251311, guid: 3193c268e6890b548902acceebf2e739, type: 3}
   - {fileID: 325172128284130751, guid: 334ce71928dab8643be5e9bd41d2f419, type: 3}
+  - {fileID: 8181007728095961547, guid: 3aaba933c503f8d45b40c0907a917cdc, type: 3}
   - {fileID: 101260816139799736, guid: 4b610d463228b73409a7df69dc782ef4, type: 3}
+  - {fileID: 7151587313560251311, guid: 3193c268e6890b548902acceebf2e739, type: 3}
   currentLevel: {fileID: 0}
   currentInput: 
   currentOutput: 
@@ -7003,7 +7003,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 159413077}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1821116792}
@@ -8536,7 +8536,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1821116793}
   m_HandleRect: {fileID: 1275944982}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
