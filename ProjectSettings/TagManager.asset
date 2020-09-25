@@ -10,7 +10,6 @@ TagManager:
   - floor
   - path
   - tutorial canvas
-  - MUSIC
   layers:
   - Default
   - TransparentFX
