@@ -10,12 +10,8 @@ public class TutorialManagerMainScreen : MonoBehaviour
     public GameObject FullMask;
     public GameObject PathMask;
     public GameObject Pour1Mask;
-    public GameObject Pour2Mask;
     public GameObject InventoryMask;
-    public GameObject MaskForCard;
     public GameObject ReceipeMask;
-    public GameObject ReceipeMaskUpper;
-    public GameObject ReceipeMaskBottom;
     public GameObject guidTextForRight;
     public GameObject guidTextForLeft;
     public GameObject Arrow;
@@ -24,17 +20,22 @@ public class TutorialManagerMainScreen : MonoBehaviour
     bool pouring = false;
     bool tutorialStarted = false;
 
+    public Transform cardHolder;
+    public GameObject UIButtons;
+    public GameObject inventoryBLocker;
+
     void Start()
     {
 
         //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
-        //PlayerPrefs.SetInt("Tutorial completed", 0);
+        PlayerPrefs.SetInt("Tutorial completed", 0);
+        PlayerPrefs.SetInt("Cinematic watched", 1);
     }
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Tutorial completed"))
             PlayerPrefs.SetInt("Tutorial completed", 0);
     }
@@ -53,6 +54,7 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
     public void ShowFullMask()
     {
+        ReceipeMask.SetActive(false);
         FullMask.SetActive(true);
     }
 
@@ -63,7 +65,7 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
     public void ShowPour1Mask(bool needPouring = true)
     {
-        Pour1Mask.SetActive(true);
+        //Pour1Mask.SetActive(true);
         pouring = needPouring;
     }
 
@@ -76,11 +78,18 @@ public class TutorialManagerMainScreen : MonoBehaviour
     public void ShowInventoryMask()
     {
         InventoryMask.SetActive(true);
+        selectedCardMask.GetComponent<RectTransform>().offsetMin = new Vector2(selectedCardMask.GetComponent<RectTransform>().offsetMin.x, 0);
     }
 
     public void ShowCardSelectionMask()
     {
-        MaskForCard.SetActive(true);
+        ReceipeMask.SetActive(true);
+        //MaskForCard.SetActive(true);
+        for (int i = 1; i < cardHolder.childCount; i++)
+        {
+            cardHolder.GetChild(i).GetComponent<CardAnimation>().mask.SetActive(true);
+            cardHolder.GetChild(i).GetComponent<CardAnimation>().mask.transform.SetAsLastSibling();
+        }
         selection = true;
     }
 
@@ -89,36 +98,48 @@ public class TutorialManagerMainScreen : MonoBehaviour
         ReceipeMask.SetActive(true);
     }
 
+    GameObject selectedCardMask;
     public void ShowReceipeMaskUpper()
     {
-        ReceipeMaskUpper.SetActive(true);
+        ReceipeMask.SetActive(true);
+        selectedCardMask = cardHolder.GetChild(0).GetComponent<CardAnimation>().mask;
+        selectedCardMask.gameObject.SetActive(true);
+        selectedCardMask.transform.SetAsLastSibling();
+        selectedCardMask.GetComponent<RectTransform>().offsetMax = new Vector2(selectedCardMask.GetComponent<RectTransform>().offsetMax.x, -150);
+        //ReceipeMaskUpper.SetActive(true);
     }
 
     public void ShowReceipeMaskBottom()
     {
-        ReceipeMaskBottom.SetActive(true);
+        ReceipeMask.SetActive(true);
+        selectedCardMask.gameObject.SetActive(true);
+        selectedCardMask.transform.SetAsLastSibling();
+        selectedCardMask.GetComponent<RectTransform>().offsetMax = new Vector2(selectedCardMask.GetComponent<RectTransform>().offsetMax.x, 0);
+        selectedCardMask.GetComponent<RectTransform>().offsetMin = new Vector2(selectedCardMask.GetComponent<RectTransform>().offsetMin.x, 165);
     }
 
-    private void ShowGuidTextForRightSide(string text, int fontSize)
+    private void ShowGuidTextForRightSide(string text, int fontSize, bool touchText)
     {
         guidTextForRight.SetActive(true);
         guidTextForRight.transform.GetChild(1).GetComponent<Text>().text = text;
         guidTextForRight.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
+        guidTextForRight.transform.GetChild(1).GetChild(0).gameObject.SetActive(touchText);
     }
 
-    private void ShowGuidTextForLeftSide(string text, int fontSize)
+    private void ShowGuidTextForLeftSide(string text, int fontSize, bool touchText)
     {
         guidTextForLeft.SetActive(true);
         guidTextForLeft.transform.GetChild(1).GetComponent<Text>().text = text;
         guidTextForLeft.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
+        guidTextForLeft.transform.GetChild(1).GetChild(0).gameObject.SetActive(touchText);
     }
 
-    public void ShowGuidText(string text, int fontSize, bool side = true)
+    public void ShowGuidText(string text, int fontSize, bool side = true, bool touchText = false)
     {
         if (side)   // Tutorial object is on right half of the screen
-            ShowGuidTextForRightSide(text, fontSize);
+            ShowGuidTextForRightSide(text, fontSize, touchText);
         else        // Tutorial object is on left half of the screen
-            ShowGuidTextForLeftSide(text, fontSize);
+            ShowGuidTextForLeftSide(text, fontSize, touchText);
     }
 
     public void ShowArrow(Vector2 cords, bool side = false)
@@ -139,12 +160,8 @@ public class TutorialManagerMainScreen : MonoBehaviour
         FullMask.SetActive(false);
         PathMask.SetActive(false);
         InventoryMask.SetActive(false);
-        MaskForCard.SetActive(false);
         ReceipeMask.SetActive(false);
-        ReceipeMaskUpper.SetActive(false);
-        ReceipeMaskBottom.SetActive(false);
         Pour1Mask.SetActive(false);
-        Pour2Mask.SetActive(false);
         clicked = false;
         selection = false;
         pouring = false;
@@ -152,47 +169,68 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
     IEnumerator tutorialWait()
     {
+        UIButtons.SetActive(false);
+        inventoryBLocker.SetActive(true);
+
         ShowFullMask();
-        ShowGuidText("Welcome to main game scene, touch to continue.", 35);
+        ShowGuidText("Welcome to the elixir creation!", 50, true, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
         ShowCardSelectionMask();
-        ShowArrow(new Vector2(0,0));
-        ShowGuidText("Let's start from first level, touch to card to continue.", 35, false);
+        ShowGuidText("Let's start from the first level, tap on the card to continue.", 50, true);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
+
         ShowReceipeMask();
-        ShowGuidText("This is your receipe card.", 50);
+        ShowGuidText("This is your receipe card.", 50, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
+
         ShowReceipeMaskUpper();
-        ShowGuidText("The upper part shows you what elixirs you have.", 50);
+        ShowGuidText("The upper part shows you what elixirs you have.", 50, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
+
         ShowReceipeMaskBottom();
-        ShowGuidText("Here you can see what elixirs you need to produce.", 50);
+        ShowGuidText("Here you can see what elixirs you need to produce.", 50, false);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
+
         ShowInventoryMask();
-        ShowGuidText("Your elixirs are located in the inventory.", 35, false);
+        ShowGuidText("Your elixirs are located in the inventory.", 35);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
         ShowPathMask();
-        ShowGuidText("This is the glass tube in which you should pour the given elixirs.", 35, false);
+        ShowGuidText("This is the glass tube in which you should pour the given elixirs.", 35);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
         ShowPour1Mask();
-        ShowGuidText("Pour one of the elixirs into the path. You can either drag and drop or select the elixir and thouch the path.", 45, false);
+        selectedCardMask.SetActive(false);
+        inventoryBLocker.SetActive(false);
+        ShowGuidText("Pour one of the elixirs into the path. You can either drag and drop or selectthe elixir and touch the path.", 35);
         yield return new WaitUntil(() => clicked);
+        inventoryBLocker.SetActive(true);
         HideTurorial();
+
         ShowPour1Mask(false);
-        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction.", 35, false);
+        ShowGuidText("Once you pour the elixir in the path, it will start flowing with a constant speed and direction.", 35);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
         ShowPour1Mask();
-        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 35, false);
+        inventoryBLocker.SetActive(false);
+        ShowGuidText("Now pour the second elixir. Make sure that it doesn't touch to first one, or they will mix.", 35);
         yield return new WaitUntil(() => clicked);
         HideTurorial();
+
+        UIButtons.SetActive(true);
+
 
         PlayerPrefs.SetInt("Tutorial completed", 1);
     }
