@@ -73,29 +73,33 @@ public class CardSelection : MonoBehaviour
     // get level "name" from user selected card
     private void ClickHandler(int childIndex)
     {
-        blackCover.SetActive(false);
-        selectedCard = transform.GetChild(childIndex).gameObject;
-
-        // move selected card to prepared place
-        selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
-        selectedLevel = selectedCard.transform.GetSiblingIndex();
-
-
-        tutorialManager.clicked = true;
-
-        // load selected level
-        gameManager.ChangeLevel(selectedLevel);
-
-        // refill inventory for selected level
-        inventoryManager.FillInventory(currentInventory);
-
-        // Disappear unselected cards
-        for (int i = 0; i < transform.childCount; i++)
+        // if the inside black mask is on, the card should not be clickable
+        if (!transform.GetChild(childIndex).GetComponent<CardAnimation>().mask.activeSelf)
         {
-            if (i != childIndex)
+            blackCover.SetActive(false);
+            selectedCard = transform.GetChild(childIndex).gameObject;
+
+            // move selected card to prepared place
+            selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
+            selectedLevel = selectedCard.transform.GetSiblingIndex();
+
+
+            tutorialManager.clicked = true;
+
+            // load selected level
+            gameManager.ChangeLevel(selectedLevel);
+
+            // refill inventory for selected level
+            inventoryManager.FillInventory(currentInventory);
+
+            // Disappear unselected cards
+            for (int i = 0; i < transform.childCount; i++)
             {
-                GameObject unSelectedCard = transform.GetChild(i).gameObject;
-                unSelectedCard.GetComponent<CardAnimation>().CardDisolve();
+                if (i != childIndex)
+                {
+                    GameObject unSelectedCard = transform.GetChild(i).gameObject;
+                    unSelectedCard.GetComponent<CardAnimation>().CardDisolve();
+                }
             }
         }
     }

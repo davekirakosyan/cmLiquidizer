@@ -25,8 +25,9 @@ public class IntroCinematic : MonoBehaviour
 
     void Start()
     {
-        //uncomment row below to unwatch cinematic
+        //uncomment rows below to unwatch cinematic
         //PlayerPrefs.SetInt("Cinematic watched", 0);
+    
         if (!SKIP_CINEMATIC && PlayerPrefs.GetInt("Cinematic watched") == 0)
         {
             pastPlants.SetActive(true);

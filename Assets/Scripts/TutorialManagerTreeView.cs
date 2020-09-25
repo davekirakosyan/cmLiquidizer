@@ -11,8 +11,8 @@ public class TutorialManagerTreeView : MonoBehaviour
     bool clicked = false;
     private Collider coll;
     public GameObject guidTextForRight;
-    public GameObject guidTextForLeft;
     public GameObject Arrow;
+    public GameObject treeMask;
     private bool tutorialState = false;
 
     public bool GetTutorialState()
@@ -25,6 +25,7 @@ public class TutorialManagerTreeView : MonoBehaviour
 
         //DontDestroyOnLoad(this);
         //uncomment row below to uncomplete tutorial
+        //PlayerPrefs.DeleteAll();
         //PlayerPrefs.SetInt("Tutorial completed", 0);
         coll = targetObject.GetComponent<Collider>();
         tutorialState = true;
@@ -67,19 +68,10 @@ public class TutorialManagerTreeView : MonoBehaviour
         guidTextForRight.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
     }
 
-    private void ShowGuidTextForLeftSide(string text, int fontSize)
-    {
-        guidTextForLeft.SetActive(true);
-        guidTextForLeft.transform.GetChild(1).GetComponent<Text>().text = text;
-        guidTextForLeft.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
-    }
-
     public void ShowGuidText(string text, int fontSize, bool side = true)
     {
         if (side)   // Tutorial object is on right half of the screen
             ShowGuidTextForRightSide(text, fontSize);
-        else        // Tutorial object is on left half of the screen
-            ShowGuidTextForLeftSide(text, fontSize);
     }
 
     public void ShowArrow(Vector2 cords, bool side = false)
@@ -92,18 +84,18 @@ public class TutorialManagerTreeView : MonoBehaviour
     public void HideTurorial()
     {
         Arrow.SetActive(false);
-        guidTextForLeft.SetActive(false);
         guidTextForRight.SetActive(false);
+        treeMask.SetActive(false);
         tutorialState = false;
     }
 
 
     IEnumerator tutorialWait()
     {
+        treeMask.SetActive(true);
         ShowGuidText("Tap on tree to enter.", 70);
         ShowArrow(new Vector2(107.9f, 125.37f));
         yield return new WaitUntil(() => clicked);
         HideTurorial();
-        
     }
 }

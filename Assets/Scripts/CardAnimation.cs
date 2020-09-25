@@ -38,6 +38,8 @@ public class CardAnimation : MonoBehaviour
     private Color colorStart;
     private Color colorEnd;
 
+    public GameObject mask;
+
     void Awake()
     {
         // set all states to false prevents any animation
