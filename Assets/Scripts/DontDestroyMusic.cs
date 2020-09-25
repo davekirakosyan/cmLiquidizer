@@ -12,4 +12,10 @@ public class DontDestroyMusic : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Update()
+    {
+        this.transform.position = Camera.main.transform.position;
+    }
+
 }
