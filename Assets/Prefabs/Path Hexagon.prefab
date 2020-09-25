@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 0.15
+  elixirLength: 0.5
   elixirSpeed: 2
   inputColors: 000000000100000002000000030000000400000005000000
   outputColors: 000000000100000002000000030000000400000005000000
@@ -231,7 +231,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 1.5
+  elixirLength: 2.5
   elixirSpeed: 2
   inputColors: 030000000400000000000000
   outputColors: 0300000005000000
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845f57a16aa19dc49abca2227310b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elixirLength: 0.55
+  elixirLength: 0.7
   elixirSpeed: 2
   inputColors: 00000000040000000300000002000000
   outputColors: 00000000040000000300000002000000
