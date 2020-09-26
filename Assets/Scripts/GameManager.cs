@@ -225,10 +225,7 @@ public class GameManager : MonoBehaviour
             CreateLevel();
 
             // Show level selection Cards
-            if (needUpdateLevelCards)
-                cardSelection.CardGeneration();
-            else
-                cardSelection.ShowLevelCards();
+            cardSelection.CardGeneration();
 
             // update world drop down menu for UI
             UpdateWorldDropdownMenuValues();
