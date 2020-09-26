@@ -20,6 +20,7 @@ public class PathController : MonoBehaviour
     public Text countdownText;
     public Coroutine countDown;
     public TutorialManagerMainScreen tutorialManager;
+    public AudioSource pourSound;
 
     void Update()
     {
@@ -45,6 +46,8 @@ public class PathController : MonoBehaviour
             {
                 // if clicked on tubes create an elixir at that hit point and initialize its main components
                 CreateElixir(hit.point, gameManager.currentLevel.elixirSpeed, gameManager.currentLevel.elixirLength, GameManager.selectedColor);
+
+                pourSound.Play();
 
                 tutorialManager.clicked = true;
             }
