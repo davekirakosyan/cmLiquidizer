@@ -86,16 +86,19 @@ public class GameManager : MonoBehaviour
         if (selectedElixir != null)
         {
             //unhighlight previous selected item
-            selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            selectedElixir.transform.GetChild(1).gameObject.SetActive(false);
+            selectedElixir.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
 
         selectedColor = elixir.GetComponent<InventoryItem>().colorName;
         selectedElixir = elixir;
 
         //highlight selected item in inventory
-        selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        //selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        selectedElixir.transform.GetChild(1).gameObject.SetActive(true);
+        selectedElixir.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
     }
-    
+
     public void ResetGame(bool forcedReset = false)
     {
         if (cardSelection.selectedCard != null)
