@@ -78,6 +78,7 @@ public class CardSelection : MonoBehaviour
         {
             blackCover.SetActive(false);
             selectedCard = transform.GetChild(childIndex).gameObject;
+            selectedCard.GetComponent<Button>().enabled = false;
 
             // move selected card to prepared place
             selectedCard.GetComponent<CardAnimation>().AnimateSelectedCard();
@@ -131,6 +132,9 @@ public class CardSelection : MonoBehaviour
     public void CardGeneration(bool forceGeneration = true)
     {
         blackCover.SetActive(true);
+
+        if (selectedCard != null)
+            selectedCard.GetComponent<Button>().enabled = true;
 
         // getting available levels for selected path (world)
         int levelCount = gameManager.currentPath.GetComponent<Path>().levels.Length;
