@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
         selectedElixir = elixir;
 
         //highlight selected item in inventory
-        //selectedElixir.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
         selectedElixir.transform.GetChild(1).gameObject.SetActive(true);
         selectedElixir.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
     }
