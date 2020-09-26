@@ -137,7 +137,7 @@ public class SwipeController : MonoBehaviour
             }
         }
 
-        if (endPosition.y != moveObject.transform.position.y)
+        if (endPosition.y != moveObject.transform.position.y && PlayerPrefs.GetInt("Tutorial completed") == 1)
             moveObject.transform.position = Vector3.MoveTowards(moveObject.transform.position, endPosition, 3f * moveUnit * Time.deltaTime);
     }
 }
