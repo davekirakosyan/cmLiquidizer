@@ -205,6 +205,5 @@ public class CardSelection : MonoBehaviour
             currentCard.GetComponent<CardAnimation>().CardDisolve();
 
         cardCompletionFilter.SetActive(true);
-        ShowLevelCards();
     }
 }
