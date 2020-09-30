@@ -50,15 +50,18 @@ public class SwipeController : MonoBehaviour
             float x = data.x;
             float y = data.y;
 
-            if (y < 0)
+            if (Mathf.Abs(x) < Mathf.Abs(y))
             {
-                if (endPosition.y >= startPosition.y && endPosition.y < topFloor.y)
-                    endPosition += Vector3.up * moveUnit;
-            }
-            else
-            {
-                if (endPosition.y > startPosition.y && endPosition.y <= topFloor.y)
-                    endPosition += Vector3.down * moveUnit;
+                if (y < 0)
+                {
+                    if (endPosition.y >= startPosition.y && endPosition.y < topFloor.y)
+                        endPosition += Vector3.up * moveUnit;
+                }
+                else
+                {
+                    if (endPosition.y > startPosition.y && endPosition.y <= topFloor.y)
+                        endPosition += Vector3.down * moveUnit;
+                }
             }
         }
     }

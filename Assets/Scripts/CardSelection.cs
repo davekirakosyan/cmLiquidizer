@@ -42,7 +42,8 @@ public class CardSelection : MonoBehaviour
     {
         // first boot-up value for level
         selectedLevel = PlayerPrefs.GetInt("Level");
-        string completedLevels = PlayerPrefs.GetString("Completed Levels");
+        // TODO: Need to change completed levels mechanics for new level navigation
+       /* string completedLevels = PlayerPrefs.GetString("Completed Levels");
         if (completedLevels.Length > 0)
         {
 
@@ -54,7 +55,7 @@ public class CardSelection : MonoBehaviour
                 if (int.TryParse(tmpLevelString, out tmpLevel))
                     CompleteLevel(tmpLevel, true);
             }
-        }
+        }*/
 
     }
 
