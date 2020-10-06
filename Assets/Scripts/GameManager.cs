@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
     private bool needToUpdateGameOver = false;
     private bool needToUpdateWinning = false;
 
+    //Color blind mode, 0-normal, 1-protanopia, 2-deuteranopia, 3-tritanopia
+    public int colorBlindMode = 0;
+    public Dropdown colorBlindDropdown;
+
     public bool GetUpdateGameOver()
     {
         return needToUpdateGameOver;
@@ -72,6 +76,12 @@ public class GameManager : MonoBehaviour
 
         // load selected world
         LoadWorld(world);
+
+        if (!PlayerPrefs.HasKey("Color blind mode"))
+            PlayerPrefs.SetInt("Color blind mode", 0);
+
+        colorBlindMode = PlayerPrefs.GetInt("Color blind mode");
+        colorBlindDropdown.value = colorBlindMode;
     }
 
     // update level data in PlayerPrefs
@@ -79,6 +89,26 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("Level", level);
         PlayerPrefs.SetInt("World", world);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ShowGameObject(GameObject toggleObject)
+    {
+            toggleObject.SetActive(true);
+    }
+
+    public void HideGameObject(GameObject toggleObject)
+    {
+        toggleObject.SetActive(false);
+    }
+
+    public void ChangeColorBlindMode(Dropdown dropDown)
+    {
+        PlayerPrefs.SetInt("Color blind mode", dropDown.value);
     }
 
     public static void SelectElixir(GameObject elixir)
