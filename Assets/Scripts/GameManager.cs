@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     //Color blind mode, 0-normal, 1-protanopia, 2-deuteranopia, 3-tritanopia
     public int colorBlindMode = 0;
     public Dropdown colorBlindDropdown;
+    public Image[] colorExample;
 
     public bool GetUpdateGameOver()
     {
@@ -109,6 +110,44 @@ public class GameManager : MonoBehaviour
     public void ChangeColorBlindMode(Dropdown dropDown)
     {
         PlayerPrefs.SetInt("Color blind mode", dropDown.value);
+    }
+
+    public void ChangeExamples()
+    {
+        if (PlayerPrefs.GetInt("Color blind mode") == 0)
+        {
+            colorExample[0].GetComponent<Image>().color = new Color(1, 0, 0);
+            colorExample[1].GetComponent<Image>().color = new Color(1, 0.5f, 0);
+            colorExample[2].GetComponent<Image>().color = new Color(1, 1, 0);
+            colorExample[3].GetComponent<Image>().color = new Color(0, 1, 0);
+            colorExample[4].GetComponent<Image>().color = new Color(0, 0, 1);
+            colorExample[5].GetComponent<Image>().color = new Color(0.7f, 0, 1);
+        } else if(PlayerPrefs.GetInt("Color blind mode") == 1)
+        {
+            colorExample[0].GetComponent<Image>().color = new Color(0.56f, 0.49f, 0.12f);
+            colorExample[1].GetComponent<Image>().color = new Color(0.72f, 0.64f, 0.08f);
+            colorExample[2].GetComponent<Image>().color = new Color(1, 0.97f, 0.85f);
+            colorExample[3].GetComponent<Image>().color = new Color(0.97f, 0.86f, 0);
+            colorExample[4].GetComponent<Image>().color = new Color(0, 0.18f, 0.36f);
+            colorExample[5].GetComponent<Image>().color = new Color(0, 0.43f, 0.89f);
+        } else if (PlayerPrefs.GetInt("Color blind mode") == 2)
+        {
+            colorExample[0].GetComponent<Image>().color = new Color(0.63f, 0.47f, 0);
+            colorExample[1].GetComponent<Image>().color = new Color(0.81f, 0.6f, 0);
+            colorExample[2].GetComponent<Image>().color = new Color(1, 0.96f, 0.92f);
+            colorExample[3].GetComponent<Image>().color = new Color(1, 084f, 0.6f);
+            colorExample[4].GetComponent<Image>().color = new Color(0, 0.19f, 0.31f);
+            colorExample[5].GetComponent<Image>().color = new Color(0, 0.45f, 0.77f);
+        }
+        else if (PlayerPrefs.GetInt("Color blind mode") == 3)
+        {
+            colorExample[0].GetComponent<Image>().color = new Color(0.99f, 0.09f, 0);
+            colorExample[1].GetComponent<Image>().color = new Color(1, 0.47f, 0.5f);
+            colorExample[2].GetComponent<Image>().color = new Color(1, 0.96f, 0.98f);
+            colorExample[3].GetComponent<Image>().color = new Color(0.46f, 0.93f, 1);
+            colorExample[4].GetComponent<Image>().color = new Color(0, 0.2f, 0.21f);
+            colorExample[5].GetComponent<Image>().color = new Color(0.58f, 0.4f, 0.42f);
+        }
     }
 
     public static void SelectElixir(GameObject elixir)
