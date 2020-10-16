@@ -14,6 +14,7 @@ public class IntroCinematic : MonoBehaviour
     public GameObject deadPlant;
     public GameObject pouringParticleEmitters;
     public GameObject swipeControls;
+    public GameObject floor;
     public GameObject tutorial;
 
 
@@ -35,11 +36,13 @@ public class IntroCinematic : MonoBehaviour
             cameraAnimator.SetBool("start_intro", true);
             boatAnimator.SetBool("start_floating", true);
             swipeControls.SetActive(false);
+            floor.SetActive(false);
         }
         else if (SKIP_CINEMATIC || PlayerPrefs.GetInt("Cinematic watched") == 1)
         {
             // enable all the tree controls
             swipeControls.SetActive(true);
+            floor.SetActive(true);
             GetComponent<Animator>().enabled = false;
         }
     }
@@ -87,6 +90,7 @@ public class IntroCinematic : MonoBehaviour
     void EndCinematicPart1 ()
     {
         swipeControls.SetActive(true);
+        floor.SetActive(true);
         tutorial.SetActive(true);
         GetComponent<Animator>().enabled = false;
         PlayerPrefs.SetInt("Cinematic watched", 1);
