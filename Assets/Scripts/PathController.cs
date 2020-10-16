@@ -183,10 +183,10 @@ public class PathController : MonoBehaviour
              */
 
             //old implemetation
-            if (isRequirementDone && gameManager.world < gameManager.PATHS.Length - 1)
-                gameManager.win();
-            else if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1)
+            if (isRequirementDone && gameManager.world >= gameManager.PATHS.Length - 1 && gameManager.level >= gameManager.currentPath.GetComponent<Path>().levels.Length - 1)
                 gameManager.endGameMsg.SetActive(true);
+            else if (isRequirementDone)
+                gameManager.win();
             else
                 gameManager.lose();
         }
