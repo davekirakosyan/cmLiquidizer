@@ -8,7 +8,7 @@ public class Elixir : MonoBehaviour
     public PathCreator[] paths;
     public PathController pathController;
     public PathCreator pathCreator;
-    public EndOfPathInstruction endOfPathInstruction; 
+    public EndOfPathInstruction endOfPathInstruction;
     float distanceTravelled;
     public float speed;
     public float length;
@@ -95,13 +95,13 @@ public class Elixir : MonoBehaviour
     }
 
     // color mixing logic
-    InventoryManager.ElixirColor MixElixirs (InventoryManager.ElixirColor color1, InventoryManager.ElixirColor color2)
+    InventoryManager.ElixirColor MixElixirs(InventoryManager.ElixirColor color1, InventoryManager.ElixirColor color2)
     {
         InventoryManager.ElixirColor mix;
         canMix = true;
 
         if (color1.Equals(InventoryManager.ElixirColor.Red) && color2.Equals(InventoryManager.ElixirColor.Yellow) ||
-            color2.Equals(InventoryManager.ElixirColor.Red) && color1.Equals(InventoryManager.ElixirColor.Yellow) )
+            color2.Equals(InventoryManager.ElixirColor.Red) && color1.Equals(InventoryManager.ElixirColor.Yellow))
         {
             mix = InventoryManager.ElixirColor.Orange;
         }
@@ -125,24 +125,87 @@ public class Elixir : MonoBehaviour
     }
 
     // color mixing logic
-    Color SelectColorByName (InventoryManager.ElixirColor name)
+    Color SelectColorByName(InventoryManager.ElixirColor name)
     {
-        switch (name)
+        if (PlayerPrefs.GetInt("Color blind mode") == 0)
         {
-            case InventoryManager.ElixirColor.Red:
-                return Color.red;
-            case InventoryManager.ElixirColor.Orange:
-                return new Color(1, 0.5f, 0);
-            case InventoryManager.ElixirColor.Yellow:
-                return Color.yellow;
-            case InventoryManager.ElixirColor.Green:
-                return Color.green;
-            case InventoryManager.ElixirColor.Blue:
-                return Color.blue;
-            case InventoryManager.ElixirColor.Purple:
-                return new Color(0.7f, 0, 1);
-            default:
-                return Color.red;
+            switch (name)
+            {
+                case InventoryManager.ElixirColor.Red:
+                    return new Color(1, 0, 0);
+                case InventoryManager.ElixirColor.Orange:
+                    return new Color(1, 0.5f, 0);
+                case InventoryManager.ElixirColor.Yellow:
+                    return new Color(1, 1, 0);
+                case InventoryManager.ElixirColor.Green:
+                    return new Color(0, 1, 0);
+                case InventoryManager.ElixirColor.Blue:
+                    return new Color(0, 0, 1);
+                case InventoryManager.ElixirColor.Purple:
+                    return new Color(0.7f, 0, 1);
+                default:
+                    return new Color(1, 0, 0);
+            }
+        } else if (PlayerPrefs.GetInt("Color blind mode") == 1)
+        {
+            switch (name)
+            {
+                case InventoryManager.ElixirColor.Red:
+                    return new Color(0.56f, 0.49f, 0.12f);
+                case InventoryManager.ElixirColor.Orange:
+                    return new Color(0.72f, 0.64f, 0.08f);
+                case InventoryManager.ElixirColor.Yellow:
+                    return new Color(1, 0.97f, 0.85f);
+                case InventoryManager.ElixirColor.Green:
+                    return new Color(0.97f, 0.86f, 0);
+                case InventoryManager.ElixirColor.Blue:
+                    return new Color(0, 0.18f, 0.36f);
+                case InventoryManager.ElixirColor.Purple:
+                    return new Color(0, 0.43f, 0.89f);
+                default:
+                    return new Color(1, 0, 0);
+            }
         }
+        else if (PlayerPrefs.GetInt("Color blind mode") == 2)
+        {
+            switch (name)
+            {
+                case InventoryManager.ElixirColor.Red:
+                    return new Color(0.63f, 0.47f, 0);
+                case InventoryManager.ElixirColor.Orange:
+                    return new Color(0.81f, 0.6f, 0);
+                case InventoryManager.ElixirColor.Yellow:
+                    return new Color(1, 0.96f, 0.92f);
+                case InventoryManager.ElixirColor.Green:
+                    return new Color(1, 084f, 0.6f);
+                case InventoryManager.ElixirColor.Blue:
+                    return new Color(0, 0.19f, 0.31f);
+                case InventoryManager.ElixirColor.Purple:
+                    return new Color(0, 0.45f, 0.77f);
+                default:
+                    return new Color(1, 0, 0);
+            }
+        }
+        else if (PlayerPrefs.GetInt("Color blind mode") == 3)
+        {
+            switch (name)
+            {
+                case InventoryManager.ElixirColor.Red:
+                    return new Color(0.99f, 0.09f, 0);
+                case InventoryManager.ElixirColor.Orange:
+                    return new Color(1, 0.47f, 0.5f);
+                case InventoryManager.ElixirColor.Yellow:
+                    return new Color(1, 0.96f, 0.98f);
+                case InventoryManager.ElixirColor.Green:
+                    return new Color(0.46f, 0.93f, 1);
+                case InventoryManager.ElixirColor.Blue:
+                    return new Color(0, 0.2f, 0.21f);
+                case InventoryManager.ElixirColor.Purple:
+                    return new Color(0.58f, 0.4f, 0.42f);
+                default:
+                    return new Color(1, 0, 0);
+            }
+        }
+        return new Color(1, 0, 0);
     }
 }
