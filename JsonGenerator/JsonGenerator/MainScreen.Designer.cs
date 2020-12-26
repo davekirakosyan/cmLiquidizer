@@ -50,6 +50,7 @@
             this.inventoryButton.TabIndex = 1;
             this.inventoryButton.Text = "Inventory";
             this.inventoryButton.UseVisualStyleBackColor = true;
+            this.inventoryButton.Click += new System.EventHandler(this.inventoryButton_Click);
             // 
             // MainScreen
             // 

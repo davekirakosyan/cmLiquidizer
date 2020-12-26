@@ -23,5 +23,12 @@ namespace JsonGenerator
             form1.Show();
             this.Hide();
         }
+
+        private void inventoryButton_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Hide();
+        }
     }
 }
