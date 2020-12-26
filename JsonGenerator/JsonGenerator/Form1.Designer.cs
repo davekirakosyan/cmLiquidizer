@@ -38,6 +38,7 @@
             this.priceText = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -88,7 +89,7 @@
             // 
             this.nameText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.nameText.Location = new System.Drawing.Point(133, 5);
-            this.nameText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nameText.Margin = new System.Windows.Forms.Padding(2);
             this.nameText.Name = "nameText";
             this.nameText.Size = new System.Drawing.Size(995, 35);
             this.nameText.TabIndex = 4;
@@ -97,7 +98,7 @@
             // 
             this.boughtText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.boughtText.Location = new System.Drawing.Point(133, 67);
-            this.boughtText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.boughtText.Margin = new System.Windows.Forms.Padding(2);
             this.boughtText.Name = "boughtText";
             this.boughtText.Size = new System.Drawing.Size(995, 35);
             this.boughtText.TabIndex = 5;
@@ -106,7 +107,7 @@
             // 
             this.selectedText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.selectedText.Location = new System.Drawing.Point(133, 130);
-            this.selectedText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectedText.Margin = new System.Windows.Forms.Padding(2);
             this.selectedText.Name = "selectedText";
             this.selectedText.Size = new System.Drawing.Size(995, 35);
             this.selectedText.TabIndex = 6;
@@ -115,7 +116,7 @@
             // 
             this.priceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.priceText.Location = new System.Drawing.Point(133, 193);
-            this.priceText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.priceText.Margin = new System.Windows.Forms.Padding(2);
             this.priceText.Name = "priceText";
             this.priceText.Size = new System.Drawing.Size(995, 35);
             this.priceText.TabIndex = 7;
@@ -124,7 +125,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(388, 418);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(359, 63);
             this.button1.TabIndex = 8;
@@ -140,11 +141,22 @@
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(1030, 456);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.TabIndex = 10;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 504);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.priceText);
@@ -155,7 +167,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -175,6 +187,7 @@
         private System.Windows.Forms.TextBox priceText;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button backButton;
     }
 }
 
