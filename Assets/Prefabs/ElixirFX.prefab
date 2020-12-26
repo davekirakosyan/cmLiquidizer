@@ -120,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6851527812423169415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.045, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5434254531262241341}
@@ -209,8 +209,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.5
+      minMaxState: 0
+      scalar: 1
       minScalar: 0.7
       maxCurve:
         serializedVersion: 2
@@ -1078,15 +1078,24 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.1674208
-          outSlope: -0.1674208
+          inSlope: -0.3493619
+          outSlope: -0.3493619
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
+          time: 0.65560555
+          value: 0.7709564
+          inSlope: -0.46377152
+          outSlope: -0.46377152
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
           time: 1
-          value: 0.8325792
+          value: 0.588677
           inSlope: -0.29149783
           outSlope: -0.29149783
           tangentMode: 0
@@ -1400,7 +1409,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
         key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 1}
+        key2: {r: 1, g: 1, b: 1, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1408,7 +1417,7 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 0
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -1416,7 +1425,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 3470
-        atime2: 48380
+        atime2: 60331
         atime3: 65535
         atime4: 0
         atime5: 0
@@ -3824,7 +3833,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 0
-    radiusScale: 1
+    radiusScale: 0.1
     collidesWith:
       serializedVersion: 2
       m_Bits: 512
@@ -4825,7 +4834,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4861,10 +4870,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeeffd0f8e8dac45b091bacdf45ecf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paths: []
   pathController: {fileID: 0}
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
   speed: 0
+  length: 0
   colorName: 0
   uniqueNumber: 0
   part: {fileID: 0}
