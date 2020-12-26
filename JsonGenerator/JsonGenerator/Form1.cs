@@ -28,20 +28,19 @@ namespace JsonGenerator
             string[] selected = selectedText.Text.Split(',');
             string[] price = priceText.Text.Split(',');
             //{\"Items\":[{\"name\":\"red-\n elixire\",\"bought\":true,\"selected\":true,\"price\":100},{\"name\":\" yellow- \nelixire\",\"bought\":false,\"selected\":false,\"price\":100},{\"name\":\"orange- \nelixire \",\"bought\":false,\"selected\":false,\"price\":200}]}"
-            string jsonFile = quote + @"{\" + quote + @"Items\" + quote + @":[";
-            if (!(names.Length == bought.Length && names.Length == selected.Length && names.Length == price.Length))
+            string jsonFile=quote+@"{\"+quote+ @"Items\"+quote+@":[";
+            if (!(names.Length == bought.Length && names.Length==selected.Length && names.Length==price.Length))
             {
                 MessageBox.Show("Inputs are wrong");
-            }
-            else
+            } else
             {
-                for (int i = 0; i < names.Length; i++)
+                for (int i=0; i < names.Length; i++)
                 {
                     jsonFile += "{";
                     jsonFile += @"\" + quote + @"name\" + quote + ":";
                     jsonFile += @"\" + quote + bf.Encrypt_CBC(names[i]) + @"\" + quote + ",";
                     jsonFile += @"\" + quote + @"bought\" + quote + ":";
-                    jsonFile += @"\" + quote + bf.Encrypt_CBC(bought[i]) + @"\" + quote + ",";
+                    jsonFile += @"\" + quote + bf.Encrypt_CBC(bought[i])+ @"\" + quote + ",";
                     jsonFile += @"\" + quote + @"selected\" + quote + ":";
                     jsonFile += @"\" + quote + bf.Encrypt_CBC(selected[i]) + @"\" + quote + ",";
                     jsonFile += @"\" + quote + @"price\" + quote + ":";
@@ -52,16 +51,9 @@ namespace JsonGenerator
                         jsonFile += ",";
                     }
                 }
-                jsonFile += "]}" + quote;
+                jsonFile += "]}"+quote;
             }
             richTextBox1.Text = jsonFile;
-        }
-
-        private void backButton_Click(object sender, EventArgs e)
-        {
-            MainScreen mainScreen = new MainScreen();
-            mainScreen.Show();
-            this.Hide();
         }
     }
 }
