@@ -1,13 +1,23 @@
-﻿using System;
+﻿/*****************************************************************************************************************
+
+Old Player prefs saving version is not removed, instead is commented in its respective place,, will be removed after testing. TODO : Remove old saving system after testing.
+
+********************************************************************************************************************/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Boomlagoon.JSON;
+using BlowFishCS;
 
 public class GameManager : MonoBehaviour
 {
     // global variables
+    public JSONObject userData;
+
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
     public int world;
@@ -40,6 +50,8 @@ public class GameManager : MonoBehaviour
     public Dropdown colorBlindDropdown;
     public Image[] colorExample;
 
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+
     public bool GetUpdateGameOver()
     {
         return needToUpdateGameOver;
@@ -62,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        userData = JSONObject.Parse("{\"Level\":\"e2a2de26ccee3661dfb4e88e2742303f\",\"World\":\"e2a2de26ccee366182157ca49cf56af3\",\"Color blind mode\":\"e2a2de26ccee3661dfb4e88e2742303f\",\"Tutorial completed\":\"e2a2de26ccee3661dfb4e88e2742303f\",\"Completed Levels\":\"e2a2de26ccee3661\",\"inematic watched\":\"e2a2de26ccee3661dfb4e88e2742303f\"]}");
         // Check if it first boot, if it is then initialize some variables
         if (firstBoot)
         {
@@ -72,24 +85,40 @@ public class GameManager : MonoBehaviour
         }
 
         // load data
-        world = PlayerPrefs.GetInt("World");
-        level = PlayerPrefs.GetInt("Level");
+
+        //world = PlayerPrefs.GetInt("World");
+        world = int.Parse(bf.Decrypt_CBC(userData.GetString("World")));
+
+        //level = PlayerPrefs.GetInt("Level");
+        level = int.Parse(bf.Decrypt_CBC(userData.GetString("Level")));
 
         // load selected world
         LoadWorld(world);
 
-        if (!PlayerPrefs.HasKey("Color blind mode"))
+        /*if (!PlayerPrefs.HasKey("Color blind mode"))
             PlayerPrefs.SetInt("Color blind mode", 0);
+        */
+        if (!userData.ContainsKey("Color blind mode"))
+            userData.Add("Color blind mode", bf.Encrypt_CBC("0"));
 
-        colorBlindMode = PlayerPrefs.GetInt("Color blind mode");
+        //colorBlindMode = PlayerPrefs.GetInt("Color blind mode");
+        colorBlindMode = int.Parse(bf.Decrypt_CBC(userData.GetString("Color blind mode")));
         colorBlindDropdown.value = colorBlindMode;
     }
 
     // update level data in PlayerPrefs
     void UpdateUserData()
     {
-        PlayerPrefs.SetInt("Level", level);
-        PlayerPrefs.SetInt("World", world);
+        /*PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("World", world);*/
+
+        userData.Remove("Level");
+        userData.Add("Level", bf.Encrypt_CBC(level.ToString()));
+
+        userData.Remove("World");
+        userData.Add("World", bf.Encrypt_CBC(world.ToString()));
+
+        //TODO : Add save to file
     }
 
     public void ExitGame()
@@ -109,12 +138,19 @@ public class GameManager : MonoBehaviour
 
     public void ChangeColorBlindMode(Dropdown dropDown)
     {
-        PlayerPrefs.SetInt("Color blind mode", dropDown.value);
+        //PlayerPrefs.SetInt("Color blind mode", dropDown.value);
+
+        userData.Remove("Color blind mode");
+        userData.Add("Color blind mode", bf.Encrypt_CBC(dropDown.value.ToString()));
+
+        colorBlindMode = dropDown.value;
+
+        //TODO : Add save to file
     }
 
     public void ChangeExamples()
     {
-        if (PlayerPrefs.GetInt("Color blind mode") == 0)
+        if (colorBlindMode == 0)
         {
             colorExample[0].GetComponent<Image>().color = new Color(1, 0, 0);
             colorExample[1].GetComponent<Image>().color = new Color(1, 0.5f, 0);
@@ -122,7 +158,7 @@ public class GameManager : MonoBehaviour
             colorExample[3].GetComponent<Image>().color = new Color(0, 1, 0);
             colorExample[4].GetComponent<Image>().color = new Color(0, 0, 1);
             colorExample[5].GetComponent<Image>().color = new Color(0.7f, 0, 1);
-        } else if(PlayerPrefs.GetInt("Color blind mode") == 1)
+        } else if(colorBlindMode == 1)
         {
             colorExample[0].GetComponent<Image>().color = new Color(0.56f, 0.49f, 0.12f);
             colorExample[1].GetComponent<Image>().color = new Color(0.72f, 0.64f, 0.08f);
@@ -130,7 +166,7 @@ public class GameManager : MonoBehaviour
             colorExample[3].GetComponent<Image>().color = new Color(0.97f, 0.86f, 0);
             colorExample[4].GetComponent<Image>().color = new Color(0, 0.18f, 0.36f);
             colorExample[5].GetComponent<Image>().color = new Color(0, 0.43f, 0.89f);
-        } else if (PlayerPrefs.GetInt("Color blind mode") == 2)
+        } else if (colorBlindMode == 2)
         {
             colorExample[0].GetComponent<Image>().color = new Color(0.63f, 0.47f, 0);
             colorExample[1].GetComponent<Image>().color = new Color(0.81f, 0.6f, 0);
@@ -139,7 +175,7 @@ public class GameManager : MonoBehaviour
             colorExample[4].GetComponent<Image>().color = new Color(0, 0.19f, 0.31f);
             colorExample[5].GetComponent<Image>().color = new Color(0, 0.45f, 0.77f);
         }
-        else if (PlayerPrefs.GetInt("Color blind mode") == 3)
+        else if (colorBlindMode == 3)
         {
             colorExample[0].GetComponent<Image>().color = new Color(0.99f, 0.09f, 0);
             colorExample[1].GetComponent<Image>().color = new Color(1, 0.47f, 0.5f);
@@ -233,7 +269,8 @@ public class GameManager : MonoBehaviour
     public void CleanCompletedLevelNotes()
     {
         // remove completed level notes from memory
-        PlayerPrefs.DeleteKey("Completed Levels");
+        //PlayerPrefs.DeleteKey("Completed Levels");
+        userData.Remove("Completed Levels");
     }
 
     public void NextLevel()
