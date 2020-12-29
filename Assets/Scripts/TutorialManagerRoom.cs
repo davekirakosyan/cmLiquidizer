@@ -54,6 +54,12 @@ public class TutorialManagerRoom : MonoBehaviour
         {
             clicked = true;
         }
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+
+        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
+        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
 
 
         if (cinematicWatched == 1 && !tutorialStarted && tutorialCompleted == 0)

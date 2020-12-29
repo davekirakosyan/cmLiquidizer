@@ -23,12 +23,12 @@ namespace JsonGenerator
         private void button1_Click(object sender, EventArgs e)
         {
             string jsonFile = "";
-            jsonFile = "{" + quote + "Level" + quote + ":" + bf.Encrypt_CBC("0") + ",";
-            jsonFile += quote + "World" + quote + ":" + bf.Encrypt_CBC("0") + ",";
-            jsonFile += quote + "Color blind mode" + quote + ":" + bf.Encrypt_CBC("1") + ",";
-            jsonFile += quote + "Tutorial completed" + quote + ":" + bf.Encrypt_CBC("0") + ",";
-            jsonFile += quote + "Completed Levels" + quote + ":" + bf.Encrypt_CBC("") + ",";
-            jsonFile += quote + "Cinematic watched" + quote + ":" + bf.Encrypt_CBC("0") + "}";
+            jsonFile = "{" + quote + "Level" + quote + " : " + quote + bf.Encrypt_CBC("0") + quote + ",";
+            jsonFile += quote + "World" + quote + " : " + quote + bf.Encrypt_CBC("0") + quote + ",";
+            jsonFile += quote + "Color blind mode" + quote + " : " + quote + bf.Encrypt_CBC("1") + quote + ",";
+            jsonFile += quote + "Tutorial completed" + quote + " : " + quote + bf.Encrypt_CBC("0") + quote + ",";
+            jsonFile += quote + "Completed Levels" + quote + " : " + quote + bf.Encrypt_CBC("") + quote + ",";
+            jsonFile += quote + "Cinematic watched" + quote + " : " + quote + bf.Encrypt_CBC("0") + quote + "}";
             richTextBox1.Text = jsonFile;
         }
     }
