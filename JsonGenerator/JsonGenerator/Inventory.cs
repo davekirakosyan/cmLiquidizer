@@ -25,10 +25,10 @@ namespace JsonGenerator
             string jsonFile = "";
             jsonFile = quote + @"{\" + quote + @"Level\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("0") + @"\" + quote + ",";
             jsonFile += @"\" + quote + @"World\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("3") + @"\" + quote + ",";
-            jsonFile += @"\" + quote + @"Color blind mode\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("0") + @"\" + quote + ",";
-            jsonFile += @"\" + quote + @"Tutorial completed\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("0") + @"\" + quote + ",";
+            jsonFile += @"\" + quote + @"Color blind mode\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("3") + @"\" + quote + ",";
+            jsonFile += @"\" + quote + @"Tutorial completed\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("1") + @"\" + quote + ",";
             jsonFile += @"\" + quote + @"Completed Levels\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("") + @"\" + quote + ",";
-            jsonFile += @"\" + quote + @"Cinematic watched\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("0") + @"\" + quote;
+            jsonFile += @"\" + quote + @"Cinematic watched\" + quote + ":" + @"\" + quote + bf.Encrypt_CBC("1") + @"\" + quote;
             jsonFile += "]}" + quote;
             richTextBox1.Text = jsonFile;
         }

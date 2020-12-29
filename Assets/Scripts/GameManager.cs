@@ -12,6 +12,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Boomlagoon.JSON;
 using BlowFishCS;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     BlowFish bf = new BlowFish("04B915BA43FEB5B6");
 
+    string path = "Assets/Resources/Text/User data.txt";
+
     public bool GetUpdateGameOver()
     {
         return needToUpdateGameOver;
@@ -74,7 +77,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        userData = JSONObject.Parse("{\"Level\":\"e2a2de26ccee3661dfb4e88e2742303f\",\"World\":\"e2a2de26ccee366182157ca49cf56af3\",\"Color blind mode\":\"e2a2de26ccee3661dfb4e88e2742303f\",\"Tutorial completed\":\"e2a2de26ccee3661dfb4e88e2742303f\",\"Completed Levels\":\"e2a2de26ccee3661\",\"inematic watched\":\"e2a2de26ccee3661dfb4e88e2742303f\"]}");
+
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+
         // Check if it first boot, if it is then initialize some variables
         if (firstBoot)
         {
@@ -114,11 +121,25 @@ public class GameManager : MonoBehaviour
 
         userData.Remove("Level");
         userData.Add("Level", bf.Encrypt_CBC(level.ToString()));
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
 
         userData.Remove("World");
         userData.Add("World", bf.Encrypt_CBC(world.ToString()));
+        writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
 
         //TODO : Add save to file
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        Debug.Log("Paused");
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
     }
 
     public void ExitGame()
@@ -142,6 +163,9 @@ public class GameManager : MonoBehaviour
 
         userData.Remove("Color blind mode");
         userData.Add("Color blind mode", bf.Encrypt_CBC(dropDown.value.ToString()));
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
 
         colorBlindMode = dropDown.value;
 
@@ -271,6 +295,9 @@ public class GameManager : MonoBehaviour
         // remove completed level notes from memory
         //PlayerPrefs.DeleteKey("Completed Levels");
         userData.Remove("Completed Levels");
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
     }
 
     public void NextLevel()
