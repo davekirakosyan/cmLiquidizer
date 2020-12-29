@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Boomlagoon.JSON;
+using BlowFishCS;
+using System.IO;
 
 public class TutorialManagerRoom : MonoBehaviour
 {
@@ -16,6 +19,13 @@ public class TutorialManagerRoom : MonoBehaviour
     public bool tableClick = false;
     public GameObject backButton;
 
+    public JSONObject userData;
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+    string path = "Assets/Resources/Text/User data.txt";
+
+    int cinematicWatched;
+    int tutorialCompleted;
+
     void Start()
     {
         //uncomment rows below to uncomplete tutorial
@@ -25,9 +35,16 @@ public class TutorialManagerRoom : MonoBehaviour
 
     private void Awake()
     {
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+
+        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
+        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
+
         //PlayerPrefs.DeleteAll();
-        if (!PlayerPrefs.HasKey("Tutorial completed"))
-            PlayerPrefs.SetInt("Tutorial completed", 0);
+        /* if (!PlayerPrefs.HasKey("Tutorial completed"))
+             PlayerPrefs.SetInt("Tutorial completed", 0);*/
     }
     // Update is called once per frame
     void Update()
@@ -39,7 +56,7 @@ public class TutorialManagerRoom : MonoBehaviour
         }
 
 
-        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed") == 0)
+        if (cinematicWatched == 1 && !tutorialStarted && tutorialCompleted == 0)
         {
             StartCoroutine(tutorialWait());
             tutorialStarted = true;

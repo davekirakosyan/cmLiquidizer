@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Boomlagoon.JSON;
+using System.IO;
+using BlowFishCS;
 
 public class Elixir : MonoBehaviour
 {
@@ -20,7 +23,20 @@ public class Elixir : MonoBehaviour
     public ParticleSystem part;
     public List<ParticleCollisionEvent> collisionEvents;
 
-    void Start()
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+
+    string path = "Assets/Resources/Text/User data.txt";
+
+    public JSONObject userData;
+
+    private void Awake()
+    {
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+    }
+
+        void Start()
     {
         // find the nearest path
         float minDistancesToThePath = float.MaxValue;
@@ -127,7 +143,9 @@ public class Elixir : MonoBehaviour
     // color mixing logic
     Color SelectColorByName(InventoryManager.ElixirColor name)
     {
-        if (PlayerPrefs.GetInt("Color blind mode") == 0)
+        int colorBlindMode;
+        colorBlindMode = int.Parse(bf.Decrypt_CBC(userData.GetString("Color blind mode")));
+        if (colorBlindMode == 0)
         {
             switch (name)
             {
@@ -146,7 +164,7 @@ public class Elixir : MonoBehaviour
                 default:
                     return new Color(1, 0, 0);
             }
-        } else if (PlayerPrefs.GetInt("Color blind mode") == 1)
+        } else if (colorBlindMode == 1)
         {
             switch (name)
             {
@@ -166,7 +184,7 @@ public class Elixir : MonoBehaviour
                     return new Color(1, 0, 0);
             }
         }
-        else if (PlayerPrefs.GetInt("Color blind mode") == 2)
+        else if (colorBlindMode == 2)
         {
             switch (name)
             {
@@ -186,7 +204,7 @@ public class Elixir : MonoBehaviour
                     return new Color(1, 0, 0);
             }
         }
-        else if (PlayerPrefs.GetInt("Color blind mode") == 3)
+        else if (colorBlindMode == 3)
         {
             switch (name)
             {

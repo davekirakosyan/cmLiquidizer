@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using BlowFishCS;
+using Boomlagoon.JSON;
 
 public class CardSelection : MonoBehaviour
 {
@@ -38,24 +41,38 @@ public class CardSelection : MonoBehaviour
 
     public GameObject blackCover;
 
-    void Start()
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+
+    string path = "Assets/Resources/Text/User data.txt";
+
+    public JSONObject userData;
+
+    private void Awake()
+    {
+
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+    }
+
+        void Start()
     {
         // first boot-up value for level
-        selectedLevel = PlayerPrefs.GetInt("Level");
+        selectedLevel = int.Parse(bf.Decrypt_CBC(userData.GetString("Level")));
         // TODO: Need to change completed levels mechanics for new level navigation
-       /* string completedLevels = PlayerPrefs.GetString("Completed Levels");
-        if (completedLevels.Length > 0)
-        {
+        /* string completedLevels = PlayerPrefs.GetString("Completed Levels");
+         if (completedLevels.Length > 0)
+         {
 
-            string[] tmpLevelArray = completedLevels.Split('x');
+             string[] tmpLevelArray = completedLevels.Split('x');
 
-            foreach (string tmpLevelString in tmpLevelArray)
-            {
-                int tmpLevel;
-                if (int.TryParse(tmpLevelString, out tmpLevel))
-                    CompleteLevel(tmpLevel, true);
-            }
-        }*/
+             foreach (string tmpLevelString in tmpLevelArray)
+             {
+                 int tmpLevel;
+                 if (int.TryParse(tmpLevelString, out tmpLevel))
+                     CompleteLevel(tmpLevel, true);
+             }
+         }*/
 
     }
 
@@ -194,9 +211,14 @@ public class CardSelection : MonoBehaviour
     {
         if (!autoboot)
         {
-            string completedLevels = PlayerPrefs.GetString("Completed Levels");
+            string completedLevels = bf.Decrypt_CBC(userData.GetString("Completed Levels"));
             completedLevels += "x" + currentLevel.ToString();
-            PlayerPrefs.SetString("Completed Levels", completedLevels);
+            //PlayerPrefs.SetString("Completed Levels", completedLevels);
+            userData.Remove("Completed Levels");
+            userData.Add("Completed Levels", bf.Encrypt_CBC(completedLevels));
+            StreamWriter writer = new StreamWriter(path, false);
+            writer.Write(userData.ToString());
+            writer.Close();
         }
 
         completedLevelsCount++;

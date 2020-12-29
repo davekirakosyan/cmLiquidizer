@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Boomlagoon.JSON;
+using BlowFishCS;
+using System.IO;
 
 public class TutorialManagerTreeView : MonoBehaviour
 {
@@ -14,6 +17,13 @@ public class TutorialManagerTreeView : MonoBehaviour
     public GameObject Arrow;
     public GameObject treeMask;
     private bool tutorialState = false;
+
+    public JSONObject userData;
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+    string path = "Assets/Resources/Text/User data.txt";
+
+    int cinematicWatched;
+    int tutorialCompleted;
 
     public bool GetTutorialState()
     {
@@ -33,9 +43,16 @@ public class TutorialManagerTreeView : MonoBehaviour
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+
+        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
+        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
+
+        /*//PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Tutorial completed"))
-            PlayerPrefs.SetInt("Tutorial completed", 0);
+            PlayerPrefs.SetInt("Tutorial completed", 0);*/
     }
     // Update is called once per frame
     void Update()
@@ -54,7 +71,7 @@ public class TutorialManagerTreeView : MonoBehaviour
         }
 
 
-        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed") == 0)
+        if (cinematicWatched == 1 && !tutorialStarted && tutorialCompleted == 0)
         {
             StartCoroutine(tutorialWait());
             tutorialStarted = true;

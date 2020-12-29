@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 using System.Collections;
 using System.Collections.Generic;
+using Boomlagoon.JSON;
+using BlowFishCS;
+using System.IO;
 
 public class TutorialManagerMainScreen : MonoBehaviour
 {
@@ -23,6 +26,13 @@ public class TutorialManagerMainScreen : MonoBehaviour
     public GameObject UIButtons;
     public GameObject inventoryBLocker;
 
+    public JSONObject userData;
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+    string path = "Assets/Resources/Text/User data.txt";
+
+    int cinematicWatched;
+    int tutorialCompleted;
+
     void Start()
     {
         //uncomment row below to uncomplete tutorial
@@ -33,8 +43,15 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
     private void Awake()
     {
-        if (!PlayerPrefs.HasKey("Tutorial completed"))
-            PlayerPrefs.SetInt("Tutorial completed", 0);
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+
+        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
+        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
+
+        /*if (!PlayerPrefs.HasKey("Tutorial completed"))
+            PlayerPrefs.SetInt("Tutorial completed", 0);*/
     }
     // Update is called once per frame
     void Update()
@@ -42,7 +59,7 @@ public class TutorialManagerMainScreen : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && !selection && !pouring)
             clicked = true;
 
-        if (PlayerPrefs.GetInt("Cinematic watched") == 1 && !tutorialStarted && PlayerPrefs.GetInt("Tutorial completed") == 0)
+        if (cinematicWatched == 1 && !tutorialStarted && tutorialCompleted == 0)
         {
             StartCoroutine(tutorialWait());
             tutorialStarted = true;
@@ -220,7 +237,11 @@ public class TutorialManagerMainScreen : MonoBehaviour
             cardHolder.GetChild(i).GetComponent<CardAnimation>().mask.SetActive(false);
 
 
-        PlayerPrefs.SetInt("Tutorial completed", 1);
+        userData.Remove("Tutorial completed");
+        userData.Add("Tutorial completed", bf.Encrypt_CBC("1"));
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
     }
 
     public void loadTurorial()

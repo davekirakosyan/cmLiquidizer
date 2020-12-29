@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
     public Image[] colorExample;
 
     BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-
     string path = "Assets/Resources/Text/User data.txt";
 
     public bool GetUpdateGameOver()

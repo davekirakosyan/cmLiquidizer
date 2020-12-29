@@ -4,6 +4,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using Boomlagoon.JSON;
+using BlowFishCS;
+using System.IO;
 
 public class SwipeController : MonoBehaviour
 {
@@ -22,8 +25,16 @@ public class SwipeController : MonoBehaviour
     private bool tap = false;
     private Vector3 beginTouchPosition, endTouchPosition;
 
+    public JSONObject userData;
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+    string path = "Assets/Resources/Text/User data.txt";
+
     private void Start()
     {
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
+
         FloorComfirmation.SetActive(false);
 
         if (swipeThreshold < 10)
@@ -87,7 +98,12 @@ public class SwipeController : MonoBehaviour
 
     public void EnterFloor()
     {
-        PlayerPrefs.SetInt("World", hit.collider.gameObject.GetComponent<Floor>().floorNumber - 1);
+        //PlayerPrefs.SetInt("World", hit.collider.gameObject.GetComponent<Floor>().floorNumber - 1);
+        userData.Remove("World");
+        userData.Add("World", bf.Encrypt_CBC((hit.collider.gameObject.GetComponent<Floor>().floorNumber - 1).ToString()));
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
         CrossScene.LoadTable = false;
         SceneManager.LoadScene(1);
     }
@@ -140,7 +156,7 @@ public class SwipeController : MonoBehaviour
             }
         }
 
-        if (endPosition.y != moveObject.transform.position.y && PlayerPrefs.GetInt("Tutorial completed") == 1)
+        if (endPosition.y != moveObject.transform.position.y && int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed"))) == 1)
             moveObject.transform.position = Vector3.MoveTowards(moveObject.transform.position, endPosition, 3f * moveUnit * Time.deltaTime);
     }
 }

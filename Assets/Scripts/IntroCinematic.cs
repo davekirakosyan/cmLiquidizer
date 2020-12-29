@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Boomlagoon.JSON;
+using BlowFishCS;
+using System.IO;
 
 public class IntroCinematic : MonoBehaviour
 {
@@ -17,19 +20,28 @@ public class IntroCinematic : MonoBehaviour
     public GameObject floor;
     public GameObject tutorial;
 
+    public JSONObject userData;
+    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
+    string path = "Assets/Resources/Text/User data.txt";
 
     private void Awake()
     {
-        if (!PlayerPrefs.HasKey("Cinematic watched"))
-            PlayerPrefs.SetInt("Cinematic watched", 0);
+        /*if (!PlayerPrefs.HasKey("Cinematic watched"))
+             PlayerPrefs.SetInt("Cinematic watched", 0);*/
+
+        StreamReader reader = new StreamReader(path);
+        userData = JSONObject.Parse(reader.ReadToEnd());
+        reader.Close();
     }
 
     void Start()
     {
         //uncomment rows below to unwatch cinematic
         //PlayerPrefs.SetInt("Cinematic watched", 0);
+
+        int cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
     
-        if (!SKIP_CINEMATIC && PlayerPrefs.GetInt("Cinematic watched") == 0)
+        if (!SKIP_CINEMATIC && cinematicWatched == 0)
         {
             pastPlants.SetActive(true);
             // start camera + boat movements
@@ -38,7 +50,7 @@ public class IntroCinematic : MonoBehaviour
             swipeControls.SetActive(false);
             floor.SetActive(false);
         }
-        else if (SKIP_CINEMATIC || PlayerPrefs.GetInt("Cinematic watched") == 1)
+        else if (SKIP_CINEMATIC || cinematicWatched == 1)
         {
             // enable all the tree controls
             swipeControls.SetActive(true);
@@ -93,6 +105,11 @@ public class IntroCinematic : MonoBehaviour
         floor.SetActive(true);
         tutorial.SetActive(true);
         GetComponent<Animator>().enabled = false;
-        PlayerPrefs.SetInt("Cinematic watched", 1);
+        //PlayerPrefs.SetInt("Cinematic watched", 1);
+        userData.Remove("Cinematic watched");
+        userData.Add("Cinematic watched", bf.Encrypt_CBC("1"));
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.Write(userData.ToString());
+        writer.Close();
     }
 }
