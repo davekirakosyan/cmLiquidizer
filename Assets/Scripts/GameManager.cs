@@ -10,14 +10,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Boomlagoon.JSON;
-using BlowFishCS;
-using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     // global variables
-    public JSONObject userData;
 
     public static InventoryManager.ElixirColor selectedColor;
     public static GameObject selectedElixir;
@@ -51,9 +47,6 @@ public class GameManager : MonoBehaviour
     public Dropdown colorBlindDropdown;
     public Image[] colorExample;
 
-    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-    string path = "Assets/Resources/Text/User data.txt";
-
     public bool GetUpdateGameOver()
     {
         return needToUpdateGameOver;
@@ -76,10 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
+        JSON_API.ReadJSONFromMemory(); // Memory access is slow operation
 
         // Check if it first boot, if it is then initialize some variables
         if (firstBoot)
@@ -91,44 +81,27 @@ public class GameManager : MonoBehaviour
         }
 
         // load data
-
-        //world = PlayerPrefs.GetInt("World");
-        world = int.Parse(bf.Decrypt_CBC(userData.GetString("World")));
-
-        //level = PlayerPrefs.GetInt("Level");
-        level = int.Parse(bf.Decrypt_CBC(userData.GetString("Level")));
+        world = JSON_API.GetJSONData<int>("World");
+        level = JSON_API.GetJSONData<int>("Level");
+        //level = 0;
 
         // load selected world
         LoadWorld(world);
 
-        /*if (!PlayerPrefs.HasKey("Color blind mode"))
-            PlayerPrefs.SetInt("Color blind mode", 0);
-        */
-        if (!userData.ContainsKey("Color blind mode"))
-            userData.Add("Color blind mode", bf.Encrypt_CBC("0"));
+        if (!JSON_API.Contains("Color blind mode"))
+            JSON_API.Add<int>("Color blind mode", 0);
 
-        //colorBlindMode = PlayerPrefs.GetInt("Color blind mode");
-        colorBlindMode = int.Parse(bf.Decrypt_CBC(userData.GetString("Color blind mode")));
+        colorBlindMode = JSON_API.GetJSONData<int>("Color blind mode");
         colorBlindDropdown.value = colorBlindMode;
     }
 
     // update level data in PlayerPrefs
     void UpdateUserData()
     {
-        /*PlayerPrefs.SetInt("Level", level);
-        PlayerPrefs.SetInt("World", world);*/
+        JSON_API.Update<int>("Level", level);
+        JSON_API.Update<int>("World", world);
 
-        userData.Remove("Level");
-        userData.Add("Level", bf.Encrypt_CBC(level.ToString()));
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
-
-        userData.Remove("World");
-        userData.Add("World", bf.Encrypt_CBC(world.ToString()));
-        writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
+        JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
 
         //TODO : Add save to file
     }
@@ -136,9 +109,7 @@ public class GameManager : MonoBehaviour
     private void OnApplicationPause(bool pause)
     {
         Debug.Log("Paused");
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
+        JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
     }
 
     public void ExitGame()
@@ -148,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowGameObject(GameObject toggleObject)
     {
-            toggleObject.SetActive(true);
+        toggleObject.SetActive(true);
     }
 
     public void HideGameObject(GameObject toggleObject)
@@ -158,13 +129,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeColorBlindMode(Dropdown dropDown)
     {
-        //PlayerPrefs.SetInt("Color blind mode", dropDown.value);
+        JSON_API.Update<int>("Color blind mode", dropDown.value);
 
-        userData.Remove("Color blind mode");
-        userData.Add("Color blind mode", bf.Encrypt_CBC(dropDown.value.ToString()));
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
+        JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
 
         colorBlindMode = dropDown.value;
 
@@ -292,17 +259,16 @@ public class GameManager : MonoBehaviour
     public void CleanCompletedLevelNotes()
     {
         // remove completed level notes from memory
-        //PlayerPrefs.DeleteKey("Completed Levels");
-        userData.Remove("Completed Levels");
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
+        JSON_API.Remove("Completed Levels");
+
+        JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
     }
 
     public void NextLevel()
     {
         // set current level card as completed
-        cardSelection.CompleteLevel(level);
+        cardSelection.CompleteLevel(new KeyValuePair<int, int>(world, level));
+        cardSelection.ShowLevelCards();
 
         level++;
 
@@ -318,7 +284,7 @@ public class GameManager : MonoBehaviour
         {
             level = 0;
             world++;
-            CleanCompletedLevelNotes();
+            //CleanCompletedLevelNotes();
             needUpdateLevelCards = true;
             LoadWorld(world);
         }

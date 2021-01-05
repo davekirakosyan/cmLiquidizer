@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using Boomlagoon.JSON;
-using BlowFishCS;
-using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TutorialManagerRoom : MonoBehaviour
 {
-
     public GameObject[] targetObject;
     bool tutorialStarted = false;
     public bool clicked = false;
@@ -18,10 +14,6 @@ public class TutorialManagerRoom : MonoBehaviour
     bool press=false;
     public bool tableClick = false;
     public GameObject backButton;
-
-    public JSONObject userData;
-    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-    string path = "Assets/Resources/Text/User data.txt";
 
     int cinematicWatched;
     int tutorialCompleted;
@@ -35,17 +27,16 @@ public class TutorialManagerRoom : MonoBehaviour
 
     private void Awake()
     {
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
+        JSON_API.ReadJSONFromMemory(); // Memory access is slow operation
 
-        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
-        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
+        cinematicWatched = JSON_API.GetJSONData<int>("Cinematic watched");
+        tutorialCompleted = JSON_API.GetJSONData<int>("Tutorial completed");
 
         //PlayerPrefs.DeleteAll();
         /* if (!PlayerPrefs.HasKey("Tutorial completed"))
              PlayerPrefs.SetInt("Tutorial completed", 0);*/
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -54,13 +45,9 @@ public class TutorialManagerRoom : MonoBehaviour
         {
             clicked = true;
         }
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
 
-        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
-        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
-
+        cinematicWatched = JSON_API.GetJSONData<int>("Cinematic watched");
+        tutorialCompleted = JSON_API.GetJSONData<int>("Tutorial completed");
 
         if (cinematicWatched == 1 && !tutorialStarted && tutorialCompleted == 0)
         {

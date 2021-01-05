@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using PathCreation;
-using Boomlagoon.JSON;
-using System.IO;
-using BlowFishCS;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Elixir : MonoBehaviour
 {
@@ -23,20 +20,12 @@ public class Elixir : MonoBehaviour
     public ParticleSystem part;
     public List<ParticleCollisionEvent> collisionEvents;
 
-    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-
-    string path = "Assets/Resources/Text/User data.txt";
-
-    public JSONObject userData;
-
     private void Awake()
     {
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
+        JSON_API.ReadJSONFromMemory(); // Memory access is slow operation
     }
 
-        void Start()
+    void Start()
     {
         // find the nearest path
         float minDistancesToThePath = float.MaxValue;
@@ -144,7 +133,7 @@ public class Elixir : MonoBehaviour
     Color SelectColorByName(InventoryManager.ElixirColor name)
     {
         int colorBlindMode;
-        colorBlindMode = int.Parse(bf.Decrypt_CBC(userData.GetString("Color blind mode")));
+        colorBlindMode = JSON_API.GetJSONData<int>("Color blind mode");
         if (colorBlindMode == 0)
         {
             switch (name)

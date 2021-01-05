@@ -1,9 +1,6 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Boomlagoon.JSON;
-using BlowFishCS;
-using System.IO;
 
 public class IntroCinematic : MonoBehaviour
 {
@@ -20,18 +17,12 @@ public class IntroCinematic : MonoBehaviour
     public GameObject floor;
     public GameObject tutorial;
 
-    public JSONObject userData;
-    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-    string path = "Assets/Resources/Text/User data.txt";
-
     private void Awake()
     {
         /*if (!PlayerPrefs.HasKey("Cinematic watched"))
              PlayerPrefs.SetInt("Cinematic watched", 0);*/
 
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
+        JSON_API.ReadJSONFromMemory(); // Memory access is slow operation
     }
 
     void Start()
@@ -39,7 +30,7 @@ public class IntroCinematic : MonoBehaviour
         //uncomment rows below to unwatch cinematic
         //PlayerPrefs.SetInt("Cinematic watched", 0);
 
-        int cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
+        int cinematicWatched = JSON_API.GetJSONData<int>("Cinematic watched");
     
         if (!SKIP_CINEMATIC && cinematicWatched == 0)
         {
@@ -105,11 +96,10 @@ public class IntroCinematic : MonoBehaviour
         floor.SetActive(true);
         tutorial.SetActive(true);
         GetComponent<Animator>().enabled = false;
-        //PlayerPrefs.SetInt("Cinematic watched", 1);
-        userData.Remove("Cinematic watched");
-        userData.Add("Cinematic watched", bf.Encrypt_CBC("1"));
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
+
+        JSON_API.Remove("Cinematic watched");
+        JSON_API.Add<int>("Cinematic watched", 1);
+
+        JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
     }
 }

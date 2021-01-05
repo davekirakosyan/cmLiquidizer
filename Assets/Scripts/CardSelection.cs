@@ -11,6 +11,9 @@ public class CardSelection : MonoBehaviour
     // user selected level
     private int selectedLevel;
 
+    // user selected world
+    private int selectedWorld;
+
     // game object for the card prefab
     public GameObject card;
 
@@ -41,39 +44,43 @@ public class CardSelection : MonoBehaviour
 
     public GameObject blackCover;
 
-    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-
-    string path = "Assets/Resources/Text/User data.txt";
-
-    public JSONObject userData;
+    private static bool firstBoot = true;
 
     private void Awake()
     {
-
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
+        JSON_API.ReadJSONFromMemory(); // Memory access is slow operation
     }
 
-        void Start()
+    void Start()
     {
+        if (firstBoot)
+        {
+            firstBoot = false;
+            ShowLevelCards();
+        }
+        print("Start CardSelection");
         // first boot-up value for level
-        selectedLevel = int.Parse(bf.Decrypt_CBC(userData.GetString("Level")));
+        selectedLevel = JSON_API.GetJSONData<int>("Level");
+        selectedWorld = JSON_API.GetJSONData<int>("World");
         // TODO: Need to change completed levels mechanics for new level navigation
-        /* string completedLevels = PlayerPrefs.GetString("Completed Levels");
-         if (completedLevels.Length > 0)
-         {
+        string completedLevels = JSON_API.GetJSONData<string>("Completed Levels");
+        if (completedLevels.Length > 0)
+        {
+            string[] tmpPairArray = completedLevels.Split('x');
+            print(tmpPairArray);
 
-             string[] tmpLevelArray = completedLevels.Split('x');
-
-             foreach (string tmpLevelString in tmpLevelArray)
-             {
-                 int tmpLevel;
-                 if (int.TryParse(tmpLevelString, out tmpLevel))
-                     CompleteLevel(tmpLevel, true);
-             }
-         }*/
-
+            foreach (string tmpPairString in tmpPairArray)
+            {
+                if (tmpPairString.Length > 0)
+                {
+                    int tmpLevel, tmpWorld;
+                    string[] tmpLevelString = tmpPairString.Split('|');
+                    if (int.TryParse(tmpLevelString[1], out tmpLevel) && int.TryParse(tmpLevelString[0], out tmpWorld))
+                        if (tmpWorld == selectedWorld)
+                            CompleteLevel(new KeyValuePair<int, int>(tmpWorld, tmpLevel), true);
+                }
+            }
+        }
     }
 
     // getter function for user selected level
@@ -132,6 +139,7 @@ public class CardSelection : MonoBehaviour
     // calculate level cards positions for user selection
     private Vector3 CalculateCardPos(GameObject currentCard, int cardCount, int cardIndex)
     {
+        print("CalculatePos");
         Vector3 cardPos = currentCard.transform.localPosition;
         float cardWidth = currentCard.GetComponent<RectTransform>().rect.width;
         
@@ -207,27 +215,27 @@ public class CardSelection : MonoBehaviour
     }
 
     // Show completion filter on the card and allow user to select new level
-    public void CompleteLevel(int currentLevel, bool autoboot = false)
+    public void CompleteLevel(KeyValuePair<int, int> currentPair, bool autoboot = false)
     {
         if (!autoboot)
         {
-            string completedLevels = bf.Decrypt_CBC(userData.GetString("Completed Levels"));
-            completedLevels += "x" + currentLevel.ToString();
-            //PlayerPrefs.SetString("Completed Levels", completedLevels);
-            userData.Remove("Completed Levels");
-            userData.Add("Completed Levels", bf.Encrypt_CBC(completedLevels));
-            StreamWriter writer = new StreamWriter(path, false);
-            writer.Write(userData.ToString());
-            writer.Close();
+            string completedLevels = JSON_API.GetJSONData<string>("Completed Levels");
+            completedLevels += "x" + currentPair.Key.ToString() + "|" + currentPair.Value.ToString();
+            JSON_API.Update<string>("Completed Levels", completedLevels);
+            JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
         }
 
         completedLevelsCount++;
-        GameObject currentCard = transform.GetChild(currentLevel).gameObject;
-        GameObject cardCompletionFilter = currentCard.transform.GetChild(0).gameObject;
-        if (!autoboot)
-            currentCard.GetComponent<CardAnimation>().CardDisolve();
+        if (selectedWorld == currentPair.Key)
+        {
+            GameObject currentCard = transform.GetChild(currentPair.Value).gameObject;
+            GameObject cardCompletionFilter = currentCard.transform.GetChild(0).gameObject;
+            cardCompletionFilter.SetActive(true);
+            print("Curent level = " + currentPair.Value + " Current world = " + currentPair.Key + "NEED TO BE COMPLETED!!!");
+            print(JSON_API.GetJSONData<string>("Completed Levels"));
 
-        cardCompletionFilter.SetActive(true);
-        ShowLevelCards();
+            if (!autoboot)
+                currentCard.GetComponent<CardAnimation>().CardDisolve();
+        }
     }
 }

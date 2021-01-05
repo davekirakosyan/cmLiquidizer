@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
 using System.Collections;
 using System.Collections.Generic;
-using Boomlagoon.JSON;
-using BlowFishCS;
-using System.IO;
 
 public class TutorialManagerMainScreen : MonoBehaviour
 {
@@ -26,10 +22,6 @@ public class TutorialManagerMainScreen : MonoBehaviour
     public GameObject UIButtons;
     public GameObject inventoryBLocker;
 
-    public JSONObject userData;
-    BlowFish bf = new BlowFish("04B915BA43FEB5B6");
-    string path = "Assets/Resources/Text/User data.txt";
-
     int cinematicWatched;
     int tutorialCompleted;
 
@@ -43,27 +35,23 @@ public class TutorialManagerMainScreen : MonoBehaviour
 
     private void Awake()
     {
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
+        JSON_API.ReadJSONFromMemory(); // Memory access is slow operation
 
-        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
-        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
+        cinematicWatched = JSON_API.GetJSONData<int>("Cinematic watched");
+        tutorialCompleted = JSON_API.GetJSONData<int>("Tutorial completed");
 
         /*if (!PlayerPrefs.HasKey("Tutorial completed"))
             PlayerPrefs.SetInt("Tutorial completed", 0);*/
     }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonUp(0) && !selection && !pouring)
             clicked = true;
-        StreamReader reader = new StreamReader(path);
-        userData = JSONObject.Parse(reader.ReadToEnd());
-        reader.Close();
 
-        cinematicWatched = int.Parse(bf.Decrypt_CBC(userData.GetString("Cinematic watched")));
-        tutorialCompleted = int.Parse(bf.Decrypt_CBC(userData.GetString("Tutorial completed")));
+        cinematicWatched = JSON_API.GetJSONData<int>("Cinematic watched");
+        tutorialCompleted = JSON_API.GetJSONData<int>("Tutorial completed");
 
         if (cinematicWatched == 1 && !tutorialStarted && tutorialCompleted == 0)
         {
@@ -242,17 +230,12 @@ public class TutorialManagerMainScreen : MonoBehaviour
         for (int i = 0; i < cardHolder.childCount; i++)
             cardHolder.GetChild(i).GetComponent<CardAnimation>().mask.SetActive(false);
 
-
-        userData.Remove("Tutorial completed");
-        userData.Add("Tutorial completed", bf.Encrypt_CBC("1"));
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(userData.ToString());
-        writer.Close();
+        JSON_API.Update<int>("Tutorial completed", 1);
+        JSON_API.UpdateJSONInMemory(); // Memory access is slow operation
     }
 
     public void loadTurorial()
     {
         StartCoroutine(tutorialWait());
     }
-
 }
