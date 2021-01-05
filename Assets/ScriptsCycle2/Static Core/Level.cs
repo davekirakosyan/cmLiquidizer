@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public abstract class genLevel<genInventoryManger, genCardTemplatesManager>
+public abstract class genLevel<genInventoryManger>
 {
-    protected float elixirLength;
+    protected int levelIndex;
+
     protected float elixirSpeed;
+    protected float elixirLength;
+
+    protected float expectedTime;
+    protected float completionTime;
 
     protected List<genInventoryManger> inputColors;
     protected List<genInventoryManger> outputColors;
-
-    protected genCardTemplatesManager instructionsTemplate;
-
 }
 
-public class Level<genInventoryManger, genCardTemplatesManager> : genLevel<genInventoryManger, genCardTemplatesManager>
+public class Level<genInventoryManger> : genLevel<genInventoryManger>
 {
 
-    public float ElixirLength { get => elixirLength; set => elixirLength = value; }
+    public int LevelIndex { get => levelIndex; set => levelIndex = value; }
     public float ElixirSpeed { get => elixirSpeed; set => elixirSpeed = value; }
+    public float ElixirLength { get => elixirLength; set => elixirLength = value; }
+    public float ExpectedTime { get => expectedTime; set => expectedTime = value; }
+    public float CompletionTime { get => completionTime; set => completionTime = value; }
     public List<genInventoryManger> InputColors { get => inputColors; set => inputColors = value; }
     public List<genInventoryManger> OutputColors { get => outputColors; set => outputColors = value; }
-    public genCardTemplatesManager InstructionsTemplate { get => instructionsTemplate; set => instructionsTemplate = value; }
-
-    public Level(float elixirLength, float elixirSpeed, List<genInventoryManger> inputColors, List<genInventoryManger> outputColors, genCardTemplatesManager instructionsTemplate)
-    {
-        ElixirLength = elixirLength;
-        ElixirSpeed = elixirSpeed;
-        InputColors = inputColors ?? throw new ArgumentNullException(nameof(inputColors));
-        OutputColors = outputColors ?? throw new ArgumentNullException(nameof(outputColors));
-        InstructionsTemplate = instructionsTemplate;
-    }
 }

@@ -2,26 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class genElixir<genColor>
+public abstract class genElixir<genColor, genElixirAbility>
 {
     protected string name;
-    protected float speed;
-    protected float lenght;
     protected genColor color;
+    protected genElixirAbility ability;
+
 }
 
-public class Elixir<genColor> : genElixir<genColor>
+public class Elixir<genColor, genElixirAbility> : genElixir<genColor, genElixirAbility>
 {
     public string Name { get => name; set => name = value; }
-    public float Speed { get => speed; set => speed = value; }
-    public float Lenght { get => lenght; set => lenght = value; }
     public genColor Color { get => color; set => color = value; }
+    public genElixirAbility Ability { get => ability; set => ability = value; }
 
-    public Elixir(string name, float speed, float lenght, genColor color)
+    public Elixir(string name, genColor color, genElixirAbility ability)
     {
-        Speed = speed;
         Color = color;
-        Lenght = lenght;
+        Ability = ability;
         Name = name ?? throw new ArgumentNullException(nameof(name));
     }
 }
