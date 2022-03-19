@@ -11,8 +11,8 @@ public abstract class genLevel<genElixir>
     protected float expectedTime;
     protected float completionTime;
 
-    protected List<genElixir> inputColors;
-    protected List<genElixir> outputColors;
+    protected List<genElixir> inputElixir;
+    protected List<genElixir> outputElixir;
 }
 
 public class Level<genElixir> : genLevel<genElixir>
@@ -22,8 +22,8 @@ public class Level<genElixir> : genLevel<genElixir>
     public float ElixirLength { get => elixirLength; set => elixirLength = value; }
     public float ExpectedTime { get => expectedTime; set => expectedTime = value; }
     public float CompletionTime { get => completionTime; set => completionTime = value; }
-    public List<genElixir> InputColors { get => inputColors; set => inputColors = value; }
-    public List<genElixir> OutputColors { get => outputColors; set => outputColors = value; }
+    public List<genElixir> InputElixirs { get => inputElixir; set => inputElixir = value; }
+    public List<genElixir> OutputElixirs { get => outputElixir; set => outputElixir = value; }
 
     public Level(int levelIndex, float elixirSpeed, float elixirLength, float expectedTime, float completionTime, List<genElixir> inputColors, List<genElixir> outputColors)
     {
