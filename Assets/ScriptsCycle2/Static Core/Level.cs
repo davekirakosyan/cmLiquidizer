@@ -25,14 +25,15 @@ public class Level<genElixir> : genLevel<genElixir>
     public List<genElixir> InputElixirs { get => inputElixir; set => inputElixir = value; }
     public List<genElixir> OutputElixirs { get => outputElixir; set => outputElixir = value; }
 
-    public Level(int levelIndex, float elixirSpeed, float elixirLength, float expectedTime, float completionTime, List<genElixir> inputColors, List<genElixir> outputColors)
+    public Level(int levelIndex, float elixirSpeed, float elixirLength, float expectedTime, float completionTime, List<genElixir> inputElixirs, List<genElixir> outputElixirs)
     {
         LevelIndex = levelIndex;
         ElixirSpeed = elixirSpeed;
         ElixirLength = elixirLength;
         ExpectedTime = expectedTime;
         CompletionTime = completionTime;
-        InputColors = inputColors ?? throw new ArgumentNullException(nameof(inputColors));
-        OutputColors = outputColors ?? throw new ArgumentNullException(nameof(outputColors));
+        InputElixirs = inputElixirs ?? throw new ArgumentNullException(nameof(inputElixirs));
+        OutputElixirs = outputElixirs ?? throw new ArgumentNullException(nameof(outputElixirs));
     }
+
 }
