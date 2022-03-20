@@ -1,0 +1,77 @@
+#############-------Core functions------###############
+	ELIXIR* pouring.
+	TREE* navigation.
+	ELIXIR* flows in PATHS*.
+	WORLD* selection through TREE* floors.
+	LEVEL* selection cards in every WORLD*.
+
+	Iteractions with the CARD*.
+	Iteractions with the STORE*.
+	Iteractions with the STORAGE*.
+	Iteractions with the INVENTORY*.
+
+	CHESTS* generation functionality. (adds, purchases, level completion, daily rewards)
+	
+	Reset button that resets current LEVEL*.
+	Back button in every scene that goes back by one step.
+	Hint button that can guid user to complete the LEVEL* by using in game CURRENCY*.
+	Settings menu. (color blind mode toggle, sound settings, delete/export user data, rewatch TUTORIAL*/cinematic scenes).
+
+	Game data security.
+
+
+###################-------Tasks------###################
+	Game reward balancing.
+	Game currency balancing.
+
+
+################-------Definitions------################
+*PATHS     - one prefab containing an image and the curve of the path
+	     every path represent one game WORLD*
+   
+*WORLD     - every game world have multiple LEVELS*
+	     coresponds to one floor in TREE*
+	     in every world a new ELIXIR* receipe is being unlocked
+	     after completing each world the current TREE* floor becomes alive
+	     LEVEL* navigation
+
+*LEVEL     - every LEVEL* comes with the receipe CARD* 
+	     every LEVEL* has it's own difficulty
+	     has complition time reward
+	     has maximum complition time restriction
+	     reward user with some game CURRENCY* after the LEVEL* completion
+
+*TREE      - has floors
+	     WORLD* navigation
+
+*CARD      - every CARD* contains instructions to how to use input ELIXIRs in order to produce the required output
+   
+*ELIXIR    - the main resource of the game
+	     comes with different colors and different names/meanings
+	     can have some special powers 
+	     they are mixing by colors
+	     ELIXIRs* can be purchased from the STORE* by game CURRENCY*
+
+*STORAGE   - contains all the ELIXIRs* user produced or purchased during the game
+	     has yellow, red, blue ELIXIRs* with infinit quantities
+	     LEVEL* can begin only if user has the input ELIXIRs* present in the STORAGE*
+   	     after LEVEL* completion output ELIXIRs* are added to the STORAGE*
+
+*INVENTORY - at the beginig of each LEVEL* the input ELIXIRs* are subtracted from the STORAGE* and added to the INVENTORY*
+	     contains all the ELIXIRs* that user needs to complete current LEVEL*
+
+*STORE     - purchase ELIXIRs* using in game CURRENCY*
+	     purchase in game CURRENCY* using federal money
+	     
+*CURRENCY  - is used in the store to buy hints, ELIXIRs*, CHESTS*
+
+*CHESTS    - have multiple types (common, rare, epic, legendary)
+             may contain spectial ELIXIRs*
+             may contain common ELIXIRs*
+             may contain game CURRENCY*
+
+
+################-------TODO List-------#################
+1. Select final terminology for the game elements. (world, level, tree, path, elixir, inventory, storage)
+2. Look forward to add customizations for the Magnus.
+3. Select CURRENCY type (coin, rocks, bannana, jems).
